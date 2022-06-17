@@ -104,8 +104,7 @@ public class Jugador {
   private boolean pilasIguales() {
     boolean pilasIguales = true;
     for (int pila = 0; pila < this.pilas.size() && pilasIguales; pila++) {
-      // TODO cambiar nombre de método UML de pila > todasIguales a cartas iguales.
-      pilasIguales = pila.cartasIguales();
+      pilasIguales = pilas.elementAt(pila).cartasIguales();
     }
     return pilasIguales;
   }
