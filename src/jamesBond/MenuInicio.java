@@ -1,9 +1,9 @@
 package jamesBond;
 
 public class MenuInicio {
-  String jugador1;
-  String jugador2;
-  String turnoInicial;
+  private String jugador1;
+  private String jugador2;
+  private String turnoInicial;
 
   public MenuInicio() {
 
@@ -38,6 +38,18 @@ public class MenuInicio {
     this.jugador2 = nombre;
   }
 
+  public String getJugadorJ1() {
+    return jugador1;
+  }
+
+  public String getJugadorJ2() {
+    return jugador2;
+  }
+
+  public String getTurnoInicial() {
+    return turnoInicial;
+  }
+
   public void jugar() {
     // llamar a controlador
 
@@ -45,6 +57,5 @@ public class MenuInicio {
 
   public void asignarTurnoInicial(String jugadorInicial) {
     this.turnoInicial = jugadorInicial;
-    String [] x = new String [2];
   }
 }
