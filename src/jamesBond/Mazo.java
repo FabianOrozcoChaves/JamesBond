@@ -36,9 +36,12 @@ public class Mazo {
 	char[] palos = {'P', 'D', 'C', 'T'}
     for(char c:palos){
 	  for(j = 1; j < 14; j++){
-		// el path a la imagen esta vacio por el momento
-		string path = "../img/carta" + c + "_" + j + ".png"
-	    this.cartas.push(new Carta(c, j, path));
+	    StringBuilder sb = new StringBuilder (String.valueOf ("../img/carta"));
+	    sb.append (c);
+		sb.append ('_');
+	    sb.append (j);
+		sb.append (".png");
+	    this.cartas.push(new Carta(c, j, sb.toString ()));
 	  }
 	}
   }
