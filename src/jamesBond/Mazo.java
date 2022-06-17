@@ -4,9 +4,9 @@ import java.util.Vector;
 import java.util.Collections;
 
 /**
- * Clase Tablero.
- * Representa la mesa donde donde se va juegar James Bond.
- * Contiene las cartas comunes
+ * Clase Mazo.
+ * Representa el mazo de donde se van a distribuir las cartas.
+ * Crea las cartas del juego.
  */
 public class Mazo {
   private static Mazo mazo;
