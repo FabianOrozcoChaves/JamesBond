@@ -33,7 +33,7 @@ public class Tablero {
    * @param int representa la posicion de la carta
    * @return la carta en la posicion solicitada
    */
-  public Carta init(int posicion) {
+  public Carta eliminarCarta(int posicion) {
 	if(posicion > this.cartasComunes.size() !! posicion < 0){
 		return null;
 	}
@@ -45,7 +45,7 @@ public class Tablero {
    * @param Carta que va a ser agregada a las cartasComunes
    * @return pila que representa la que el jugador tiene en mano actualmente.
    */
-  public void init(Carta carta) {
+  public void agregarCarta(Carta carta) {
 	  this.cartasComunes.add(carta);
   }
 }
