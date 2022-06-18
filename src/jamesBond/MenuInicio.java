@@ -1,20 +1,25 @@
 package jamesBond;
 
+
 public class MenuInicio {
   private String jugador1;
   private String jugador2;
   private String turnoInicial;
-
+  private String  NombreJuego = "James Bond";
   public MenuInicio() {
 
   }
 
-  public void mostrarOpciopnes() {
-    System.out.println("Menu de ajustes:");
-    System.out.println("\t1.Reglas\n");
-    System.out.println("\t2.Guardar partida");
-    System.out.println("\n3.Cargar partida");
-    System.out.println("\n4.Salir");
+  public String [] mostrarOpciones() {
+    String [] opciones = new String [6];
+    int i = 0;
+    opciones[i++] = "1.Jugar";
+    opciones[i++] = "3.Cargar partida";
+    opciones[i++] = "1.Reglas";
+    opciones[i++] ="4.Salir";
+    opciones[i++] ="Jugador 1";
+    opciones[i++] ="Jugador 2";
+    return opciones;
   }
 
   public void cargarPartida() {

@@ -24,7 +24,7 @@ public class Mazo {
    */
   public static Mazo getInstance() {
 	if(mazo == null){
-	  maso =  new Mazo();
+	  mazo =  new Mazo();
 	}
 	return mazo;
    }
@@ -33,12 +33,12 @@ public class Mazo {
    * @brief genera todas las cartas del mazo
    */
   public void generaCartas() {
-	char[] palos = {'P', 'D', 'C', 'T'}
+	char[] palos = {'P', 'D', 'C', 'T'};
     for(char c:palos){
-	  for(j = 1; j < 14; j++){
+	  for(int j = 1; j < 14; j++){
 		// el path a la imagen esta vacio por el momento
-		string path = "../img/carta" + c + "_" + j + ".png"
-	    this.cartas.push(new Carta(c, j, path));
+		String path = "../img/carta" + c + "_" + j + ".png";
+	  this.cartas.add(new Carta(c, j, path));
 	  }
 	}
   }
@@ -58,7 +58,7 @@ public class Mazo {
 	  if(this.cartas.size() < 1){
 		return null;
 	}
-    return this.cartasComunes.remove(0);
+    return this.cartas.remove(0);
   }
   
   /**
@@ -66,8 +66,8 @@ public class Mazo {
    * @return Un string que contiene el contenido del mazo
    */
   public String toString(){
-	String resultado = "El mazo contiene: "
-    for (Carta carta : vector) {
+	String resultado = "El mazo contiene: ";
+    for (Carta carta : this.cartas) {
 	  resultado += carta.toString() + " ";
 	}
 	return resultado;

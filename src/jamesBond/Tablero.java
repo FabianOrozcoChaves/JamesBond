@@ -34,7 +34,7 @@ public class Tablero {
    * @return la carta en la posicion solicitada
    */
   public Carta eliminarCarta(int posicion) {
-	if(posicion > this.cartasComunes.size() !! posicion < 0){
+	if(posicion > this.cartasComunes.size() && posicion < 0){
 		return null;
 	}
     return this.cartasComunes.remove(posicion);

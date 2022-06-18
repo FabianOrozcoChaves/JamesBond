@@ -1,9 +1,8 @@
 package jamesBond;
-import java.io.*;
 
 public class MenuAjustes implements Menu {
 
-  public void mostrarOpciopnes() {
+  public void mostrarOpciones() {
     System.out.println("Menu de ajustes:");
     System.out.println("\t1.Reglas\n");
     System.out.println("\t2.Guardar partida");
