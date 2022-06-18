@@ -2,8 +2,8 @@ package jamesBond;
 
 
 public class MenuInicio {
-  private String jugador1;
-  private String jugador2;
+  private String jugador1 = "Jugador 1";
+  private String jugador2 = "Jugador 2";
   private String turnoInicial;
   private String  NombreJuego = "James Bond";
   public MenuInicio() {
