@@ -75,4 +75,8 @@ public class Mazo {
 	}
 	return resultado;
   }
+  
+  public int getCartasRestantes(){
+	  return this.cartas.size();
+  }
 }

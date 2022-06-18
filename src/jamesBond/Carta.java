@@ -28,7 +28,7 @@ public class Carta {
     return this.numero;
   }
 
-  public int getPalo() {
+  public char getPalo() {
     return this.palo;
   }
 
