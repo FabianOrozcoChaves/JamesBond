@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -49,12 +50,23 @@ public class GUI extends Application {
     }
     botonesMenu[0].setOnAction(e -> System.out.println("Jugar"));
 
-    HBox topMenu = new HBox();
+    HBox topMenuBotones = new HBox();
     botonesMenu[4].setAlignment(Pos.TOP_RIGHT);
-    topMenu.getChildren().addAll(botonesMenu[4], botonesMenu[5]);
-    topMenu.setSpacing(700);
-    topMenu.setAlignment(Pos.CENTER);
+    topMenuBotones.getChildren().addAll(botonesMenu[4], botonesMenu[5]);
+    topMenuBotones.setSpacing(700);
+    topMenuBotones.setAlignment(Pos.CENTER);
 
+    HBox topMenuLabels = new HBox();
+    Label asignarJugador1 = new Label("Nombre jugador 1:");
+    Label asignarJugador2 = new Label("Nombre jugador 2:");
+    topMenuLabels.getChildren().addAll(asignarJugador1, asignarJugador2);
+    topMenuLabels.setSpacing(700);
+    topMenuBotones.setAlignment(Pos.CENTER);
+
+    VBox topMenu = new VBox();
+    topMenu.getChildren().addAll(topMenuLabels, topMenuBotones);
+
+    
     VBox centerMenu = new VBox();
     centerMenu.getChildren().addAll(botonesMenu[0],botonesMenu[1],botonesMenu[2],botonesMenu[3]);
     centerMenu.setAlignment(Pos.CENTER);
