@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -42,7 +43,7 @@ public class GUI extends Application {
 
   public void mostrarMenuInicio(MenuInicio menu) {
     String [] opciones = menu.mostrarOpciones();
-    Button [] botonesMenu = new Button[6];
+    Button [] botonesMenu = new Button[4];
 
     for (int i = 0; i < botonesMenu.length; ++i) {
       botonesMenu[i] = new Button();
@@ -51,9 +52,19 @@ public class GUI extends Application {
     botonesMenu[0].setOnAction(e -> System.out.println("Jugar"));
 
     HBox topMenuBotones = new HBox();
-    botonesMenu[4].setAlignment(Pos.TOP_RIGHT);
-    topMenuBotones.getChildren().addAll(botonesMenu[4], botonesMenu[5]);
-    topMenuBotones.setSpacing(700);
+    TextField nombreJugador1 = new TextField(menu.getJugadorJ1());
+    nombreJugador1.setOnAction(e -> { 
+      nombreJugador1.setPromptText(nombreJugador1.getText());
+      menu.asignarNombreJ1(nombreJugador1.getText());
+    });
+    TextField nombreJugador2 = new TextField(menu.getJugadorJ2());
+    nombreJugador2.setOnAction(e ->{ 
+      nombreJugador2.setPromptText(nombreJugador2.getText());
+      menu.asignarNombreJ1(nombreJugador2.getText());
+    });
+
+    topMenuBotones.getChildren().addAll(nombreJugador1, nombreJugador2);
+    topMenuBotones.setSpacing(600);
     topMenuBotones.setAlignment(Pos.CENTER);
 
     HBox topMenuLabels = new HBox();
@@ -61,7 +72,7 @@ public class GUI extends Application {
     Label asignarJugador2 = new Label("Nombre jugador 2:");
     topMenuLabels.getChildren().addAll(asignarJugador1, asignarJugador2);
     topMenuLabels.setSpacing(700);
-    topMenuBotones.setAlignment(Pos.CENTER);
+    topMenuLabels.setAlignment(Pos.CENTER);
 
     VBox topMenu = new VBox();
     topMenu.getChildren().addAll(topMenuLabels, topMenuBotones);
