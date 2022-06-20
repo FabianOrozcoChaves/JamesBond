@@ -1,3 +1,5 @@
+package test;
+
 import jamesBond.Mazo;
 import jamesBond.Carta;
 
@@ -10,8 +12,8 @@ public class MazoTest {
 
   @Before
   public void setUp() throws Exception {
-    math = getInstance();
-    generaCartas();
+    mazo = Mazo.getInstance();
+    mazo.generaCartas();
   }
 	
   @Test

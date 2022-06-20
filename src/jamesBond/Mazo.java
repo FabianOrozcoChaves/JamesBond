@@ -16,6 +16,7 @@ public class Mazo {
    * @brief Constructor privado de la clase.
    */
   private Mazo() {
+    this.cartas = new Vector<Carta>();
   }
 
   /**
