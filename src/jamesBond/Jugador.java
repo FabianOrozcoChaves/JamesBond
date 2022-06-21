@@ -79,7 +79,6 @@ public class Jugador {
    * @return Carta que representa la carta que fue sacada de la mesa
    */
   public Carta intercambiarCarta(Carta cartaEntrante, int posicionSaliente) {
-    // TODO agregar método getCarta a UML de Pila.
     Carta cartaSaliente = pilaActiva().eliminarCarta(posicionSaliente);
     pilaActiva().agregarCarta(cartaEntrante);
     return cartaSaliente;

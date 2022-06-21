@@ -38,8 +38,7 @@ public class Pila {
     this.cartas.add(carta);
   }
   
-  // TODO cambiar nombre de método UML de pila > todasIguales a cartas iguales.
-  /**
+   /**
    * Verifica si todas las cartas de la pila poseen el mismo número.
    * Funciona cuando la pila no está vacía.
    * @return true en caso de que todos los números coincidan, false en caso contrario.
