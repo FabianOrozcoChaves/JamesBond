@@ -96,7 +96,7 @@ public class Jugador {
     return pilasIguales;
   }
 
-  public String getName(){
+  public String getNombre(){
     return this.nombre;
   }
 

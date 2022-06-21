@@ -1,4 +1,3 @@
-/***
 package test;
 
 import jamesBond.Carta;
@@ -24,14 +23,16 @@ public class PilaTest {
 	
   @Test
   public void cartasIguales() {
+    Assert.assertEquals(pila.cartasIguales(), false);
     Carta carta = new Carta('C', 1, "../img/back.png");
     this.pila.agregarCarta(carta);
     Carta ultima = this.pila.getCarta(3);
     Assert.assertEquals(ultima.toString(), "A de C");
     Assert.assertEquals(pila.cartasIguales(), true);
-    Carta eliminada = pila.eliminarCarta(0);
+    carta = new Carta('C', 2, "../img/back.png");
+    Carta eliminada = pila.cambiarCarta(0, carta);
     Assert.assertEquals(eliminada.toString(), "A de P");
-    Assert.assertEquals(pila.cartasIguales(), false);
+    
     
   }
 
@@ -43,4 +44,3 @@ public class PilaTest {
   }
     
 }
-***/
