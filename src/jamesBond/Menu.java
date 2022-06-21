@@ -22,10 +22,4 @@ public interface Menu {
    * @return un String con las reglas.
    */
   public String mostrarReglas();
-
-  /*
-   * @brief Metodo para cerrar el menu.
-   * @return String con un mensaje de cierre.
-   */
-  public String salir();
 }
