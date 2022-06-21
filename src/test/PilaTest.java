@@ -1,3 +1,4 @@
+/***
 package test;
 
 import jamesBond.Carta;
@@ -42,3 +43,4 @@ public class PilaTest {
   }
     
 }
+***/

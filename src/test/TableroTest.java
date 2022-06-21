@@ -1,3 +1,4 @@
+/***
 package test;
 
 import jamesBond.Tablero;
@@ -38,3 +39,4 @@ public class TableroTest {
     tablero.agregarCarta(carta4);
   }
 }
+***/

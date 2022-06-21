@@ -32,13 +32,15 @@ public class Tablero {
   /**
    * @brief elimina una de las cartas comunes del tablero
    * @param int representa la posicion de la carta
+   * @param cartaEntrante carta que será introducida en las cartas comunes. Viene del jugador.
    * @return la carta en la posicion solicitada
    */
-  public Carta eliminarCarta(int posicion) {
+  // TODO: cambiar nombre del metodo en UML, agregar parametro y hacer void.
+  public Carta cambiarCarta(int posicion, Carta cartaEntrante) {
 	if(posicion > this.cartasComunes.size() && posicion < 0){
 		return null;
 	}
-    return this.cartasComunes.remove(posicion);
+    return this.cartasComunes.set(posicion, cartaEntrante);
   }
   
   /**

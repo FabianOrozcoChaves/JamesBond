@@ -23,10 +23,12 @@ public class Pila {
   /**
    * Método que elimina una carta del vector de cartas y la retorna.
    * @param posicion representa la posición en el vector de la carta que se quiere eliminar.
+   * @param cartaEntrante carta que será introducida en la pila actual del jugador. Viene desde la mesa.
    * @return Carta que se elimina.
    */
-  public Carta eliminarCarta(int posicion) {
-    Carta carta = this.cartas.remove(posicion);
+  // TODO: cambiar nombre del metodo en UML y agregar parametro
+  public Carta cambiarCarta(int posicion, Carta cartaEntrante) {
+    Carta carta = this.cartas.set(posicion, cartaEntrante);
     return carta;
   }
 

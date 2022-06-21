@@ -79,8 +79,7 @@ public class Jugador {
    * @return Carta que representa la carta que fue sacada de la mesa
    */
   public Carta intercambiarCarta(Carta cartaEntrante, int posicionSaliente) {
-    Carta cartaSaliente = pilaActiva().eliminarCarta(posicionSaliente);
-    pilaActiva().agregarCarta(cartaEntrante);
+    Carta cartaSaliente = pilaActiva().cambiarCarta(posicionSaliente, cartaEntrante);
     return cartaSaliente;
   }
 

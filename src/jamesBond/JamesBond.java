@@ -36,7 +36,8 @@ public class JamesBond {
   }
 
   public void intercambiarCarta(int posTablero, int posJugador) {
-    Carta cartaJugador = tablero.eliminarCarta(posTablero);
+    //Carta cartaJugador = tablero.eliminarCarta(posTablero);
+    Carta cartaJugador = tablero.getCarta(posTablero);
     Carta cartaTablero;
 
     if (turnoActual.equals(jugador1))
@@ -44,7 +45,7 @@ public class JamesBond {
     else
       cartaTablero = jugador2.intercambiarCarta(cartaJugador, posJugador);
 
-    tablero.agregarCarta(cartaTablero);
+    tablero.cambiarCarta(posTablero, cartaTablero);
   }
 
   public void inicializarTurnos(String nombreJugador1, String nombreJugador2, String turnoInicial) {
