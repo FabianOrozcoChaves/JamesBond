@@ -50,15 +50,6 @@ public class MenuInicio implements Menu {
     return reglas;
   }
 
-  /*
-   * @brief Metodo que retorna el mensaje de despedida.
-   * @return String con un mensaje.
-   */
-  public String salir() {
-    String despedida = "Gracias por jugar. Hasta la proxima!";
-    return despedida;
-  }
-
   /* 
    * @brief PErmite asegnarle un nombre al jugador 1.
    * @deaails modifica el atributo del menu this.jugador1.
