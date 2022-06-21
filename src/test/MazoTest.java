@@ -12,10 +12,16 @@ public class MazoTest {
 
   @Before
   public void setUp() throws Exception {
-    mazo = Mazo.getInstance();
-    mazo.generaCartas();
+    this.mazo = Mazo.getInstance();
+    this.mazo.generaCartas();
   }
 	
+  @Test
+  public void singletonClass() {
+    Mazo mazo2 = Mazo.getInstance();
+    Assert.assertEquals(mazo2, mazo);
+  }
+
   @Test
   public void testGenerar() {
     Assert.assertEquals(52, mazo.getCartasRestantes());

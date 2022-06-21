@@ -1,5 +1,5 @@
 package jamesBond;
-import jamesBond.Carta;
+
 import java.util.Vector;
 
 /**

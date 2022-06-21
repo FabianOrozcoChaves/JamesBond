@@ -7,9 +7,7 @@ public class Carta {
   private String imagen;
 
   public Carta() {
-    this.palo = ' ';
-    this.numero = 0;
-    this.imagen = new String("../img/back.png");
+    this(' ', 0, "../img/back.png");
   }
 
   public Carta(char palo, int numero, String imagen) {
@@ -18,14 +16,12 @@ public class Carta {
     this.imagen = imagen;
   }
 
-  public Carta(Carta otraCarta) {
-    this.palo = otraCarta.palo;
-    this.numero = otraCarta.numero;
-    this.imagen = otraCarta.imagen;
-  }
-
   public int getNumero() {
     return this.numero;
+  }
+
+  public String getImagen() {
+    return this.imagen;
   }
 
   public char getPalo() {

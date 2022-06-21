@@ -1,5 +1,5 @@
 package jamesBond;
-import jamesBond.Carta;
+
 import java.util.Vector;
 
 /**
@@ -8,17 +8,16 @@ import java.util.Vector;
  * Puede estar boca abajo en la mesa o en la mano del jugador.
  */
 public class Pila {
-  private int MAX_CARTAS;
+  private int maxCartas;
   private Vector<Carta> cartas;
-  private boolean cartasIguales;
 
   /**
    * Método constructor por parámetros. 
-   * @param max_cartas indica la cantidad máxima de cartas que puede contenet la pila.
+   * @param max_cartas indica la cantidad máxima de cartas que puede contener la pila.
    */
-  public void Pila(final int max_cartas) {
-    this.MAX_CARTAS = max_cartas;
-    this.cartas = new Vector<Carta>(this.MAX_CARTAS);
+  public Pila(int maxCartas) {
+    this.maxCartas = maxCartas;
+    this.cartas = new Vector<Carta>(this.maxCartas);
   }
 
   /**
@@ -26,9 +25,8 @@ public class Pila {
    * @param posicion representa la posición en el vector de la carta que se quiere eliminar.
    * @return Carta que se elimina.
    */
-  public Carta eliminarCarta(final int posicion) {
-    Carta carta = getCarta(posicion);
-    this.cartas.remove(carta);
+  public Carta eliminarCarta(int posicion) {
+    Carta carta = this.cartas.remove(posicion);
     return carta;
   }
 
@@ -47,12 +45,12 @@ public class Pila {
    * @return true en caso de que todos los números coincidan, false en caso contrario.
    */
   public boolean cartasIguales() {
-    if (!this.isEmpty()) {
+    if (!this.isEmpty() && this.cartas.size() == maxCartas) {
       // selecciona el número de la primera carta como pivote.
       int numeroPivote = this.cartas.elementAt(0).getNumero();
   
       // recorre cada carta para ver si su número es igual
-      for (int carta = 1; carta < this.cartas.size(); ++carta) {
+      for (int carta = 1; carta < maxCartas; ++carta) {
         if (this.cartas.elementAt(carta).getNumero() != numeroPivote) {
           return false;
         }
@@ -85,9 +83,5 @@ public class Pila {
    */
   public Carta getCarta(int posicion) {
     return this.cartas.elementAt(posicion);
-  }
-
-  public static void main(String[] args) {
-    
   }
 }

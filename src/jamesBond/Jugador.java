@@ -1,6 +1,5 @@
 package jamesBond;
-import jamesBond.Pila;
-import jamesBond.Carta;
+
 import java.util.Vector;
 
 /**
@@ -10,7 +9,7 @@ import java.util.Vector;
  */
 public class Jugador {
   private String nombre;
-  private int MAX_PILAS;
+  private int maxPilas;
   private Vector<Pila> pilas;
   private int pilaActiva;
 
@@ -19,48 +18,39 @@ public class Jugador {
    * @param nombre string que representa el nombre del jugador
    * @param maxPilas cantidad de pilas que puede poseer un jugador.
    */
-  Jugador(final String nombre, final int maxPilas) {
-    init(nombre, maxPilas);
-  }
-
-  /**
-   * @brief Constructor por omision. Inicializa atributos de la clase
-   */
-  Jugador() {
-    init("Player", 6);
-  }
-
-  /**
-   * @brief Constructor por omision. Inicializa atributos de la clase
-   */
-  Jugador(String nombre) {
-    init(nombre, 6);
-  }
-
-  /**
-   * @brief Inicializa atributos de la clase. Modulariza constructores.
-   * @param nombre string que representa el nombre del jugador
-   * @param maxPilas cantidad de pilas que puede poseer un jugador.
-   */
-  private void init(String nombre, int maxPilas) {
+  public Jugador(final String nombre, final int maxPilas) {
     this.nombre = nombre;
-    this.MAX_PILAS = maxPilas;
+    this.maxPilas = maxPilas;
     this.pilas = new Vector<Pila>();
     this.pilaActiva = 0;
+  }
+
+  /**
+   * @brief Constructor por omision. Inicializa atributos de la clase
+   */
+  public Jugador() {
+    this("Player", 6);
+  }
+
+  /**
+   * @brief Constructor por omision. Inicializa atributos de la clase
+   */
+  public Jugador(String nombre) {
+    this(nombre, 6);
   }
 
   /**
    * @brief Método que setea un nuevo valor a la pila activa.
    * @param index int que representa el nuevo valor a asignar.
    */
-  private void cambiarPila(int index) {
+  public void cambiarPila(int index) {
     this.pilaActiva = index;
   }
 
   /**
    * @brief Método que muestra (retorna al GUI) la pila activa.
    */
-  private Pila mostrarPila() {
+  public Pila mostrarPila() {
     // Verifica si la pila no está vacía.
     return this.pilas.elementAt(this.pilaActiva).isEmpty() == false ? 
     this.pilas.elementAt(this.pilaActiva) : null;
@@ -77,7 +67,7 @@ public class Jugador {
   /**
    * @brief Método que escode (retorna al GUI) la pila activa.
    */
-  private Pila esconderPila() {
+  public Pila esconderPila() {
     // Verifica si la pila no está vacía.
     return this.pilaActiva().isEmpty() ? null : pilaActiva();
   }
@@ -90,8 +80,7 @@ public class Jugador {
    */
   public Carta intercambiarCarta(Carta cartaEntrante, int posicionSaliente) {
     // TODO agregar método getCarta a UML de Pila.
-    Carta cartaSaliente = pilaActiva().getCarta(posicionSaliente);
-    pilaActiva().eliminarCarta(posicionSaliente);
+    Carta cartaSaliente = pilaActiva().eliminarCarta(posicionSaliente);
     pilaActiva().agregarCarta(cartaEntrante);
     return cartaSaliente;
   }
@@ -101,15 +90,23 @@ public class Jugador {
    * @detail invoca al método de la clase Pila para verificar la igualdad del número en la carta.
    * @return boolean que representa si las pilas del jugador son iguales o no.
    */
-  private boolean pilasIguales() {
+  public boolean pilasIguales() {
     boolean pilasIguales = true;
-    for (int pila = 0; pila < this.pilas.size() && pilasIguales; pila++) {
+    for (int pila = 0; pila < maxPilas && pilasIguales; pila++) {
       pilasIguales = pilas.elementAt(pila).cartasIguales();
     }
     return pilasIguales;
   }
 
-  public static void main(String[] args) {
-    System.out.println("crea jugador");
+  public String getName(){
+    return this.nombre;
+  }
+
+  public int getMaxPilas(){
+    return this.maxPilas;
+  }
+
+  public void agregarPila(Pila pila){
+    this.pilas.add(pila);
   }
 }

@@ -1,5 +1,5 @@
 package jamesBond;
-import jamesBond.Carta;
+
 import java.util.Vector;
 import java.util.Collections;
 
@@ -34,24 +34,25 @@ public class Mazo {
    * @brief genera todas las cartas del mazo
    */
   public void generaCartas() {
-	char[] palos = {'P', 'D', 'C', 'T'};
+    cartas.clear();
+	  char[] palos = {'P', 'D', 'C', 'T'};
     for(char c:palos){
-	  for(int j = 1; j < 14; j++){
-	    StringBuilder sb = new StringBuilder (String.valueOf ("../img/carta"));
-	    sb.append (c);
-		sb.append ('_');
-	    sb.append (j);
-		sb.append (".png");
-	    this.cartas.add(new Carta(c, j, sb.toString ()));
+	    for(int j = 1; j < 14; j++){
+	      StringBuilder sb = new StringBuilder (String.valueOf ("../img/carta"));
+	      sb.append (c);
+		    sb.append ('_');
+	      sb.append (j);
+		    sb.append (".png");
+	      this.cartas.add(new Carta(c, j, sb.toString ()));
+	    }
 	  }
-	}
   }
 
   /**
    * @brief mezcla las cartas del mazo
    */
   public void barajas() {
-	Collections.shuffle(this.cartas);
+	  Collections.shuffle(this.cartas);
   }
   
   /**
@@ -60,8 +61,8 @@ public class Mazo {
    */
   public Carta getCarta() {
 	  if(this.cartas.size() < 1){
-		return null;
-	}
+		  return null;
+	  }
     return this.cartas.remove(0);
   }
   
@@ -72,9 +73,9 @@ public class Mazo {
   public String toString(){
 	String resultado = "El mazo contiene: ";
     for (Carta carta : this.cartas) {
-	  resultado += carta.toString() + " ";
-	}
-	return resultado;
+  	  resultado += carta.toString() + " ";
+  	}
+  	return resultado;
   }
   
   public int getCartasRestantes(){
