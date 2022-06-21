@@ -1,11 +1,11 @@
 package jamesBond;
 
 public class MenuAjustes implements Menu {
+  private String titulo = "Menu de ajustes"; 
 
   public String [] mostrarOpciones() {
     String [] opciones = new String[4]; 
     int i = 0;
-    opciones[i++] = "Menu de ajustes:";
     opciones[i++] = "Reglas";
     opciones[i++] = "Guardar partida";
     opciones[i++] = "Cargar partida";
@@ -27,8 +27,7 @@ public class MenuAjustes implements Menu {
     return reglas;
   }
 
-  public String salir() {
-    String mensaje = "Volviendo al menu de inicio";
-    return mensaje;
+  public String getTitulo() {
+    return this.titulo;
   }
 }

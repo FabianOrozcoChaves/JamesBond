@@ -1,17 +1,24 @@
 package jamesBond;
-
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PopupControl;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jamesBond.PopUp;
 
+
+import jamesBond.MenuInicio;
 /**
  * Clase GUI.
  * Interfaz grafica
@@ -21,11 +28,11 @@ public class GUI extends Application {
   private int alturaVentana = 600;
   private Stage mainStage;
   private Scene menuIncio_scene, menuAjustes_scene;
-  private MenuInicio menuInicio;
+  private MenuInicio menuInicio = new MenuInicio("James Bond");;
+  private MenuAjustes menuAjustes = new MenuAjustes();
 
   public void start(Stage stage) {
     this.mainStage = stage;
-    this.menuInicio = new MenuInicio("James Bond");
     stage.setTitle(this.menuInicio.getNombreJUego());
     this.mainStage.setOnCloseRequest(e -> this.cerrarVentana());
     this.mostrarMenuInicio();
@@ -46,10 +53,11 @@ public class GUI extends Application {
       botonesMenu[i].setText(opciones[i]);
     }
     botonesMenu[jugar].setOnAction(e -> System.out.println(this.menuInicio.getJugadorJ1() + this.menuInicio.getJugadorJ2()));
-    botonesMenu[cargar].setOnAction(e -> System.out.println("Cargar"));
+    botonesMenu[cargar].setOnAction(e ->{
+      System.out.println("Cargar");
+    });
     botonesMenu[reglas].setOnAction(e ->{
       PopUp.mostrar("Reglas", this.menuInicio.mostrarReglas());
-
     });
     botonesMenu[salir].setOnAction(e -> {
       this.cerrarVentana();
@@ -59,15 +67,15 @@ public class GUI extends Application {
     HBox topMenuBotones = new HBox();
     TextField nombreJugador1 = new TextField(this.menuInicio.getJugadorJ1());
     nombreJugador1.setOnAction(e -> {
-      this.menuInicio.asignarNombreJ1(nombreJugador1.getText());
       nombreJugador1.setText(nombreJugador1.getText() + " " + Character.toString(10004));
+      this.menuInicio.asignarNombreJ1(nombreJugador1.getText());
       nombreJugador1.setEditable(false);
 
     });
     TextField nombreJugador2 = new TextField(this.menuInicio.getJugadorJ2());
     nombreJugador2.setOnAction(e ->{ 
-      this.menuInicio.asignarNombreJ2(nombreJugador2.getText());
       nombreJugador2.setText(nombreJugador2.getText() + " " + Character.toString(10004));
+      this.menuInicio.asignarNombreJ2(nombreJugador2.getText());
       nombreJugador2.setEditable(false);
     });
 
@@ -90,38 +98,22 @@ public class GUI extends Application {
     CheckBox checkRandom = new CheckBox("Turno inicial aleatorio");
 
     topMenuCheckboxs.getChildren().addAll(checkJugador1, checkRandom, checkJugador2);
-    
-    // default
-    checkRandom.setSelected(true);
-
     checkJugador1.setOnAction(e -> {
-      if (!checkJugador1.isSelected() && !checkJugador2.isSelected()) {
-        checkRandom.setSelected(true);
-        this.menuInicio.asignarTurnoInicial("random");
-        System.out.println("El turno inicial es aleatorio");
-      } else if (checkJugador2.isSelected() || checkRandom.isSelected()) {
+      if (checkJugador2.isSelected() || checkRandom.isSelected()) {
         checkJugador2.setSelected(false);
         checkRandom.setSelected(false);
       }
-      if (checkJugador1.isSelected()) {
-        this.menuInicio.asignarTurnoInicial(this.menuInicio.getJugadorJ1());
-        System.out.println("El turno inicial lo tiene " + this.menuInicio.getTurnoInicial());
-      }
+      this.menuInicio.asignarTurnoInicial(this.menuInicio.getJugadorJ1());
+      System.out.println("El turno inicial lo tiene " + this.menuInicio.getTurnoInicial());
     });
 
     checkJugador2.setOnAction(e -> {
-      if (!checkJugador1.isSelected() && !checkJugador2.isSelected()) {
-        checkRandom.setSelected(true);
-        this.menuInicio.asignarTurnoInicial("random");
-        System.out.println("El turno inicial es aleatorio");
-      } else if (checkJugador1.isSelected() || checkRandom.isSelected()) {
+      if (checkJugador1.isSelected() || checkRandom.isSelected()) {
         checkJugador1.setSelected(false);
         checkRandom.setSelected(false);
       }
-      if (checkJugador2.isSelected()) {
-        this.menuInicio.asignarTurnoInicial(this.menuInicio.getJugadorJ2());
-        System.out.println("El turno inicial lo tiene " + this.menuInicio.getTurnoInicial());
-      }
+      this.menuInicio.asignarTurnoInicial(this.menuInicio.getJugadorJ2());
+      System.out.println("El turno inicial lo tiene " + this.menuInicio.getTurnoInicial());
     });
 
     checkRandom.setOnAction(e -> {
@@ -131,7 +123,6 @@ public class GUI extends Application {
       }
       this.menuInicio.asignarTurnoInicial("random");
       System.out.println("El turno inicial es aleatorio");
-      checkRandom.setSelected(true);
     });
 
     topMenuCheckboxs.setSpacing(190);
