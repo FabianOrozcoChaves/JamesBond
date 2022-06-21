@@ -15,6 +15,7 @@ public class Tablero {
    * @brief Constructor privado de la clase.
    */
   private Tablero() {
+    cartasComunes = new Vector<Carta>();
   }
 
   /**
@@ -47,5 +48,14 @@ public class Tablero {
    */
   public void agregarCarta(Carta carta) {
 	  this.cartasComunes.add(carta);
+  }
+
+  /**
+   * @brief devuelve la carta en al posicion escogida
+   * @param int posicion 
+   * @return la carata que se encuentra en ese posicion
+   */
+  public Carta getCarta(int posicion) {
+	  return this.cartasComunes.get(posicion);
   }
 }
