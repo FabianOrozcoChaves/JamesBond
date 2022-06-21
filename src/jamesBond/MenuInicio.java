@@ -4,7 +4,7 @@ package jamesBond;
  * @class MenuInicio.
  * Esta clase le ofrece al GUI los metodos necesarios para que el menu de inicio reaccione a los eventos.
  */
-public class MenuInicio {
+public class MenuInicio implements Menu {
   private String jugador1 = "Jugador 1";
   private String jugador2 = "Jugador 2";
   private String turnoInicial = "random";
