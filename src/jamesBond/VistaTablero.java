@@ -1,9 +1,14 @@
 package jamesBond;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import jamesBond.JamesBond;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -35,6 +40,8 @@ public class VistaTablero extends Application {
   HBox [] pilaJ1_hbx = new HBox[3];
   HBox [] pilaJ2_hbx = new HBox[3];
   VBox [] comunes_vbx = new VBox[3];
+  int timerCount = 3;
+  Button button;
 
   // GUI
   private Stage tablero_stg;
@@ -108,6 +115,36 @@ public class VistaTablero extends Application {
     comunes_vbx[2] = new VBox();
     inicializarPilas(j2, pilaJ2_hbx, vistaPilaJ2, comunes_vbx[2]);
 
+    button = new Button();
+    button.setText("timer: " + timerCount);
+    button.setOnAction(event -> {
+      Timer tm = new Timer();
+      TimerTask task = new TimerTask() {
+        public void run(){
+          Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+              button.setText("timer: " + timerCount);
+            }
+          });
+          System.out.println("timer: " + timerCount);
+          timerCount--;
+          if(timerCount == 0){
+              timerCount = 3;
+              tm.cancel();
+              tm.purge();
+            }
+          }
+        };
+        tm.scheduleAtFixedRate(task, 1000,1000);
+    });
+    HBox timer_hbx = new HBox();
+    timer_hbx.getChildren().add(button);
+    timer_hbx.setSpacing(20);
+    timer_hbx.setAlignment(Pos.CENTER);
+    
+    
+
     Tablero tablero = gameJB.getTablero();
 
     // ventana
@@ -118,10 +155,14 @@ public class VistaTablero extends Application {
     inicializarCartasComunes(tablero);
 
     // setea hbox en border pane
+    // comunes_vbx[0] es contiene las cartas comunes
+    // comunes_vbx[1] es contiene las pilas del jugador 1
+    // comunes_vbx[2] es contiene las pilas del jugador 2
     this.tablero_bp.setCenter(this.comunes_vbx[0]);
     this.tablero_bp.setBottom(this.pilaActiva_hbx);
     this.tablero_bp.setRight(this.comunes_vbx[1]);
     this.tablero_bp.setLeft(this.comunes_vbx[2]);
+    this.tablero_bp.setTop(timer_hbx);
 
     
     // escena y stage
