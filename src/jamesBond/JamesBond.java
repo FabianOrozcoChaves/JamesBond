@@ -76,7 +76,7 @@ public class JamesBond {
     else
       turnoActual = jugador1;
   }
-
+  // TODO agregar metodos faltantes UML
   public boolean revisarPilas(Jugador jugador) {
     return jugador.pilasIguales();
   }
