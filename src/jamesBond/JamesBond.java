@@ -22,21 +22,22 @@ public class JamesBond {
     mazo.generaCartas();
     mazo.barajas();
 
-    for (int i = 0; i < 4; i++) {
-      Pila pilaJugador1 = new Pila(6);
-      Pila pilaJugador2 = new Pila(6);
-      for (int j = 0; j < 6; j++) {
+    for (int i = 0; i < 6; i++) {
+      Pila pilaJugador1 = new Pila(4);
+      Pila pilaJugador2 = new Pila(4);
+      for (int j = 0; j < 4; j++) {
         pilaJugador1.agregarCarta(mazo.getCarta());
         pilaJugador2.agregarCarta(mazo.getCarta());
       }
       jugador1.agregarPila(pilaJugador1);
       jugador2.agregarPila(pilaJugador2);
+    }
+    for(int i = 0; i < 4; i++){
       tablero.agregarCarta(mazo.getCarta());
     }
   }
 
   public void intercambiarCarta(int posTablero, int posJugador) {
-    //Carta cartaJugador = tablero.eliminarCarta(posTablero);
     Carta cartaJugador = tablero.getCarta(posTablero);
     Carta cartaTablero;
 

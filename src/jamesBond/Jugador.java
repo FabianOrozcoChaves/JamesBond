@@ -60,7 +60,7 @@ public class Jugador {
    * Metodo de visualizacion
    * @return pila que representa la que el jugador tiene en mano actualmente.
    */
-  private Pila pilaActiva(){
+  public Pila pilaActiva(){
     return this.pilas.elementAt(this.pilaActiva);
   }
 
@@ -106,5 +106,9 @@ public class Jugador {
 
   public void agregarPila(Pila pila){
     this.pilas.add(pila);
+  }
+
+  public Pila getPila(int posicion){
+    return pilas.get(posicion);
   }
 }

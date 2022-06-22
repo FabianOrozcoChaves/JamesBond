@@ -2,7 +2,6 @@ package test;
 
 import jamesBond.JamesBond;
 import jamesBond.Jugador;
-import jamesBond.Tablero;
 import jamesBond.Pila;
 import jamesBond.Carta;
 
@@ -25,9 +24,10 @@ public class JamesBondTest {
     JamesBond controlador = new JamesBond();
     controlador.inicializarTurnos("Luis", "Juan"
         , "Luis");
-    Pila pila = iniciarJugador(controlador.getJugador(1));
-    iniciarTablero(controlador.getTablero());
+    controlador.repartirCartas();
+    Jugador jugador1 = controlador.getJugador(1);
     controlador.getJugador(1).cambiarPila(5);
+    Pila pila = jugador1.pilaActiva();
     Carta cartaJugadorAntes = pila.getCarta(1);
     Carta cartaTableroAntes = controlador.getTablero().getCarta(2);
     controlador.intercambiarCarta(2, 1);
@@ -35,30 +35,5 @@ public class JamesBondTest {
     Carta cartaTableroDespues = controlador.getTablero().getCarta(2);
     Assert.assertEquals(cartaJugadorAntes, cartaTableroDespues);
     Assert.assertEquals(cartaTableroAntes, cartaJugadorDespues);
-  }
-
-  private Pila iniciarJugador(Jugador jugador) {
-    Pila aux = new Pila(4);
-    for(int i = 0; i < jugador.getMaxPilas(); i++){
-      Pila pila =  new Pila(4);
-      iniciarPila(pila, i);
-      jugador.agregarPila(pila);
-      aux = pila;
-    }
-    return aux;
-  }
-
-  private void iniciarPila(Pila pila, int numero){
-    char[] palos = {'P', 'D', 'C', 'T'};
-    for (int i = 0; i < palos.length; i++) {
-      pila.agregarCarta(new Carta(palos[i], numero+i, "path"));
-    }
-  }
-
-  private void iniciarTablero(Tablero tablero) {
-    char[] palos = {'P', 'D', 'C', 'T'};
-    for (int i = 0; i < palos.length; i++) {
-      tablero.agregarCarta(new Carta(palos[i], (int)Math.random()*10+1, "path"));
-    }
   }
 }
