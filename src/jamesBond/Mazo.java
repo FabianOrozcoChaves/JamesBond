@@ -38,12 +38,12 @@ public class Mazo {
 	  char[] palos = {'P', 'D', 'C', 'T'};
     for(char c:palos){
 	    for(int j = 1; j < 14; j++){
-	      StringBuilder sb = new StringBuilder (String.valueOf ("../img/carta"));
+	      StringBuilder sb = new StringBuilder (String.valueOf("./img/"));
 	      sb.append (c);
 		    sb.append ('_');
 	      sb.append (j);
 		    sb.append (".png");
-	      this.cartas.add(new Carta(c, j, sb.toString ()));
+	      this.cartas.add(new Carta( c, j, sb.toString() ));
 	    }
 	  }
   }
@@ -51,7 +51,7 @@ public class Mazo {
   /**
    * @brief mezcla las cartas del mazo
    */
-  public void barajas() {
+  public void barajar() {
 	  Collections.shuffle(this.cartas);
   }
   

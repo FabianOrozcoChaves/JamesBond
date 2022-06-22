@@ -20,7 +20,7 @@ public class JamesBond {
 
   public void repartirCartas() {
     mazo.generaCartas();
-    mazo.barajas();
+    mazo.barajar();
 
     for (int i = 0; i < 6; i++) {
       Pila pilaJugador1 = new Pila(4);

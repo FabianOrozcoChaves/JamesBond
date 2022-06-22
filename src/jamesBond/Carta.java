@@ -1,26 +1,29 @@
 package jamesBond;
 
+import javafx.scene.image.Image;
 
 public class Carta {
   private char palo;
   private int numero;
-  private String imagen;
+  private Image imagen;
+  private String ruta;
 
   public Carta() {
-    this(' ', 0, "../img/back.png");
+    this(' ', 0, "./img/back.png");
   }
 
-  public Carta(char palo, int numero, String imagen) {
+  public Carta(char palo, int numero, String rutaImagen) {
     this.palo = palo;
     this.numero = numero;
-    this.imagen = imagen;
+    this.ruta = rutaImagen;
+    this.imagen = new Image(getClass().getResourceAsStream(rutaImagen));
   }
 
   public int getNumero() {
     return this.numero;
   }
 
-  public String getImagen() {
+  public Image getImagen() {
     return this.imagen;
   }
 
