@@ -6,14 +6,23 @@ import jamesBond.JamesBond;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,24 +44,51 @@ public class VistaTablero extends Application {
   
   BorderPane tablero_bp = new BorderPane();
 
-  HBox pilaActiva_hbx = new HBox();   
+  HBox pilaActiva_hbx = new HBox();
   HBox [] comunes_hbx = new HBox[2];  // cada índice es un par de cartas
   HBox [] pilaJ1_hbx = new HBox[3];   // cada índice es un par de cartas
   HBox [] pilaJ2_hbx = new HBox[3];   // cada índice es un par de cartas
-  VBox [] comunes_vbx = new VBox[3];  // 0: comunes(mesa) | 1: pilaJ1 | 2: pilaJ2
-  int timerCount = 3;
-  Button button;
+  VBox [] pilas_vbox = new VBox[3];   // 0: comunes(mesa) | 1: pilaJ1 | 2: pilaJ2
+
+  Text pilaActiva_txt = new Text("Pila activa");
+  Text pilaJ1_txt = new Text();
+  Text pilaJ2_txt = new Text();
+  Text comunes_txt = new Text();
+
+  // Temporizador
+  int temporizador = 3;
+  final int SEGUNDOS = 10;
+  int segunderoTurnos = 10;
+
   // GUI
   private Stage tablero_stg;
   private Scene tablero_scn;
 
   private JamesBond gameJB = new JamesBond(); //simul. borrar luego
 
+
+  public void definirTextos(String jugador1, String jugador2) {
+    pilaActiva_txt.setFill(Color.WHITE);
+    pilaActiva_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
+
+    comunes_txt.setFill(Color.WHITE);
+    comunes_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
+
+    pilaJ1_txt.setFill(Color.WHITE);
+    pilaJ1_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
+    pilaJ1_txt.setText("Pila de " + jugador1);
+
+    pilaJ2_txt.setFill(Color.WHITE);
+    pilaJ2_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
+    pilaJ2_txt.setText("Pila de " + jugador2);
+  }
+
   // métodos
   public void inicializarPilaActiva(Jugador jugador) {
     Pila pilaActiva = jugador.pilaActiva();
     pilaActiva_hbx = new HBox();
-    
+    pilaActiva_hbx.getChildren().add(this.pilaActiva_txt);
+
     // vistas comunes
     for (int indexCarta = 0; indexCarta < vistaPilaActiva.length; indexCarta++) {
       vistaPilaActiva[indexCarta] = new VistaCarta(pilaActiva.getCarta(indexCarta));
@@ -63,15 +99,13 @@ public class VistaTablero extends Application {
     pilaActiva_hbx.setAlignment(Pos.BOTTOM_CENTER);
   }
 
-
   public void inicializarCartasComunes(Tablero tablero) {
     // vistas comunes
     for (int indexCarta = 0; indexCarta < vistaComunes.length; indexCarta++) {
       vistaComunes[indexCarta] = new VistaCarta(tablero.getCarta(indexCarta));
     }
-    this.comunes_vbx[0] = new VBox();
-
-    inicializarComun(comunes_hbx, vistaComunes, this.comunes_vbx[0]);
+    this.pilas_vbox[0] = new VBox();
+    inicializarComun(comunes_hbx, vistaComunes, this.pilas_vbox[0]);
   }
 
   public void inicializarPilas(Jugador jugador, HBox [] pila_hbx, VistaCarta [] vistaPila, VBox vbx) {
@@ -102,47 +136,42 @@ public class VistaTablero extends Application {
     vbx.setSpacing(20);
   }
 
+
+  public void mostrarTemporizador(Text seconds) {
+    Timer timer = new Timer();
+    TimerTask task = new TimerTask() {
+      public void run(){
+        Platform.runLater(new Runnable() {
+          @Override
+          public void run() {
+            seconds.setText("00:0" + temporizador);
+          }
+        });
+        System.out.println("timer: " + temporizador);
+        temporizador--;
+        if(temporizador == 0){
+            temporizador = SEGUNDOS;
+            timer.cancel();
+            timer.purge();
+          }
+        }
+      };
+      timer.scheduleAtFixedRate(task, 0,1000);
+  }
+
   public void start(Stage tablero_stg) {
     // crea contexto (GUI)
     gameJB.inicializarTurnos("Luis","Juan","Luis");
     gameJB.repartirCartas();
     Jugador j1 = gameJB.getJugador(1);
     inicializarPilaActiva(j1);
-    comunes_vbx[1] = new VBox();
-    inicializarPilas(j1, pilaJ1_hbx, vistaPilaJ1, comunes_vbx[1]);
+    pilas_vbox[1] = new VBox();
+    pilas_vbox[1].getChildren().add(this.pilaJ1_txt);
+    inicializarPilas(j1, pilaJ1_hbx, vistaPilaJ1, pilas_vbox[1]);
     Jugador j2 = gameJB.getJugador(2);
-    comunes_vbx[2] = new VBox();
-    inicializarPilas(j2, pilaJ2_hbx, vistaPilaJ2, comunes_vbx[2]);
-
-    button = new Button();
-    button.setText("timer: " + timerCount);
-    button.setOnAction(event -> {
-      Timer tm = new Timer();
-      TimerTask task = new TimerTask() {
-        public void run(){
-          Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-              button.setText("timer: " + timerCount);
-            }
-          });
-          System.out.println("timer: " + timerCount);
-          timerCount--;
-          if(timerCount == 0){
-              timerCount = 3;
-              tm.cancel();
-              tm.purge();
-            }
-          }
-        };
-        tm.scheduleAtFixedRate(task, 1000,1000);
-    });
-    HBox timer_hbx = new HBox();
-    timer_hbx.getChildren().add(button);
-    timer_hbx.setSpacing(20);
-    timer_hbx.setAlignment(Pos.CENTER);
-    
-    
+    pilas_vbox[2] = new VBox();
+    pilas_vbox[2].getChildren().add(this.pilaJ2_txt);
+    inicializarPilas(j2, pilaJ2_hbx, vistaPilaJ2, pilas_vbox[2]);
 
     Tablero tablero = gameJB.getTablero();
 
@@ -153,22 +182,38 @@ public class VistaTablero extends Application {
     // inicializa comunes
     inicializarCartasComunes(tablero);
 
-    // setea hbox en border pane
-    // comunes_vbx[0] es contiene las cartas comunes
-    // comunes_vbx[1] es contiene las pilas del jugador 1
-    // comunes_vbx[2] es contiene las pilas del jugador 2
-    this.tablero_bp.setCenter(this.comunes_vbx[0]);
-    this.tablero_bp.setBottom(this.pilaActiva_hbx);
-    this.tablero_bp.setRight(this.comunes_vbx[1]);
-    this.tablero_bp.setLeft(this.comunes_vbx[2]);
-    this.tablero_bp.setTop(timer_hbx);
 
-    
+    // setea hbox en border pane
+    // pilas_vbox[0] es contiene las cartas comunes
+    // pilas_vbox[1] es contiene las pilas del jugador 1
+    // pilas_vbox[2] es contiene las pilas del jugador 2
+    this.tablero_bp.setCenter(this.pilas_vbox[0]);
+    this.tablero_bp.setBottom(this.pilaActiva_hbx);
+    this.tablero_bp.setRight(this.pilas_vbox[1]);
+    this.tablero_bp.setLeft(this.pilas_vbox[2]);
+
     // escena y stage
     this.tablero_scn = new Scene(this.tablero_bp, this.anchoVentana, this.alturaVentana);
-    this.tablero_scn.setFill(Color.web("#008000"));
+    // setea el color al background
+    this.tablero_bp.setBackground(new Background(new BackgroundFill(Color.web("#008000"), new CornerRadii(0), Insets.EMPTY)));
     this.tablero_stg.setScene(this.tablero_scn);
     this.tablero_stg.show();
+
+    // Temporizador
+    Text seconds = new Text();
+    seconds.setFill(Color.WHITE);
+    seconds.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
+    seconds.setText("00:0" + temporizador);
+    
+    HBox timer_hbx = new HBox();
+    timer_hbx.getChildren().addAll(seconds);
+    timer_hbx.setSpacing(5);
+    timer_hbx.setAlignment(Pos.CENTER);
+    this.tablero_bp.setTop(timer_hbx);
+
+    definirTextos(j1.getNombre(), j2.getNombre());
+
+    mostrarTemporizador(seconds);
   }
 
   public Scene getTablero_scn() {
