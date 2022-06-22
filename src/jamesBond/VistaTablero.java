@@ -63,21 +63,9 @@ public class VistaTablero extends Application {
     for (int indexCarta = 0; indexCarta < vistaComunes.length; indexCarta++) {
       vistaComunes[indexCarta] = new VistaCarta(tablero.getCarta(indexCarta));
     }
-
-    // hbox comunes
-    for(int i = 0; i < comunes_hbx.length; i++){
-      comunes_hbx[i] = new HBox();
-      int index = i*2;
-      comunes_hbx[i].getChildren().addAll(vistaComunes[index++].getView(true), vistaComunes[index].getView(true));
-      comunes_hbx[i].setSpacing(20);
-      comunes_hbx[i].setAlignment(Pos.CENTER);
-    }
-    
-    // vbox comunes
     this.comunes_vbx[0] = new VBox();
-    this.comunes_vbx[0].setAlignment(Pos.CENTER);
-    this.comunes_vbx[0].getChildren().addAll(this.comunes_hbx[0], this.comunes_hbx[1]);
-    this.comunes_vbx[0].setSpacing(20);
+
+    inicializarComun(comunes_hbx, vistaComunes, this.comunes_vbx[0]);
   }
 
   public void inicializarPilas(Jugador jugador, HBox [] pila_hbx, VistaCarta [] vistaPila, VBox vbx) {
@@ -85,6 +73,11 @@ public class VistaTablero extends Application {
     for (int indexCarta = 0; indexCarta < vistaPila.length; indexCarta++) {
       vistaPila[indexCarta] = new VistaCarta(jugador.getPila(indexCarta).getCarta(0));
     }
+
+    inicializarComun(pila_hbx, vistaPila, vbx);
+  }
+
+  public void inicializarComun(HBox [] pila_hbx, VistaCarta [] vistaPila, VBox vbx) {
 
     // hbox pila
     for(int i = 0; i < pila_hbx.length; i++){
@@ -97,7 +90,9 @@ public class VistaTablero extends Application {
 
     // vbox pila
     vbx.setAlignment(Pos.CENTER);
-    vbx.getChildren().addAll(pila_hbx[0], pila_hbx[1], pila_hbx[2]);
+    for(int i = 0; i < pila_hbx.length; i++){
+      vbx.getChildren().add(pila_hbx[i]);
+    }
     vbx.setSpacing(20);
   }
 
