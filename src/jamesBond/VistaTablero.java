@@ -30,11 +30,11 @@ public class VistaTablero extends Application {
   
   BorderPane tablero_bp = new BorderPane();
 
-  HBox pilaActiva_hbx = new HBox();
-  HBox [] comunes_hbx = new HBox[2];
-  HBox [] pilaJ1_hbx = new HBox[3];
-  HBox [] pilaJ2_hbx = new HBox[3];
-  VBox [] comunes_vbx = new VBox[3];
+  HBox pilaActiva_hbx = new HBox();   
+  HBox [] comunes_hbx = new HBox[2];  // cada índice es un par de cartas
+  HBox [] pilaJ1_hbx = new HBox[3];   // cada índice es un par de cartas
+  HBox [] pilaJ2_hbx = new HBox[3];   // cada índice es un par de cartas
+  VBox [] comunes_vbx = new VBox[3];  // 0: comunes(mesa) | 1: pilaJ1 | 2: pilaJ2
 
   // GUI
   private Stage tablero_stg;
