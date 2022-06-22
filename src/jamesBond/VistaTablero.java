@@ -65,21 +65,40 @@ public class VistaTablero extends Application {
     }
 
     // hbox comunes
-    comunes_hbx[0] = new HBox();
-    comunes_hbx[0].getChildren().addAll(vistaComunes[0].getView(true), vistaComunes[1].getView(true));
-    comunes_hbx[0].setSpacing(20);
-    comunes_hbx[0].setAlignment(Pos.CENTER);
-
-    comunes_hbx[1] = new HBox();
-    comunes_hbx[1].getChildren().addAll(vistaComunes[2].getView(true), vistaComunes[3].getView(true));
-    comunes_hbx[1].setSpacing(20);
-    comunes_hbx[1].setAlignment(Pos.CENTER);
-
+    for(int i = 0; i < comunes_hbx.length; i++){
+      comunes_hbx[i] = new HBox();
+      int index = i*2;
+      comunes_hbx[i].getChildren().addAll(vistaComunes[index++].getView(true), vistaComunes[index].getView(true));
+      comunes_hbx[i].setSpacing(20);
+      comunes_hbx[i].setAlignment(Pos.CENTER);
+    }
+    
     // vbox comunes
     this.comunes_vbx[0] = new VBox();
     this.comunes_vbx[0].setAlignment(Pos.CENTER);
     this.comunes_vbx[0].getChildren().addAll(this.comunes_hbx[0], this.comunes_hbx[1]);
     this.comunes_vbx[0].setSpacing(20);
+  }
+
+  public void inicializarPilas(Jugador jugador, HBox [] pila_hbx, VistaCarta [] vistaPila, VBox vbx) {
+    // vista pila
+    for (int indexCarta = 0; indexCarta < vistaPila.length; indexCarta++) {
+      vistaPila[indexCarta] = new VistaCarta(jugador.getPila(indexCarta).getCarta(0));
+    }
+
+    // hbox pila
+    for(int i = 0; i < pila_hbx.length; i++){
+      pila_hbx[i] = new HBox();
+      int index = i*2;
+      pila_hbx[i].getChildren().addAll(vistaPila[index++].getView(true), vistaPila[index].getView(true));
+      pila_hbx[i].setSpacing(20);
+      pila_hbx[i].setAlignment(Pos.CENTER);
+    }
+
+    // vbox pila
+    vbx.setAlignment(Pos.CENTER);
+    vbx.getChildren().addAll(pila_hbx[0], pila_hbx[1], pila_hbx[2]);
+    vbx.setSpacing(20);
   }
 
   public void start(Stage tablero_stg) {
@@ -88,6 +107,11 @@ public class VistaTablero extends Application {
     gameJB.repartirCartas();
     Jugador j1 = gameJB.getJugador(1);
     inicializarPilaActiva(j1);
+    comunes_vbx[1] = new VBox();
+    inicializarPilas(j1, pilaJ1_hbx, vistaPilaJ1, comunes_vbx[1]);
+    Jugador j2 = gameJB.getJugador(2);
+    comunes_vbx[2] = new VBox();
+    inicializarPilas(j2, pilaJ2_hbx, vistaPilaJ2, comunes_vbx[2]);
 
     Tablero tablero = gameJB.getTablero();
 
@@ -101,6 +125,9 @@ public class VistaTablero extends Application {
     // setea hbox en border pane
     this.tablero_bp.setCenter(this.comunes_vbx[0]);
     this.tablero_bp.setBottom(this.pilaActiva_hbx);
+    this.tablero_bp.setRight(this.comunes_vbx[1]);
+    this.tablero_bp.setLeft(this.comunes_vbx[2]);
+
     
     // escena y stage
     this.tablero_scn = new Scene(this.tablero_bp, this.anchoVentana, this.alturaVentana);
