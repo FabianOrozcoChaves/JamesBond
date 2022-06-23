@@ -108,6 +108,10 @@ public class Jugador {
     this.pilas.add(pila);
   }
 
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
   // TODO agregar getPila ya que no hay forma de accesder a las pilas desde el controlador UML
   public Pila getPila(int posicion){
     return pilas.get(posicion);

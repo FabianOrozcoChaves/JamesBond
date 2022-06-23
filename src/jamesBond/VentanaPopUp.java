@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class PopUp {
+public class VentanaPopUp {
   public static void mostrar(String titulo, String mensaje) {
     Stage ventana = new Stage();
     ventana.initModality(Modality.APPLICATION_MODAL);
@@ -53,7 +53,7 @@ public class PopUp {
     }
 
     botones[reglas].setOnAction(e -> {
-      PopUp.mostrar("reglas", menuAjustes.mostrarReglas());
+      VentanaPopUp.mostrar("reglas", menuAjustes.mostrarReglas());
     });
 
     botones[guardar].setOnAction(e -> {
@@ -63,6 +63,8 @@ public class PopUp {
     botones[cargar].setOnAction(e -> {
       menuAjustes.cargarPartida();
     });
+
+    ventana.setOnCloseRequest(e -> ventana.close());
 
     botones[salir].setOnAction(e -> ventana.close());
 

@@ -100,4 +100,8 @@ public class JamesBond {
   public Tablero getTablero() {
     return tablero;
   }
+
+  public Jugador getTurnoActual() {
+    return this.turnoActual;
+  }
 }

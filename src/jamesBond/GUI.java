@@ -10,7 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import jamesBond.VistaTablero;
 
 /**
  * Clase GUI.
@@ -20,19 +22,22 @@ public class GUI extends Application {
   private int anchoVentana = 1000;
   private int alturaVentana = 600;
   private Stage mainStage;
-  private Scene menuIncio_scene, menuAjustes_scene;
-  private MenuInicio menuInicio;
+  private Scene menuIncio_scene;
+  private MenuInicio menuInicio = new MenuInicio("James Bond");
+  private VistaTablero tablero = new VistaTablero();
 
   public void start(Stage stage) {
     this.mainStage = stage;
-    this.menuInicio = new MenuInicio("James Bond");
     stage.setTitle(this.menuInicio.getNombreJUego());
     this.mainStage.setOnCloseRequest(e -> this.cerrarVentana());
-    this.mostrarMenuInicio();
+
+    this.construirMenuInicio();
+
+    this.mainStage.setScene(this.menuIncio_scene);
     stage.show();
   }
 
-  public void mostrarMenuInicio() {
+  public void construirMenuInicio() {
     int jugar = 0;
     int cargar = 1;
     int reglas = 2;
@@ -45,11 +50,16 @@ public class GUI extends Application {
       botonesMenu[i] = new Button();
       botonesMenu[i].setText(opciones[i]);
     }
-    botonesMenu[jugar].setOnAction(e -> System.out.println(this.menuInicio.getJugadorJ1() + this.menuInicio.getJugadorJ2()));
-    botonesMenu[cargar].setOnAction(e -> System.out.println("Cargar"));
-    botonesMenu[reglas].setOnAction(e ->{
-      PopUp.mostrar("Reglas", this.menuInicio.mostrarReglas());
+    botonesMenu[jugar].setOnAction(e -> {
+      this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene);
+      this.tablero.run(this.mainStage);
 
+    });
+    botonesMenu[cargar].setOnAction(e ->{
+      System.out.println("Cargar");
+    });
+    botonesMenu[reglas].setOnAction(e ->{
+      VentanaPopUp.mostrar("Reglas", this.menuInicio.mostrarReglas());
     });
     botonesMenu[salir].setOnAction(e -> {
       this.cerrarVentana();
@@ -151,7 +161,6 @@ public class GUI extends Application {
     borderpane.setCenter(centerMenu);
 
     this.menuIncio_scene = new Scene(borderpane, this.anchoVentana, this.alturaVentana);
-    this.mainStage.setScene(this.menuIncio_scene);
   }
 
   private void cerrarVentana() {

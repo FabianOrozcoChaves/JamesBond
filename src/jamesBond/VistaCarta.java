@@ -3,6 +3,8 @@ import jamesBond.Carta;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+
 
 public class VistaCarta {
   private Image imagenCarta;
@@ -23,6 +25,10 @@ public class VistaCarta {
       Image back = new Image(getClass().getResourceAsStream("./img/back.png"));
       this.imagenVistaCarta.setImage(back);
     }
+    return this.imagenVistaCarta;
+  }
+
+  public ImageView getImageView() {
     return this.imagenVistaCarta;
   }
 }
