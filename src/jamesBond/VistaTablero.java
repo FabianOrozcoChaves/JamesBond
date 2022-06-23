@@ -89,6 +89,9 @@ public class VistaTablero {
   public VistaTablero() {
   }
 
+  /*
+   * @brief LLama al controlador para cdonstruir el mazo y repartir las cartas.
+   */
   public void construirJuego(String turnoInicial, String nombreJ1, String nombreJ2, Stage mainStage, Scene menuInicio) {
     this.menuInicio_scene = menuInicio;
 
@@ -118,14 +121,7 @@ public class VistaTablero {
     
     // construir escenas de cada jugador
     this.construirTablero();
-    mostrarTemporizador(seconds);
     
-    if (gameJB.getTurnoActual() == jugador1) {
-      construirEscenaJ1();
-    } else if (gameJB.getTurnoActual() == jugador2) {
-      construirEscenaJ2();
-    }
-    gameJB.cambiarTurno();
     mainStage.setOnCloseRequest(e -> {
       this.timer.cancel();
       this.timer.purge();
@@ -138,6 +134,14 @@ public class VistaTablero {
   }
 
   public void run(Stage mainStage) {
+    mostrarTemporizador(seconds);
+    if (gameJB.getTurnoActual() == jugador1) {
+      construirEscenaJ1();
+    } else if (gameJB.getTurnoActual() == jugador2) {
+      construirEscenaJ2();
+    }
+    gameJB.cambiarTurno();
+
     this.timer.schedule(new TimerTask() {
       Jugador turno = gameJB.getTurnoActual(); 
       @Override
@@ -371,7 +375,6 @@ public class VistaTablero {
   public void mostrarTemporizador(Text seconds) {
     this.timerGrafico = new Timer();
     this.timer.schedule(new TimerTask() {
-      Jugador turno = gameJB.getTurnoActual(); 
       @Override
       public void run() {
         if (temporizador == 10) {
@@ -380,11 +383,6 @@ public class VistaTablero {
           seconds.setText("00:0" + temporizador);
         }
         --temporizador;
-        if (temporizador <= 0) {
-          temporizador = 10;
-          timerGrafico.cancel();
-          timerGrafico.purge();
-        }
       }
     }, 1000, 1000);
   }
