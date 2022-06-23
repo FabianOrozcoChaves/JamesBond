@@ -26,6 +26,9 @@ public class GUI extends Application {
   private MenuInicio menuInicio = new MenuInicio("James Bond");
   private VistaTablero tablero = new VistaTablero();
 
+  /*
+   * @metodo principal para ejecutar el programa.
+   */
   public void start(Stage stage) {
     this.mainStage = stage;
     stage.setTitle(this.menuInicio.getNombreJUego());
@@ -37,6 +40,10 @@ public class GUI extends Application {
     stage.show();
   }
 
+  /*
+   * @brief COnstructor de la escena que corresponde al menu de inicio.
+   * @details modifica el atributo this.menuInicio.
+   */
   public void construirMenuInicio() {
     int jugar = 0;
     int cargar = 1;
@@ -163,11 +170,17 @@ public class GUI extends Application {
     this.menuIncio_scene = new Scene(borderpane, this.anchoVentana, this.alturaVentana);
   }
 
+  /*
+   * @brief Metodo para cerrar la aplicacion del juego.
+   */
   private void cerrarVentana() {
     System.out.println("Ventana cerrada");
     this.mainStage.close();
   }
 
+    /*
+     * @brief Main principal de la aplicacion.
+     */
   public static void main(String[] args) {
     launch(args);
   }
