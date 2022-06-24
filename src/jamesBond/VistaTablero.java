@@ -147,7 +147,7 @@ public class VistaTablero {
       @Override
       public void run() {
         temporizador = 10;
-        System.out.println("Turno de+ " + turno.getNombre());
+        System.out.println("Turno de " + turno.getNombre());
         turno = gameJB.getTurnoActual();
         if (turno == jugador1) {
           construirEscenaJ1();
@@ -310,11 +310,11 @@ public class VistaTablero {
 
     pilaJ1_txt.setFill(Color.WHITE);
     pilaJ1_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
-    pilaJ1_txt.setText("Pila de " + jugador1);
+    pilaJ1_txt.setText("Pilas de " + jugador1);
 
     pilaJ2_txt.setFill(Color.WHITE);
     pilaJ2_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
-    pilaJ2_txt.setText("Pila de " + jugador2);
+    pilaJ2_txt.setText("Pilas de " + jugador2);
   }
 
   // métodos
