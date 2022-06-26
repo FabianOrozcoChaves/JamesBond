@@ -5,11 +5,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 
-
+/**
+ * Clase que representa la vista de una carta.
+ */
 public class VistaCarta {
-  private Image imagenCarta;
-  private ImageView imagenVistaCarta;
+  private Image imagenCarta;  // ruta de la imagen respectiva a la carta
+  private ImageView imagenVistaCarta;  // vista de la imagen respectiva de la carta
   
+  /**
+   * Método constructor de la clase.
+   * @param carta Carta que se quiere adaptar.
+   */
   public VistaCarta (Carta carta) {
     this.imagenCarta = carta.getImagen();
     this.imagenVistaCarta = new ImageView();
@@ -17,6 +23,12 @@ public class VistaCarta {
     this.imagenVistaCarta.setFitHeight(100);
     this.imagenVistaCarta.setFitWidth(100);
   }
+
+  /**
+   * Método get. Retorna la vista de la imagen de la carta.
+   * @param activa Booleano que representa si la carta debe mostrarse boca arriba o boca abajo.
+   * @return Vista de la imagen de la carta boca arriba en caso que <activa> sea True, vista de la imagen de la carta boca abajo en caso contrario.
+   */
   // TODO agregar rol wrapper en UML
   public ImageView getView(boolean activa) {
     if (activa) {
@@ -28,6 +40,10 @@ public class VistaCarta {
     return this.imagenVistaCarta;
   }
 
+  /**
+   * Método get. Retorna la vista de la imagen de la carta.
+   * @return Vista de la imagen de la carta boca arriba.
+   */
   public ImageView getImageView() {
     return this.imagenVistaCarta;
   }
