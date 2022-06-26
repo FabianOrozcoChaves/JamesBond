@@ -9,9 +9,9 @@ import java.util.Vector;
  */
 public class Jugador {
   private String nombre;
-  private int maxPilas;
+  private int maxPilas;  // cantidad máxima de pilas por jugador (pensado para versiones futuras del juego)
   private Vector<Pila> pilas;
-  private int pilaActiva;
+  private int pilaActiva;  // indica la posición en el vector de la pila que se encuentra activa (la que el jugador posee en mano)
 
   /**
    * @brief Constructor. Inicializa atributos de la clase
@@ -49,6 +49,7 @@ public class Jugador {
 
   /**
    * @brief Método que muestra (retorna al GUI) la pila activa.
+   * @return null en caso de que las pila esté vacía, la Pila activa en caso contrario.
    */
   public Pila mostrarPila() {
     // Verifica si la pila no está vacía.
@@ -65,7 +66,8 @@ public class Jugador {
   }
 
   /**
-   * @brief Método que escode (retorna al GUI) la pila activa.
+   * @brief Método que esconde (retorna al GUI) la pila activa.
+   * @return null en caso de que las pila esté vacía, la Pila activa en caso contrario.
    */
   public Pila esconderPila() {
     // Verifica si la pila no está vacía.
@@ -96,23 +98,44 @@ public class Jugador {
     return pilasIguales;
   }
 
+  /**
+   * Método get que devuelve el atributo de la clase
+   * @return String que representa el nombre del jugador
+   */
   public String getNombre(){
     return this.nombre;
   }
 
+  /**
+   * Método get que devuelve el atributo de la clase
+   * @return int que representa la cantidad máxima de pilas que puede tener el jugador
+   */
   public int getMaxPilas(){
     return this.maxPilas;
   }
 
+  /**
+   * Método que agrega una Pila al vector de pilas del jugador
+   * @param pila que representa la pila que se quiere agregar a las pilas del jugador
+   */
   public void agregarPila(Pila pila){
     this.pilas.add(pila);
   }
 
+  /**
+   * Método set que asigna el nombre al jugador.
+   * @param nombre string que representa el nombre que se le asignará al jugador
+   */
   public void setNombre(String nombre) {
     this.nombre = nombre;
   }
 
   // TODO agregar getPila ya que no hay forma de accesder a las pilas desde el controlador UML
+  /**
+   * Método get que accede a las pilas del jugador según su índice (para el controlador)
+   * @param posicion int que representa la posición de la pila en el arreglo.
+   * @return Pila que se quiere acceder.
+   */
   public Pila getPila(int posicion){
     return pilas.get(posicion);
   }
