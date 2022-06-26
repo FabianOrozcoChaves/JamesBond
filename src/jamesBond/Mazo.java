@@ -56,8 +56,8 @@ public class Mazo {
   }
   
   /**
-   * @brief Elimina y retorna la primera carta del mazo
-   * @return La primera carta del mazo
+   * @brief Elimina y retorna la primera carta del mazo de haber disponibles
+   * @return La primera carta del mazo o null si no hay mas cartas
    */
   public Carta getCarta() {
 	  if(this.cartas.size() < 1){
@@ -78,6 +78,10 @@ public class Mazo {
   	return resultado;
   }
   
+  /**
+   * @brief Devuelve el numero de cartas restantes
+   * @return int con la cantidad de cartas restantes
+   */
   public int getCartasRestantes(){
 	  return this.cartas.size();
   }

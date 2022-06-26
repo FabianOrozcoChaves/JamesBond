@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
- * @class VentanaPopUp pemrite abrir popups.
+ * @class VentanaPopUp permite abrir popups.
  * @details se sobreacarga el metodo mostrar para mostrar diferentes popups.
  */
 public class VentanaPopUp {

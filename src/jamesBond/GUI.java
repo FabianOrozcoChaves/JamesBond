@@ -141,7 +141,7 @@ public class GUI extends Application {
     topMenuLabels.setSpacing(550);
     topMenuLabels.setAlignment(Pos.CENTER);
 
-    // creaciond e caja horizontal para los checkboxs para sgnar el turno inicial.
+    // creacion de caja horizontal para los checkboxs para sgnar el turno inicial.
     HBox topMenuCheckboxs = new HBox();
     // creacion de los tres checkboxs
     CheckBox checkJugador1 = new CheckBox("Asignar turno inicial");
@@ -202,7 +202,7 @@ public class GUI extends Application {
         checkJugador2.setSelected(false);
       }
 
-      // se asigane en el menu de inicio que el turno es aleatorio
+      // se asigna en el menu de inicio que el turno es aleatorio
       this.menuInicio.asignarTurnoInicial("random");
       System.out.println("El turno inicial es aleatorio");
       checkRandom.setSelected(true);
