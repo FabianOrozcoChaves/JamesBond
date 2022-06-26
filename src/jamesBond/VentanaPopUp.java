@@ -8,8 +8,18 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+/**
+ * @class VentanaPopUp pemrite abrir popups.
+ * @details se sobreacarga el metodo mostrar para mostrar diferentes popups.
+ */
 public class VentanaPopUp {
+
+  /**
+   * @brief Abre una ventana y muestra el mensaje que se le indique.
+   * @details es un metodo estatico.
+   * @param titulo es un string con el tiutlo de la ventana.
+   * @param mensaje string con el mensaje a mostrar.
+   */
   public static void mostrar(String titulo, String mensaje) {
     Stage ventana = new Stage();
     ventana.initModality(Modality.APPLICATION_MODAL);
@@ -33,6 +43,10 @@ public class VentanaPopUp {
     ventana.showAndWait();
   }
 
+  /**
+   * @brief sobrecraga del metodo que pemrite mostrar un menu de ajustes.
+   * @param menuAjustes instancia de menu de ajustes.
+   */
   public static void mostrar(MenuAjustes menuAjustes) {
     Stage ventana = new Stage();
     ventana.initModality(Modality.APPLICATION_MODAL);
