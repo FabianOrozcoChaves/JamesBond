@@ -112,7 +112,7 @@ public class VistaTablero {
     definirTextos(this.jugador1.getNombre(), this.jugador2.getNombre());
 
     // barra superior
-    this.inicializarBarraTop(mainStage);
+    this.inicializarBarraTop();
     
     // construir escenas de cada jugador
     this.construirTablero();
