@@ -295,9 +295,8 @@ public class VistaTablero {
 
   /**
    * Coloca y configura el menú de ajustes y el temporizador.
-   * @param mainStage
    */
-  public void inicializarBarraTop(Stage mainStage) {
+  public void inicializarBarraTop() {
     Button menu = new Button("Menú");
     
     menu.setOnAction(e -> {
