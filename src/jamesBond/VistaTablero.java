@@ -1,65 +1,59 @@
 package jamesBond;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-import jamesBond.JamesBond;
-
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import jamesBond.MenuAjustes;
-import jamesBond.VentanaPopUp;
 
 /**
- * Clase GUI.
- * Interfaz grafica del tablero.
+ * Clase gráfica del tablero.
+ * Maneja la posición de las pilas y cartas comunes. Así como los nombres para cada una, los botones de menú de ajustes, el de jamesbond y el temporizador.
  */
 public class VistaTablero {
   // ventana
-  private int anchoVentana = 1000;
-  private int alturaVentana = 600;
+  private final int anchoVentana = 1000;
+  private final int alturaVentana = 600;
   
   // cartas
-  private VistaCarta [] vistaComunes = new VistaCarta[4];
-  private VistaCarta [] vistaPilaJ1 = new VistaCarta[6];
-  private VistaCarta [] vistaPilaJ2 = new VistaCarta[6];
-  private VistaCarta [] vistaPilaActiva = new VistaCarta[4];
+  private VistaCarta [] vistaComunes = new VistaCarta[4];     // Vista de las cartas comunes
+  private VistaCarta [] vistaPilaJ1 = new VistaCarta[6];      // Vista de la pila del jugador 1
+  private VistaCarta [] vistaPilaJ2 = new VistaCarta[6];      // Vista de la pila del jugador 1
+  private VistaCarta [] vistaPilaActiva = new VistaCarta[4];  // Vista de la pila activa
   
   // layouts
-  HBox pilaActiva_hbx = new HBox();
-  VBox pilaActiva_vbx = new VBox();
-  VBox centro = new VBox();
-  BorderPane topBar = new BorderPane();
-  HBox [] comunes_hbx = new HBox[2];  // cada índice es un par de cartas
-  HBox [] pilaJ1_hbx = new HBox[3];   // cada índice es un par de cartas
-  HBox [] pilaJ2_hbx = new HBox[3];   // cada índice es un par de cartas
-  VBox [] pilas_vbox = new VBox[3];   // 0: comunes(mesa) | 1: pilaJ1 | 2: pilaJ2
+  HBox pilaActiva_hbx = new HBox();      // para posicionar la pila activa horizontalmente
+  VBox pilaActiva_vbx = new VBox();      // para colocar nombre a la pila activa
+  VBox centro = new VBox();              // para colocar nombre a las cartas comunes
+
+  BorderPane topBar = new BorderPane();  // border pane interno (para el nivel superior)-
+  HBox [] comunes_hbx = new HBox[2];     // cada índice es un par de cartas
+  HBox [] pilaJ1_hbx = new HBox[3];      //               " "
+  HBox [] pilaJ2_hbx = new HBox[3];      //               " "
+  VBox [] pilas_vbox = new VBox[3];      // 0: comunes(mesa) | 1: pila jugador 1 | 2: pila jugador 2
 
   // menuAjustes
   MenuAjustes menuAjustes = new MenuAjustes();
   Scene menuInicio_scene;
 
+  // Temporizador
+  int temporizador = 10;
+  int segunderoTurnos = 11;  // delay de 1 segundo para cada cambio.
+  Timer timer = new Timer();
+  Timer timerGrafico;
 
   // textos
   Text pilaActiva_txt = new Text("Pila activa");
@@ -67,30 +61,31 @@ public class VistaTablero {
   Text pilaJ2_txt = new Text();
   Text comunes_txt = new Text();
   Text turno_txt = new Text();
-
-  // Temporizador
-  int temporizador = 10;
-  int segunderoTurnos = 11;
+  Text seconds = new Text();
 
   // GUI
   private BorderPane tablero = new BorderPane();
   private Scene turnoJuego; 
-  Text seconds = new Text();
-
 
   // Controlador
-  private JamesBond gameJB = new JamesBond(); //simul. borrar luego
+  private JamesBond gameJB = new JamesBond();  // controlador del juego
   private Jugador jugador1;
   private Jugador jugador2;
   
-  Timer timer = new Timer();
-  Timer timerGrafico;
 
+  /**
+   * Método constructor por omisión. Para crear instancias con valores por defecto.
+   */
   public VistaTablero() {
   }
 
-  /*
-   * @brief LLama al controlador para cdonstruir el mazo y repartir las cartas.
+  /**
+   * @brief Llama al controlador para construir el mazo y repartir las cartas.
+   * @param turnoInicial  String que representa el nombre del jugador inicial.
+   * @param nombreJ1 String que representa el nombre del jugador 1
+   * @param nombreJ2 String que representa el nombre del jugador 2
+   * @param mainStage Ventana principal del GUI
+   * @param menuInicio Escena principal del menú de inicio del GUI
    */
   public void construirJuego(String turnoInicial, String nombreJ1, String nombreJ2, Stage mainStage, Scene menuInicio) {
     this.menuInicio_scene = menuInicio;
@@ -122,6 +117,7 @@ public class VistaTablero {
     // construir escenas de cada jugador
     this.construirTablero();
     
+    // Cierra los temporizadores
     mainStage.setOnCloseRequest(e -> {
       this.timer.cancel();
       this.timer.purge();
@@ -133,6 +129,10 @@ public class VistaTablero {
 
   }
 
+  /**
+   * @brief Inicia el flujo de los turnos.
+   * @param mainStage Ventana principal del GUI.
+   */
   public void run(Stage mainStage) {
     mostrarTemporizador(seconds);
     if (gameJB.getTurnoActual() == jugador1) {
@@ -159,27 +159,22 @@ public class VistaTablero {
     }, this.segunderoTurnos * 1000, this.segunderoTurnos * 1000);//wait 0 ms before doing the action and do it every 1000ms (1second)
   }
 
-
-
+  /**
+   * @brief Método que construye la estructura de la vista del tablero (cartas comunes).
+   */
   public void construirTablero() {
-    this.turno_txt.setFill(Color.WHITE);
-    this. turno_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
-    this.turno_txt.setText("Turno de ");
-
-    this.centro.getChildren().addAll(turno_txt, this.pilas_vbox[0]);
+    // Agrupa el texto del turno actual con la pila de cartas comunes.
+    this.centro.getChildren().addAll(this.turno_txt, this.pilas_vbox[0]);
     this.centro.setAlignment(Pos.CENTER);
     this.centro.setSpacing(20);
 
-    // setea hbox en border pane
-    // pilas_vbox[0] es contiene las cartas comunes
-    // pilas_vbox[1] es contiene las pilas del jugador 1
-    // pilas_vbox[2] es contiene las pilas del jugador 2
-    this.tablero.setCenter(this.centro);
-    this.tablero.setBottom(this.pilaActiva_vbx);
-    this.tablero.setLeft(this.pilas_vbox[1]);
-    this.tablero.setRight(this.pilas_vbox[2]);
-    this.tablero.setTop(this.topBar);
-    // botnoes pila de jugador 1
+    this.tablero.setCenter(this.centro);          // vbox con el nombre del turno y cartas comunes
+    this.tablero.setBottom(this.pilaActiva_vbx);  // vbox de pila activa
+    this.tablero.setLeft(this.pilas_vbox[1]);     // vbox con el nombre y las pilas del jugador 1
+    this.tablero.setRight(this.pilas_vbox[2]);    // vbox con el nombre y las pilas del jugador 1
+    this.tablero.setTop(this.topBar);             // menú de ajustes, botón jamesBond y temporizador
+    
+    // Botones pila de jugador 1
     this.vistaPilaJ1[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 0");
     });
@@ -199,7 +194,7 @@ public class VistaTablero {
       System.out.println("Jugador 1 Escogio la pila 5");
     });
 
-    // botnoes pila de jugador 2
+    // Botones pila de jugador 2
     this.vistaPilaJ2[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 0");
     });
@@ -219,7 +214,7 @@ public class VistaTablero {
       System.out.println("Jugador 2 Escogio la pila 5");
     });
 
-    // botones pila comun
+    // Botones de las cartas comunes (mesa/centro)
     this.vistaComunes[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio la carta comun 0");
     });
@@ -233,7 +228,7 @@ public class VistaTablero {
       System.out.println("Se escogio la carta comun 3");
     });
   
-    // botones pila activa
+    // Botones pila activa
     this.vistaPilaActiva[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio de la pila activa la carta 0");
     });
@@ -253,6 +248,10 @@ public class VistaTablero {
     this.turnoJuego = new Scene(this.tablero, this.anchoVentana, this.alturaVentana);
   }
 
+  /**
+   * @brief Construye la escena para el jugador 1.
+   * Gira las cartas del rival, cambia el nombre del turno actual y deshabilita el click de las cartas del jugador 2
+   */
   public void construirEscenaJ1() {
     this.turno_txt.setText("Turno de " + jugador1.getNombre());
 
@@ -266,6 +265,10 @@ public class VistaTablero {
     }
   }
 
+  /**
+   * @brief Construye la escena para el jugador 2.
+   * Gira las cartas del rival, cambia el nombre del turno actual y deshabilita el click de las cartas del jugador 1.
+   */
   public void construirEscenaJ2() {
     this.turno_txt.setText("Turno de " + jugador2.getNombre());
 
@@ -279,18 +282,22 @@ public class VistaTablero {
     }
   }
 
+  /**
+   * @brief Metodo que gira las cartas que le pasan por parámetro según el booleano indicado.
+   * @param cartas Arreglo de las cartas que se quieren girar
+   * @param activar Booleano que indica si las cartas se giran hacia arriba(True) o hacia abajo (False)
+   */
   public void girarCartas(VistaCarta [] cartas, Boolean activar) {
     for (int i = 0; i < cartas.length; ++i) {
       cartas[i].getView(activar);
     }
   }
 
-
+  /**
+   * Coloca y configura el menú de ajustes y el temporizador.
+   * @param mainStage
+   */
   public void inicializarBarraTop(Stage mainStage) {
-    this.seconds.setFill(Color.WHITE);
-    this.seconds.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
-    this.seconds.setText("00:" + temporizador);
-
     Button menu = new Button("Menú");
     
     menu.setOnAction(e -> {
@@ -301,41 +308,64 @@ public class VistaTablero {
     this.topBar.setLeft(menu);
   }
 
+  /**
+   * @brief Define el estilo de los textos del tablero
+   * @param jugador1 String que representa el nombre del jugador 1
+   * @param jugador2 String que representa el nombre del jugador 1
+   */
   public void definirTextos(String jugador1, String jugador2) {
+    // pila activa
     pilaActiva_txt.setFill(Color.WHITE);
     pilaActiva_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
-
+    // cartas comunes
     comunes_txt.setFill(Color.WHITE);
     comunes_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
-
+    // pila del jugador 1
     pilaJ1_txt.setFill(Color.WHITE);
     pilaJ1_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
     pilaJ1_txt.setText("Pilas de " + jugador1);
-
+    // pila del jugador 2
     pilaJ2_txt.setFill(Color.WHITE);
     pilaJ2_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
     pilaJ2_txt.setText("Pilas de " + jugador2);
+    // turno actual
+    this.turno_txt.setFill(Color.WHITE);
+    this.turno_txt.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
+    this.turno_txt.setText("Turno de ");
+    // temporizador
+    this.seconds.setFill(Color.WHITE);
+    this.seconds.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
+    this.seconds.setText("00:" + temporizador);
   }
 
-  // métodos
+  // 
+  /**
+   * @brief Inicia la vista de la pila activa según el jugador y la pila que tenga en mano.
+   * @param jugador jugador del juego que posee una pila activa cuando es su turno.
+   */
   public void inicializarPilaActiva(Jugador jugador) {
     Pila pilaActiva = jugador.pilaActiva();
+    // asigna el hbox y vbox de la pila activa
     this.pilaActiva_hbx.setAlignment(Pos.BOTTOM_CENTER);
     this.pilaActiva_vbx.getChildren().addAll(this.pilaActiva_txt, pilaActiva_hbx);
     this.pilaActiva_vbx.setAlignment(Pos.BOTTOM_CENTER);
 
-    // vistas comunes
+    // instancia la vista de pila activa y la agrega al hbox de la pila activa.
     for (int indexCarta = 0; indexCarta < vistaPilaActiva.length; indexCarta++) {
       vistaPilaActiva[indexCarta] = new VistaCarta(pilaActiva.getCarta(indexCarta));
       pilaActiva_hbx.getChildren().add(vistaPilaActiva[indexCarta].getView(true));
     }
-    // hbox comunes
+    // centra y espacea el hbox de pila activa
     pilaActiva_hbx.setSpacing(20);
     pilaActiva_hbx.setAlignment(Pos.BOTTOM_CENTER);
   }
 
+  /**
+   * @brief Inicia las vistas de las cartas comunes con las que inicia el juego según el tablero.
+   * @param tablero Tablero que indica cuales son las cartas comunes.
+   */
   public void inicializarCartasComunes(Tablero tablero) {
-    // vistas comunes
+    // instancia la vista del cartas comunes.
     for (int indexCarta = 0; indexCarta < vistaComunes.length; indexCarta++) {
       vistaComunes[indexCarta] = new VistaCarta(tablero.getCarta(indexCarta));
     }
@@ -343,12 +373,18 @@ public class VistaTablero {
     inicializarComun(comunes_hbx, vistaComunes, this.pilas_vbox[0]);
   }
 
+  /**
+   * @brief Inicia una pila de jugador
+   * @param jugador Jugador que contiene la pila que se quiere visualizar.
+   * @param pila_hbx Pila en la que se quiere contener la pila a visualizar.
+   * @param vistaPila Arreglo de vistas que se quieren visualizar.
+   * @param vbx vbox que contendrá la pila a visualizar.
+   */
   public void inicializarPilas(Jugador jugador, HBox [] pila_hbx, VistaCarta [] vistaPila, VBox vbx) {
-    // vista pila
+    // instancia la vista de la pila que se quiere visualizar.
     for (int indexCarta = 0; indexCarta < vistaPila.length; indexCarta++) {
       vistaPila[indexCarta] = new VistaCarta(jugador.getPila(indexCarta).getCarta(0));
     }
-
     inicializarComun(pila_hbx, vistaPila, vbx);
   }
 
@@ -371,7 +407,11 @@ public class VistaTablero {
     vbx.setSpacing(20);
   }
 
-
+  /**
+   * @brief Muestra el temporizador del juego.
+   * @details <temporizador> es un atributo de clase.
+   * @param seconds
+   */
   public void mostrarTemporizador(Text seconds) {
     this.timerGrafico = new Timer();
     this.timer.schedule(new TimerTask() {
