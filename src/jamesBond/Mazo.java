@@ -38,7 +38,7 @@ public class Mazo {
 	  char[] palos = {'P', 'D', 'C', 'T'};
     for(char c:palos){
 	    for(int j = 1; j < 14; j++){
-	      StringBuilder sb = new StringBuilder (String.valueOf("./img/"));
+	      StringBuilder sb = new StringBuilder (String.valueOf("/img/"));
 	      sb.append (c);
 		    sb.append ('_');
 	      sb.append (j);
