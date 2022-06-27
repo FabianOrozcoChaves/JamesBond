@@ -15,7 +15,7 @@ public class Carta {
    * @brief Constructor por defecto que inicializa una carata "nula".
    */
   public Carta() {
-    this(' ', 0, "./img/back.png");
+    this(' ', 0, "/img/back.png");
   }
   
   /** 

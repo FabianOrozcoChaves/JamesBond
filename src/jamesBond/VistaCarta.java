@@ -33,7 +33,7 @@ public class VistaCarta {
     if (activa) {
       this.imagenVistaCarta.setImage(imagenCarta);
     } else {
-      Image back = new Image(getClass().getResourceAsStream("./img/back.png"));
+      Image back = new Image(getClass().getResourceAsStream("/img/back.png"));
       this.imagenVistaCarta.setImage(back);
     }
     return this.imagenVistaCarta;
