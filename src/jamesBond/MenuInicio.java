@@ -1,6 +1,6 @@
 package jamesBond;
 
-/*
+/**
  * @class MenuInicio.
  * Esta clase le ofrece al GUI los metodos necesarios para que el menu de inicio reaccione a los eventos.
  */
@@ -10,7 +10,7 @@ public class MenuInicio implements Menu {
   private String turnoInicial = "random";
   private String nombreJuego = "James Bond";
 
-  /*
+  /**
    * @brief Constructor
    * @param nombre es un string con el nombre del juego
    */
@@ -18,7 +18,7 @@ public class MenuInicio implements Menu {
     this.nombreJuego = nombre;
   }
 
-  /*
+  /**
    * @brief Metodo que indica las opciones que contiene el menu de inicio.
    * @return un arreglo de hileras donde cada hilera es una opcion del menu.
    */
@@ -34,14 +34,14 @@ public class MenuInicio implements Menu {
     return opciones;
   }
 
-  /*
+  /**
    * @brief Metodo para cargar una partida que fue guardad previeamante.
    */
   public void cargarPartida() {
     System.out.println("Se debe leer de un archivo.");
   }
 
-  /*
+  /**
    * @brief Metodo que muestra las reglas del juego.
    * @return retorna un string con las reglas del juego.
    */
@@ -50,8 +50,8 @@ public class MenuInicio implements Menu {
     return reglas;
   }
 
-  /* 
-   * @brief PErmite asegnarle un nombre al jugador 1.
+  /** 
+   * @brief Permite asegnarle un nombre al jugador 1.
    * @deaails modifica el atributo del menu this.jugador1.
    * @param nombre es el string con el nombre que se desea asignar.
   */
@@ -59,8 +59,8 @@ public class MenuInicio implements Menu {
     this.jugador1 = nombre;
   }
 
-  /* 
-   * @brief PErmite asegnarle un nombre al jugador 2.
+  /** 
+   * @brief Permite asegnarle un nombre al jugador 2.
    * @deaails modifica el atributo del menu this.jugador2.
    * @param nombre es el string con el nombre que se desea asignar.
   */
@@ -68,7 +68,7 @@ public class MenuInicio implements Menu {
     this.jugador2 = nombre;
   }
 
-  /*
+  /**
    * @brief Metodo para acceder al nombre del jugador 1
    * @return un string con el nombre del jugador 1
    */
@@ -76,7 +76,7 @@ public class MenuInicio implements Menu {
     return jugador1;
   }
 
-  /*
+  /**
    * @brief Metodo para acceder al nombre del jugador 2.
    * @return un string con el nombre del jugador 2.
    */
@@ -84,7 +84,7 @@ public class MenuInicio implements Menu {
     return jugador2;
   }
 
-  /*
+  /**
    * @brief Metodo para acceder al nombre del jugador que tiene el turno inicial.
    * @return un string con el nombre del jugador que inicia el juego.
    */
@@ -92,7 +92,7 @@ public class MenuInicio implements Menu {
     return turnoInicial;
   }
 
-  /*
+  /**
    * @brief Metodo que ejecuta el juego.
    */
   public void jugar() {
@@ -100,7 +100,7 @@ public class MenuInicio implements Menu {
 
   }
 
-  /*
+  /**
    * @brief Metodo que asigna el jugador que tendra el turno inicial.
    * @deatils modifica el artributo del menu this.turnoInicial
    * @param jugadorInicial string cone l niombre del jugador con el primer turno
@@ -109,7 +109,7 @@ public class MenuInicio implements Menu {
     this.turnoInicial = jugadorInicial;
   }
 
-  /*
+  /**
    * @brief Get del nombre del juego.
    * @return string con el nombre del juego
    */

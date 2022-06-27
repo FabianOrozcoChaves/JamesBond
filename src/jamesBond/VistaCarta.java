@@ -29,7 +29,6 @@ public class VistaCarta {
    * @param activa Booleano que representa si la carta debe mostrarse boca arriba o boca abajo.
    * @return Vista de la imagen de la carta boca arriba en caso que <activa> sea True, vista de la imagen de la carta boca abajo en caso contrario.
    */
-  // TODO agregar rol wrapper en UML
   public ImageView getView(boolean activa) {
     if (activa) {
       this.imagenVistaCarta.setImage(imagenCarta);

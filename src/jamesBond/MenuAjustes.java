@@ -1,13 +1,13 @@
 package jamesBond;
 
-/*
+/**
  * @class MenuAjustes
  * @brief clase que maneja las acciones del menu de ajustes.
  */
 public class MenuAjustes implements Menu {
   private String titulo = "Menu de ajustes"; 
 
-  /*
+  /**
    * @brief Metodo que indica que opciones tiene el menu.
    * @return un arrego de strings con las opciones del menu.
    */
@@ -21,14 +21,14 @@ public class MenuAjustes implements Menu {
     return opciones;
   }
 
-  /*
+  /**
    * @brief Metodo que permite cargar una partida.
    */
   public void cargarPartida() {
     System.out.println("Se debe leer de un archivo.");
   }
 
-  /*
+  /**
    * @brief Metodo que permite guardar una partida.
    */
   public void guardarPartida() {
@@ -36,7 +36,7 @@ public class MenuAjustes implements Menu {
     
   }
 
-  /*
+  /**
    * @brief Metodo que indica Las reglas del juego.
    * @return String con las reglas del juego.
    */
@@ -46,7 +46,7 @@ public class MenuAjustes implements Menu {
   }
 
 
-  /*
+  /**
    * @brief Metodo que indica el tituo del menu.
    * @return String con el nombre del menu.
    */

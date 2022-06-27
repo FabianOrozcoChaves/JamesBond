@@ -112,7 +112,7 @@ public class VistaTablero {
     definirTextos(this.jugador1.getNombre(), this.jugador2.getNombre());
 
     // barra superior
-    this.inicializarBarraTop(mainStage);
+    this.inicializarBarraTop();
     
     // construir escenas de cada jugador
     this.construirTablero();
@@ -295,9 +295,8 @@ public class VistaTablero {
 
   /**
    * Coloca y configura el menú de ajustes y el temporizador.
-   * @param mainStage
    */
-  public void inicializarBarraTop(Stage mainStage) {
+  public void inicializarBarraTop() {
     Button menu = new Button("Menú");
     
     menu.setOnAction(e -> {
@@ -388,7 +387,13 @@ public class VistaTablero {
     inicializarComun(pila_hbx, vistaPila, vbx);
   }
 
-  public void inicializarComun(HBox [] pila_hbx, VistaCarta [] vistaPila, VBox vbx) {
+  /**
+   * @brief Metodo de comun para agregar vistas a las hbx y estas los vbx
+   * @param pila_hbx Pila en la que se quiere contener la pila a visualizar.
+   * @param vistaPila Arreglo de vistas que se quieren visualizar.
+   * @param vbx vbox que contendrá la pila a visualizar.
+   */
+  private void inicializarComun(HBox [] pila_hbx, VistaCarta [] vistaPila, VBox vbx) {
 
     // hbox pila
     for(int i = 0; i < pila_hbx.length; i++){
