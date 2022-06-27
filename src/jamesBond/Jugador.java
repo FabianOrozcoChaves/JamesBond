@@ -130,7 +130,6 @@ public class Jugador {
     this.nombre = nombre;
   }
 
-  // TODO agregar getPila ya que no hay forma de accesder a las pilas desde el controlador UML
   /**
    * Método get que accede a las pilas del jugador según su índice (para el controlador)
    * @param posicion int que representa la posición de la pila en el arreglo.
