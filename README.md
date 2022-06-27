@@ -4,7 +4,8 @@
 
 En Windows:
 
-- Tener instalado java. Link de descarga: <https://www.java.com/es/download/ie_manual.jsp>.
+- Tener instalado `java` en su última versión. Link de descarga: <https://www.java.com/es/download/ie_manual.jsp>.
+- Tener el `jdk` en su última versión (compilado en v18). Link de descarga: <https://www.oracle.com/java/technologies/downloads/#jdk18-windows>.
 - Tener descargado el sdk de `javafx` ubicado en una dirección sin espacios, por ejemplo: `C:\` o `C:\java\`.
 
   Link de descarga: <https://gluonhq.com/products/javafx/>. Descarga sugerida: ![javafx](design\img\javafx.png)
