@@ -26,7 +26,6 @@ public class Pila {
    * @param cartaEntrante carta que será introducida en la pila actual del jugador. Viene desde la mesa.
    * @return Carta que se elimina.
    */
-  // TODO: cambiar nombre del metodo en UML y agregar parametro
   public Carta cambiarCarta(int posicion, Carta cartaEntrante) {
     Carta carta = this.cartas.set(posicion, cartaEntrante);
     return carta;
