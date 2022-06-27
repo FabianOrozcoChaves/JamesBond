@@ -1,10 +1,29 @@
 # JamesBond
 
+## Pre-requisito de ejecución
+
+En Windows:
+
+- Tener instalado java. Link de descarga: <https://www.java.com/es/download/ie_manual.jsp>.
+- Tener descargado el sdk de `javafx` ubicado en una dirección sin espacios, por ejemplo: `C:\` o `C:\java\`.
+
+  Link de descarga: <https://gluonhq.com/products/javafx/>. Descarga sugerida: ![javafx](design\img\javafx.png)
+
+## Ejecución
+
+Estando en la carpeta raíz del proyecto, en **`powershell`** / **`CMD`**, ejecute el siguiente comando:  
+`java --module-path <JavaFX_lib_path> --add-modules javafx.controls --enable-preview -jar JamesBond.jar`, reemplazando "<JavaFX_lib_path>" por la ruta donde tiene ubicado la librería del sdk de javafx.  
+Por ejemplo:  `java --module-path C:\javafx-sdk-18.0.1\lib\ --add-modules javafx.controls --enable-preview -jar JamesBond.jar`
+
+## Rama más actualizada
+
+Rama `main`
+
+## Sobre el repositorio
+
 Repositorio dedicado al desarrollo del MARDA. 2022 semestre I - Diseño de Software
 
-## Descripción del juego - James Bond
-
-### Información general
+## Información general del juego
 
 Los jugadores juegan para recoger paquetes de cuatro cartas iguales intercambiando cartas de una en una con un conjunto de cuatro cartas boca arriba (las que están en la mesa).
 
