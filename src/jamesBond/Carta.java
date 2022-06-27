@@ -12,14 +12,14 @@ public class Carta {
   private String ruta; // ruta de donde esta la imagen.
 
   /**
-   * @brief 
+   * @brief Constructor por defecto que inicializa una carata "nula".
    */
   public Carta() {
     this(' ', 0, "./img/back.png");
   }
   
   /** 
-   * @brief Constructor por defecto que inicializa una carata "nula".
+   * @brief Constructor por parametros.
    * @param palo char con el palod e la carta. Trebol (t), Pica (p), Diamante (d) o Corazon (c). 
    * @param numero es un entero con el nuemro de la carta.
    * @param rutaImagen string con la ruta de donde se encuntra la imagen de la carta.
