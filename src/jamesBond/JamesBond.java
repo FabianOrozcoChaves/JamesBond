@@ -83,7 +83,7 @@ public class JamesBond {
    * @brief Método que elige el primer turno al azar
    */
   public void randomizarTurno() {
-    int turnoAleatorio = (int) Math.random() * 2;
+    int turnoAleatorio = (int) (Math.random() * 2);
     if (turnoAleatorio == 0) {
       turnoActual = jugador1;
     } else {

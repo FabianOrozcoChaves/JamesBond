@@ -3,6 +3,7 @@ package jamesBond;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -95,7 +96,6 @@ public class VistaTablero {
 
     // Jugador 1
     this.jugador1 = gameJB.getJugador(1);
-    inicializarPilaActiva(this.jugador1);
     pilas_vbox[1] = new VBox();
     pilas_vbox[1].getChildren().add(this.pilaJ1_txt);
     inicializarPilas(this.jugador1, pilaJ1_hbx, vistaPilaJ1, pilas_vbox[1]);
@@ -105,6 +105,9 @@ public class VistaTablero {
     pilas_vbox[2] = new VBox();
     pilas_vbox[2].getChildren().add(this.pilaJ2_txt);
     inicializarPilas(this.jugador2, pilaJ2_hbx, vistaPilaJ2, pilas_vbox[2]);
+
+    // PilaActiva
+    inicializarPilaActiva(gameJB.getTurnoActual());
 
     // inicializa comunes
     Tablero tablero = gameJB.getTablero();
@@ -147,12 +150,14 @@ public class VistaTablero {
       @Override
       public void run() {
         temporizador = 10;
-        System.out.println("Turno de " + turno.getNombre());
         turno = gameJB.getTurnoActual();
+        System.out.println("Turno de " + turno.getNombre());
         if (turno == jugador1) {
           construirEscenaJ1();
+          cambiarPilaActivaAuto(turno);
         } else if (turno == jugador2) {
           construirEscenaJ2();
+          cambiarPilaActivaAuto(turno);
         }
         gameJB.cambiarTurno();
       }
@@ -174,44 +179,56 @@ public class VistaTablero {
     this.tablero.setRight(this.pilas_vbox[2]);    // vbox con el nombre y las pilas del jugador 1
     this.tablero.setTop(this.topBar);             // menú de ajustes, botón jamesBond y temporizador
     
-    // Botones pila de jugador 1
+    // botones pila de jugador 1
     this.vistaPilaJ1[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 0");
+      cambiarPilaActiva(jugador1, 0);
     });
     this.vistaPilaJ1[1].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 1");
+      cambiarPilaActiva(jugador1, 1);
     });
     this.vistaPilaJ1[2].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 2");
+      cambiarPilaActiva(jugador1, 2);
     });
     this.vistaPilaJ1[3].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 3");
+      cambiarPilaActiva(jugador1, 3);
     });
     this.vistaPilaJ1[4].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 4");
+      cambiarPilaActiva(jugador1, 4);
     });
     this.vistaPilaJ1[5].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 5");
+      cambiarPilaActiva(jugador1, 5);
     });
 
-    // Botones pila de jugador 2
+    // botones pila de jugador 2
     this.vistaPilaJ2[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 0");
+      cambiarPilaActiva(jugador2, 0);
     });
     this.vistaPilaJ2[1].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 1");
+      cambiarPilaActiva(jugador2, 1);
     });
     this.vistaPilaJ2[2].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 2");
+      cambiarPilaActiva(jugador2, 2);
     });
     this.vistaPilaJ2[3].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 3");
+      cambiarPilaActiva(jugador2, 3);
     });
     this.vistaPilaJ2[4].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 4");
+      cambiarPilaActiva(jugador2, 4);
     });
     this.vistaPilaJ2[5].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 5");
+      cambiarPilaActiva(jugador2, 5);
     });
 
     // Botones de las cartas comunes (mesa/centro)
@@ -431,4 +448,30 @@ public class VistaTablero {
       }
     }, 1000, 1000);
   }
+
+   /**
+   * @brief Cambia la vista de la pila activa cuando el jugador desea ver otra.
+   * @param jugador El jugador que quiere cambiar la pila
+   * @param index Indice de la pila que quiere cambiar
+   */
+   public void cambiarPilaActiva(Jugador jugador, int index) {
+    jugador.cambiarPila(index);
+    Pila pilaActiva = jugador.pilaActiva();
+    
+    for (int indexCarta = 0; indexCarta < vistaPilaActiva.length; indexCarta++) {
+      vistaPilaActiva[indexCarta].getImageView().setImage(pilaActiva.getCarta(indexCarta).getImagen());
+    }
+  }
+
+  /**
+   * @brief Cambia la vista de la pila activa cuando se acaba el turno de un jugador
+   * @param turno el jugador el cual tiene el turno actual
+   */
+  private void cambiarPilaActivaAuto(Jugador turno) {          
+    Platform.runLater(new Runnable() {
+        @Override public void run() {
+          cambiarPilaActiva(turno, 0);
+        }
+    });
+  };
 }
