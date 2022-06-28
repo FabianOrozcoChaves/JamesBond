@@ -1,0 +1,71 @@
+{"JamesBond":
+  {"Jugador1":
+    {
+    "nombre":"Jugador1",
+    "pilas":[
+      {
+        "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      }
+    ]
+    },
+    "Jugador2":
+    {
+    "nombre":"Jugador2",
+    "pilas":[
+      {
+        "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      },
+      {  "pila":[
+          {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+        ]
+      }
+    ]
+    },
+    "turnoActual":0,
+    "temporazador":10,
+    "cartasComunes":[
+      {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
+    ],
+    "turnosJugados":20
+  }
+}
