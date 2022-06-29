@@ -227,6 +227,8 @@ public class VistaTablero {
       Boolean ganador = this.gameJB.revisarPilas(this.gameJB.getJugador(1));
       if (ganador == true) {
         VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(1).getNombre());
+        this.mainStage.setScene(menuInicio_scene);
+        this.destruirTablero();
       } else {
         VentanaPopUp.mostrar("Ganador", "Aun no has ganado, sigue jugando");
       }
@@ -238,6 +240,8 @@ public class VistaTablero {
       Boolean ganador = this.gameJB.revisarPilas(this.gameJB.getJugador(0));
       if (ganador == true) {
         VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(1).getNombre());
+        this.mainStage.setScene(menuInicio_scene);
+        this.destruirTablero();
       } else {
         VentanaPopUp.mostrar("Ganador", "Aun no has ganado, sigue jugando");
       }
@@ -397,9 +401,8 @@ public class VistaTablero {
       this.timerGrafico.cancel();
       Boolean salirDeljuego = VentanaPopUp.mostrar(this.menuAjustes);
       if (salirDeljuego == true) {
-        this.timer.purge();
-        this.timerGrafico.purge();
         this.mainStage.setScene(menuInicio_scene);
+        this.destruirTablero();
       } else {
         this.run();
       }
@@ -564,6 +567,10 @@ public class VistaTablero {
   };
 
   public void destruirTablero() {
+    this.timer.cancel();
+    this.timerGrafico.cancel();
+    this.timer.purge();
+    this.timerGrafico.purge();
     this.vistaComunes = null;     // Vista de las cartas comunes
     this.vistaPilaJ1 = null;      // Vista de la pila del jugador 1
     this.vistaPilaJ2 = null;      // Vista de la pila del jugador 1
