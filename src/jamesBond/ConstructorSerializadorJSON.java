@@ -100,7 +100,6 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
   }
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto Carta y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
-   * @details Este método cierra la última carta con coma (,). Serializador de pila debe quitar la última coma del cierre de la última carta. //TODO
    * @param carta Objeto Carta del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
   public void serializarCarta(Carta carta) {
