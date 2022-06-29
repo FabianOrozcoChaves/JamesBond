@@ -31,50 +31,51 @@ public class VistaTablero {
   private final int alturaVentana = 600;
   
   // cartas
-  private VistaCarta [] vistaComunes = new VistaCarta[4];     // Vista de las cartas comunes
-  private VistaCarta [] vistaPilaJ1 = new VistaCarta[6];      // Vista de la pila del jugador 1
-  private VistaCarta [] vistaPilaJ2 = new VistaCarta[6];      // Vista de la pila del jugador 1
-  private VistaCarta [] vistaPilaActiva = new VistaCarta[4];  // Vista de la pila activa
+  private VistaCarta [] vistaComunes;   // Vista de las cartas comunes
+  private VistaCarta [] vistaPilaJ1;   // Vista de la pila del jugador 1
+  private VistaCarta [] vistaPilaJ2;   // Vista de la pila del jugador 1
+  private VistaCarta [] vistaPilaActiva;  // Vista de la pila activa
   
   // layouts
-  HBox pilaActiva_hbx = new HBox();      // para posicionar la pila activa horizontalmente
-  VBox pilaActiva_vbx = new VBox();      // para colocar nombre a la pila activa
-  VBox centro = new VBox();              // para colocar nombre a las cartas comunes
+  HBox pilaActiva_hbx;      // para posicionar la pila activa horizontalmente
+  VBox pilaActiva_vbx;      // para colocar nombre a la pila activa
+  VBox centro;              // para colocar nombre a las cartas comunes
 
-  BorderPane topBar = new BorderPane();  // border pane interno (para el nivel superior)-
-  HBox [] comunes_hbx = new HBox[2];     // cada índice es un par de cartas
-  HBox [] pilaJ1_hbx = new HBox[3];      //               " "
-  HBox [] pilaJ2_hbx = new HBox[3];      //               " "
-  VBox [] pilas_vbox = new VBox[3];      // 0: comunes(mesa) | 1: pila jugador 1 | 2: pila jugador 2
+  BorderPane topBar;   // border pane interno (para el nivel superior)-
+  HBox [] comunes_hbx;      // cada índice es un par de cartas
+  HBox [] pilaJ1_hbx;       //               " "
+  HBox [] pilaJ2_hbx;       //               " "
+  VBox [] pilas_vbox;       // 0: comunes(mesa) | 1: pila jugador 1 | 2: pila jugador 2
 
   // menuAjustes
-  MenuAjustes menuAjustes = new MenuAjustes();
+  MenuAjustes menuAjustes;
   Scene menuInicio_scene;
 
   // Temporizador
   int temporizador = 10;
   int segunderoTurnos = 11;  // delay de 1 segundo para cada cambio.
-  Timer timer = new Timer();
+  Timer timer;
   Timer timerGrafico;
 
   // textos
-  Text pilaActiva_txt = new Text("Pila activa");
-  Text pilaJ1_txt = new Text();
-  Text pilaJ2_txt = new Text();
-  Text comunes_txt = new Text();
-  Text turno_txt = new Text();
-  Text seconds = new Text();
+  Text pilaActiva_txt;
+  Text pilaJ1_txt;
+  Text pilaJ2_txt;
+  Text comunes_txt;
+  Text turno_txt;
+  Text seconds;
 
   // GUI
-  private BorderPane tablero = new BorderPane();
+  private BorderPane tablero;
   private Scene turnoJuego; 
+  private Stage mainStage;
 
   // Controlador
-  private JamesBond gameJB = new JamesBond();  // controlador del juego
+  private JamesBond gameJB;  // controlador del juego
   private Jugador jugador1;
   private Jugador jugador2;
-  Button ganarJugador1 = new Button("James Bond!");
-  Button ganarJugador2 = new Button("James Bond!");
+  Button ganarJugador1;
+  Button ganarJugador2;
 
   
 
@@ -82,6 +83,47 @@ public class VistaTablero {
    * Método constructor por omisión. Para crear instancias con valores por defecto.
    */
   public VistaTablero() {
+  }
+
+  private void init() {
+    this.vistaComunes = new VistaCarta[4];     // Vista de las cartas comunes
+    this.vistaPilaJ1 = new VistaCarta[6];      // Vista de la pila del jugador 1
+    this.vistaPilaJ2 = new VistaCarta[6];      // Vista de la pila del jugador 1
+    this.vistaPilaActiva = new VistaCarta[4];  // Vista de la pila activa
+    
+    // layouts
+    this.pilaActiva_hbx = new HBox();      // para posicionar la pila activa horizontalmente
+    this.pilaActiva_vbx = new VBox();      // para colocar nombre a la pila activa
+    this.centro = new VBox();              // para colocar nombre a las cartas comunes
+  
+    this.topBar = new BorderPane();  // border pane interno (para el nivel superior)-
+    this.comunes_hbx = new HBox[2];     // cada índice es un par de cartas
+    this.pilaJ1_hbx = new HBox[3];      //               " "
+    this.pilaJ2_hbx = new HBox[3];      //               " "
+    this.pilas_vbox = new VBox[3];      // 0: comunes(mesa) | 1: pila jugador 1 | 2: pila jugador 2
+  
+    // menuAjustes
+    this.menuAjustes = new MenuAjustes();
+  
+    // Temporizador
+    this.temporizador = 10;
+    this.segunderoTurnos = 11;  // delay de 1 segundo para cada cambio.
+  
+    // textos
+    this.pilaActiva_txt = new Text("Pila activa");
+    this.pilaJ1_txt = new Text();
+    this.pilaJ2_txt = new Text();
+    this.comunes_txt = new Text();
+    this.turno_txt = new Text();
+    this.seconds = new Text();
+  
+    // GUI
+    this.tablero = new BorderPane();
+  
+    // Controlador
+    this.gameJB = new JamesBond();  // controlador del juego
+    this.ganarJugador1 = new Button("James Bond!");
+    this.ganarJugador2 = new Button("James Bond!");
   }
 
   /**
@@ -93,7 +135,9 @@ public class VistaTablero {
    * @param menuInicio Escena principal del menú de inicio del GUI
    */
   public void construirJuego(String turnoInicial, String nombreJ1, String nombreJ2, Stage mainStage, Scene menuInicio) {
+    this.init();
     this.menuInicio_scene = menuInicio;
+    this.mainStage = mainStage;
 
     gameJB.inicializarTurnos(nombreJ1, nombreJ2, turnoInicial);
     gameJB.repartirCartas();
@@ -138,9 +182,9 @@ public class VistaTablero {
 
   /**
    * @brief Inicia el flujo de los turnos.
-   * @param mainStage Ventana principal del GUI.
    */
-  public void run(Stage mainStage) {
+  public void run() {
+    this.timer  = new Timer();
     mostrarTemporizador(seconds);
     if (gameJB.getTurnoActual() == jugador1) {
       construirEscenaJ1();
@@ -148,7 +192,6 @@ public class VistaTablero {
       construirEscenaJ2();
     }
     gameJB.cambiarTurno();
-
     this.timer.schedule(new TimerTask() {
       Jugador turno = gameJB.getTurnoActual(); 
       @Override
@@ -350,7 +393,16 @@ public class VistaTablero {
     Button menu = new Button("Menú");
     
     menu.setOnAction(e -> {
-      VentanaPopUp.mostrar(this.menuAjustes);
+      this.timer.cancel();
+      this.timerGrafico.cancel();
+      Boolean salirDeljuego = VentanaPopUp.mostrar(this.menuAjustes);
+      if (salirDeljuego == true) {
+        this.timer.purge();
+        this.timerGrafico.purge();
+        this.mainStage.setScene(menuInicio_scene);
+      } else {
+        this.run();
+      }
     });
 
     this.topBar.setCenter(this.seconds);
@@ -478,6 +530,9 @@ public class VistaTablero {
           seconds.setText("00:0" + temporizador);
         }
         --temporizador;
+        if (temporizador < 0) {
+          temporizador = 10;
+        }
       }
     }, 1000, 1000);
   }
@@ -507,4 +562,42 @@ public class VistaTablero {
         }
     });
   };
+
+  public void destruirTablero() {
+    this.vistaComunes = null;     // Vista de las cartas comunes
+    this.vistaPilaJ1 = null;      // Vista de la pila del jugador 1
+    this.vistaPilaJ2 = null;      // Vista de la pila del jugador 1
+    this.vistaPilaActiva = null;  // Vista de la pila activa
+    
+    // layouts
+    this.pilaActiva_hbx = null;      // para posicionar la pila activa horizontalmente
+    this.pilaActiva_vbx = null;      // para colocar nombre a la pila activa
+    this.centro = null;              // para colocar nombre a las cartas comunes
+  
+    this.topBar = null;  // border pane interno (para el nivel superior)-
+    this.comunes_hbx = null;     // cada índice es un par de cartas
+    this.pilaJ1_hbx = null;      //               " "
+    this.pilaJ2_hbx = null;      //               " "
+    this.pilas_vbox = null;      // 0: comunes(mesa) | 1: pila jugador 1 | 2: pila jugador 2
+  
+    // menuAjustes
+    this.menuAjustes = null;
+  
+  
+    // textos
+    this.pilaActiva_txt = null;
+    this.pilaJ1_txt = null;
+    this.pilaJ2_txt = null;
+    this.comunes_txt = null;
+    this.turno_txt = null;
+    this.seconds = null;
+  
+    // GUI
+    this.tablero = null;
+  
+    // Controlador
+    this.gameJB = null;  // controlador del juego
+    this.ganarJugador1 = null;
+    this.ganarJugador2 = null;
+  }
 }
