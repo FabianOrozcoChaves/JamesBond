@@ -17,7 +17,7 @@ public class MenuAjustes implements Menu {
     opciones[i++] = "Reglas";
     opciones[i++] = "Guardar partida";
     opciones[i++] = "Cargar partida";
-    opciones[i++] = "Salir de la partida.";
+    opciones[i++] = "Salir de la partida";
     opciones[i++] = "Reanudar";
     return opciones;
   }
