@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 /**
@@ -72,6 +73,9 @@ public class VistaTablero {
   private JamesBond gameJB = new JamesBond();  // controlador del juego
   private Jugador jugador1;
   private Jugador jugador2;
+  Button ganarJugador1 = new Button("James Bond!");
+  Button ganarJugador2 = new Button("James Bond!");
+
   
 
   /**
@@ -173,8 +177,35 @@ public class VistaTablero {
     this.centro.setAlignment(Pos.CENTER);
     this.centro.setSpacing(20);
 
+    HBox bottomMenu = new HBox();
+    this.ganarJugador1 = new Button("James Bond!");
+    this.ganarJugador1.setOnAction(e -> {
+      System.out.println("Jugador 1 grito james bond");
+      Boolean ganador = this.gameJB.revisarPilas(this.gameJB.getJugador(1));
+      if (ganador == true) {
+        VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(1).getNombre());
+      } else {
+        VentanaPopUp.mostrar("Ganador", "Aun no has ganado, sigue jugando");
+      }
+
+    });
+    this.ganarJugador2 = new Button("James Bond!");
+    this.ganarJugador2.setOnAction(e -> {
+      System.out.println("Jugador 2 grito james bond");
+      Boolean ganador = this.gameJB.revisarPilas(this.gameJB.getJugador(0));
+      if (ganador == true) {
+        VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(1).getNombre());
+      } else {
+        VentanaPopUp.mostrar("Ganador", "Aun no has ganado, sigue jugando");
+      }
+    });
+
+    bottomMenu.setAlignment(Pos.CENTER);
+    bottomMenu.setSpacing(200);
+    bottomMenu.getChildren().addAll(this.ganarJugador1, this.pilaActiva_vbx, this.ganarJugador2);
+
     this.tablero.setCenter(this.centro);          // vbox con el nombre del turno y cartas comunes
-    this.tablero.setBottom(this.pilaActiva_vbx);  // vbox de pila activa
+    this.tablero.setBottom(bottomMenu);  // vbox de pila activa
     this.tablero.setLeft(this.pilas_vbox[1]);     // vbox con el nombre y las pilas del jugador 1
     this.tablero.setRight(this.pilas_vbox[2]);    // vbox con el nombre y las pilas del jugador 1
     this.tablero.setTop(this.topBar);             // menú de ajustes, botón jamesBond y temporizador
@@ -271,7 +302,8 @@ public class VistaTablero {
    */
   public void construirEscenaJ1() {
     this.turno_txt.setText("Turno de " + jugador1.getNombre());
-
+    this.ganarJugador1.setDisable(false);
+    this.ganarJugador2.setDisable(true);
     this.girarCartas(vistaPilaJ2, false);
     this.girarCartas(vistaPilaJ1, true);
     for (int i = 0; i < this.vistaPilaJ2.length; ++i) { 
@@ -288,7 +320,8 @@ public class VistaTablero {
    */
   public void construirEscenaJ2() {
     this.turno_txt.setText("Turno de " + jugador2.getNombre());
-
+    this.ganarJugador1.setDisable(true);
+    this.ganarJugador2.setDisable(false);
     this.girarCartas(vistaPilaJ2, true);
     this.girarCartas(vistaPilaJ1, false);
     for (int i = 0; i < this.vistaPilaJ2.length; ++i) { 
