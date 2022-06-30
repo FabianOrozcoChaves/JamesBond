@@ -12,12 +12,13 @@ public class MenuAjustes implements Menu {
    * @return un arrego de strings con las opciones del menu.
    */
   public String [] mostrarOpciones() {
-    String [] opciones = new String[4]; 
+    String [] opciones = new String[5]; 
     int i = 0;
     opciones[i++] = "Reglas";
     opciones[i++] = "Guardar partida";
     opciones[i++] = "Cargar partida";
-    opciones[i++] = "Salir";
+    opciones[i++] = "Salir de la partida";
+    opciones[i++] = "Reanudar";
     return opciones;
   }
 

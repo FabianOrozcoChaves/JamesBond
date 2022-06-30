@@ -13,6 +13,7 @@ import javafx.stage.Stage;
  * @details se sobreacarga el metodo mostrar para mostrar diferentes popups.
  */
 public class VentanaPopUp {
+  static boolean volverAlMenu = false;
 
   /**
    * @brief Abre una ventana y muestra el mensaje que se le indique.
@@ -20,7 +21,7 @@ public class VentanaPopUp {
    * @param titulo es un string con el tiutlo de la ventana.
    * @param mensaje string con el mensaje a mostrar.
    */
-  public static void mostrar(String titulo, String mensaje) {
+  public static Boolean mostrar(String titulo, String mensaje) {
     Stage ventana = new Stage();
     ventana.initModality(Modality.APPLICATION_MODAL);
     ventana.setTitle(titulo);
@@ -41,13 +42,15 @@ public class VentanaPopUp {
     Scene escena = new Scene(orden);
     ventana.setScene(escena);
     ventana.showAndWait();
+    return false;
   }
+
 
   /**
    * @brief sobrecraga del metodo que pemrite mostrar un menu de ajustes.
    * @param menuAjustes instancia de menu de ajustes.
    */
-  public static void mostrar(MenuAjustes menuAjustes) {
+  public static boolean mostrar(MenuAjustes menuAjustes) {
     Stage ventana = new Stage();
     ventana.initModality(Modality.APPLICATION_MODAL);
     ventana.setTitle(menuAjustes.getTitulo());
@@ -59,6 +62,8 @@ public class VentanaPopUp {
     int guardar = 1;
     int cargar = 2;
     int salir = 3;
+    int reanudar = 4;
+
 
     String [] opciones = menuAjustes.mostrarOpciones();
     Button [] botones = new Button [opciones.length];
@@ -80,15 +85,23 @@ public class VentanaPopUp {
 
     ventana.setOnCloseRequest(e -> ventana.close());
 
-    botones[salir].setOnAction(e -> ventana.close());
+    botones[salir].setOnAction(e ->{
+      volverAlMenu = true;
+      ventana.close();
+    });
+
+    botones[reanudar].setOnAction(e ->{
+      ventana.close();
+    });
 
     VBox orden = new VBox();
-    orden.getChildren().addAll( botones[reglas], botones[guardar], botones[cargar], botones[salir]);
+    orden.getChildren().addAll(botones);
     orden.setAlignment(Pos.CENTER);
     orden.setSpacing(20);
 
     Scene escena = new Scene(orden);
     ventana.setScene(escena);
     ventana.showAndWait();
+    return volverAlMenu;
   }
 }

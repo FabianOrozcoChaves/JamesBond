@@ -73,7 +73,7 @@ public class GUI extends Application {
     // jugar crea una vista del tablero que utiliza el controlador para jugar.
     botonesMenu[jugar].setOnAction(e -> {
       this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene);
-      this.tablero.run(this.mainStage);
+      this.tablero.run();
 
     });
 
