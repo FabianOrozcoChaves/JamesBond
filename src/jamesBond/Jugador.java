@@ -138,4 +138,8 @@ public class Jugador {
   public Pila getPila(int posicion){
     return pilas.get(posicion);
   }
+
+  public int getIndexPilaActiva(){
+    return this.pilaActiva;
+  }
 }

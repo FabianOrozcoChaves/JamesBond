@@ -73,6 +73,9 @@ public class VistaTablero {
   private Jugador jugador1;
   private Jugador jugador2;
   
+  // 
+  private int indicadorPila;
+  private int indicadorTablero;
 
   /**
    * Método constructor por omisión. Para crear instancias con valores por defecto.
@@ -93,6 +96,9 @@ public class VistaTablero {
 
     gameJB.inicializarTurnos(nombreJ1, nombreJ2, turnoInicial);
     gameJB.repartirCartas();
+
+    this.indicadorPila = -1;
+    this.indicadorTablero = -1;
 
     // Jugador 1
     this.jugador1 = gameJB.getJugador(1);
@@ -143,23 +149,27 @@ public class VistaTablero {
     } else if (gameJB.getTurnoActual() == jugador2) {
       construirEscenaJ2();
     }
-    gameJB.cambiarTurno();
 
     this.timer.schedule(new TimerTask() {
       Jugador turno = gameJB.getTurnoActual(); 
       @Override
       public void run() {
+        gameJB.cambiarTurno();
         temporizador = 10;
         turno = gameJB.getTurnoActual();
         System.out.println("Turno de " + turno.getNombre());
         if (turno == jugador1) {
           construirEscenaJ1();
           cambiarPilaActivaAuto(turno);
+          vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
+          vistaPilaJ2[jugador2.getIndexPilaActiva()].normalizarCarta();
         } else if (turno == jugador2) {
           construirEscenaJ2();
           cambiarPilaActivaAuto(turno);
+          vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
+          vistaPilaJ1[jugador1.getIndexPilaActiva()].normalizarCarta();
         }
-        gameJB.cambiarTurno();
+        //gameJB.cambiarTurno();
       }
     }, this.segunderoTurnos * 1000, this.segunderoTurnos * 1000);//wait 0 ms before doing the action and do it every 1000ms (1second)
   }
@@ -182,81 +192,137 @@ public class VistaTablero {
     // botones pila de jugador 1
     this.vistaPilaJ1[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 0");
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador1, 0);
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ1[1].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 1");
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador1, 1);
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ1[2].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 2");
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador1, 2);
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ1[3].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 3");
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador1, 3);
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ1[4].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 4");
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador1, 4);
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ1[5].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 1 Escogio la pila 5");
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador1, 5);
+      this.vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
     });
 
     // botones pila de jugador 2
     this.vistaPilaJ2[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 0");
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador2, 0);
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ2[1].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 1");
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador2, 1);
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ2[2].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 2");
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador2, 2);
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ2[3].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 3");
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador2, 3);
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ2[4].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 4");
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador2, 4);
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
     });
     this.vistaPilaJ2[5].getImageView().setOnMouseClicked(e -> {
       System.out.println("Jugador 2 Escogio la pila 5");
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].normalizarCarta();
       cambiarPilaActiva(jugador2, 5);
+      this.vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
     });
 
-    // Botones de las cartas comunes (mesa/centro)
+    //Botones de las cartas comunes (mesa/centro)
     this.vistaComunes[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio la carta comun 0");
+      resaltarCartaComun(0);
+      if (this.indicadorPila != -1) {
+        intercambiarCarta(this.indicadorTablero, this.indicadorPila);
+      }
     });
     this.vistaComunes[1].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio la carta comun 1");
+      resaltarCartaComun(1);
+      if (this.indicadorPila != -1) {
+        intercambiarCarta(this.indicadorTablero, this.indicadorPila);
+      }
     });
     this.vistaComunes[2].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio la carta comun 2");
+      resaltarCartaComun(2);
+      if (this.indicadorPila != -1) {
+        intercambiarCarta(this.indicadorTablero, this.indicadorPila);
+      }
     });
     this.vistaComunes[3].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio la carta comun 3");
+      resaltarCartaComun(3);
+      if (this.indicadorPila != -1) {
+        intercambiarCarta(this.indicadorTablero, this.indicadorPila);
+      }
     });
   
-    // Botones pila activa
+    // botones pila activa
     this.vistaPilaActiva[0].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio de la pila activa la carta 0");
+      resaltarCartaPila(0);
+      if (this.indicadorTablero != -1) {
+        intercambiarCarta(this.indicadorTablero, this.indicadorPila);
+      }
     });
     this.vistaPilaActiva[1].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio de la pila activa la carta 1");
+      resaltarCartaPila(1);
+      if (this.indicadorTablero != -1) {
+        intercambiarCarta(this.indicadorTablero, this.indicadorPila);
+      }
     });
     this.vistaPilaActiva[2].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio de la pila activa la carta 2");
+      resaltarCartaPila(2);
+      if (this.indicadorTablero != -1) {
+        intercambiarCarta(this.indicadorTablero, this.indicadorPila);
+      }
     });
     this.vistaPilaActiva[3].getImageView().setOnMouseClicked(e -> {
       System.out.println("Se escogio de la pila activa la carta 3");
+      resaltarCartaPila(3);
+      if (this.indicadorTablero != -1) {
+        intercambiarCarta(this.indicadorTablero, this.indicadorPila);
+      }
     });
 
     // set  del color al background
@@ -474,4 +540,48 @@ public class VistaTablero {
         }
     });
   };
+
+  // TODO Documentar y agregar a UML
+  public void intercambiarCarta(int posTablero, int posJugador) {
+    Pila pilaActiva =  gameJB.getTurnoActual().pilaActiva();
+    Carta auxPila = pilaActiva.getCarta(posJugador);
+    Carta auxComunes = gameJB.getTablero().getCarta(posTablero);
+
+    this.gameJB.intercambiarCarta(posTablero, posJugador);
+
+    vistaPilaActiva[posJugador].getImageView().setImage(auxComunes.getImagen());
+    vistaComunes[posTablero].getImageView().setImage(auxPila.getImagen());
+    this.vistaComunes[this.indicadorTablero].normalizarCarta();
+    this.vistaPilaActiva[this.indicadorPila].normalizarCarta();
+    this.actualizarPilasJugador();
+
+    this.indicadorPila = -1;
+    this.indicadorTablero = -1;
+  }
+
+  public void resaltarCartaComun(int posicion) {
+    if (this.indicadorTablero != -1)
+        this.vistaComunes[this.indicadorTablero].normalizarCarta();
+    this.indicadorTablero = posicion;
+    this.vistaComunes[this.indicadorTablero].resaltarCarta();
+  }
+
+  public void resaltarCartaPila(int posicion) {
+    if (this.indicadorPila != -1)
+        this.vistaPilaActiva[this.indicadorPila].normalizarCarta();
+    this.indicadorPila = posicion;
+    this.vistaPilaActiva[this.indicadorPila].resaltarCarta();
+  }
+
+  public void actualizarPilasJugador() {
+    Carta aux;
+    for (int indexCarta = 0; indexCarta < this.vistaPilaJ1.length; indexCarta++) {
+      aux = this.gameJB.getJugador(1).getPila(indexCarta).getCarta(0);
+      vistaPilaJ1[indexCarta].getImageView().setImage(aux.getImagen());
+    }
+    for (int indexCarta = 0; indexCarta < this.vistaPilaJ2.length; indexCarta++) {
+      aux = this.gameJB.getJugador(1).getPila(indexCarta).getCarta(0);
+      vistaPilaJ2[indexCarta].getImageView().setImage(aux.getImagen());
+    }
+  }
 }

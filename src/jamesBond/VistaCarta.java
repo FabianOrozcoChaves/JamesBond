@@ -46,4 +46,15 @@ public class VistaCarta {
   public ImageView getImageView() {
     return this.imagenVistaCarta;
   }
+
+  // TODO agregar a UML
+  public void resaltarCarta() {
+    this.imagenVistaCarta.setFitHeight(125);
+    this.imagenVistaCarta.setFitWidth(125);
+  }
+
+  public void normalizarCarta() {
+    this.imagenVistaCarta.setFitHeight(100);
+    this.imagenVistaCarta.setFitWidth(100);
+  }
 }
