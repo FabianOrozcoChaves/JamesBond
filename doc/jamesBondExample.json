@@ -63,7 +63,7 @@
     },
     "turnoActual":0,
     "temporazador":10,
-    "cartasComunes":[
+    "Tablero":[
       {"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2},{"palo":"T","numero":2}
     ],
     "turnosJugados":20

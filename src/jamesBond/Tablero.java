@@ -55,9 +55,18 @@ public class Tablero {
   /**
    * @brief devuelve la carta en al posicion escogida
    * @param int posicion 
-   * @return la carata que se encuentra en ese posicion
+   * @return la carta que se encuentra en ese posicion
    */
   public Carta getCarta(int posicion) {
 	  return this.cartasComunes.get(posicion);
+  }
+
+  // TODO: agregar metodo al UML
+  /**
+   * @brief devuelve las cartas comunes del juego
+   * @return un vector de cartas con las cartas comunes
+   */
+  public Vector<Carta> getCartas() {
+	  return this.cartasComunes;
   }
 }

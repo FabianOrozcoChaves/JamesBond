@@ -1,5 +1,7 @@
 package jamesBond;
 
+import java.util.Vector;
+
 public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstracto {
     
   private String serializacion;
@@ -78,12 +80,18 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
 
   }
   /**
-   * // TODO completar documentación.
-   * @param tablero
+   * @brief Método serializador. Se encarga de extraer los atributos del objeto Tablero y representarlos debidamente en un objeto json.
+   * @param Tablero Objeto Tablero del que se extraerán sus atributos para guardarlos en el objeto json.
    */
   public void serializarTablero(Tablero tablero) {
-
-  }  
+    this.serializacion += "\n" + sQts("Tablero") + ":[\n";
+    Vector<Carta> cartas = tablero.getCartas();
+    for (Carta carta : cartas) {
+      serializarCarta(carta);
+    }
+    this.serializacion += ":]\n";
+  }
+    
   /**
    * @brief Método serializador. Se encarga de extraer las pilas y nombre de un jugador para representarlas debidamente en el objeto complejo, ya sea en formato json, xml u otro.
    * @param jugador Objeto Jugador del que se extraerán sus atributos para guardarlos en el objeto compuesto.
@@ -105,11 +113,16 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
   }
 
   /**
-   * // TODO completar documentación.
-   * @param pila
+   * @brief Método serializador. Se encarga de extraer los atributos del objeto Pila y representarlos debidamente en un objeto json.
+   * @param pila Objeto Pila del que se extraerán sus atributos para guardarlos en el objeto json.
    */
   public void serializarPila(Pila pila) {
-
+    this.serializacion += "\n" + sQts("pila") + ":[\n";
+    Vector<Carta> cartas = pila.getCartas();
+    for (Carta carta : cartas) {
+      serializarCarta(carta);
+    }
+    this.serializacion += ":]\n";
   }
   
   /**
@@ -118,7 +131,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    */
   public void serializarCarta(Carta carta) {
     // comprueba si es o no la primer carta de la pila (para no agregar coma).
-    if ( this.serializacion.strip().endsWith("[") == false ) {
+    if ( this.serializacion.strip().endsWith("[\n") == false ) {
       // si no es la primera, agrega coma al inicio.
       this.serializacion += ",";
     }

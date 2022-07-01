@@ -34,8 +34,8 @@ public interface ConstructorSerializadorAbstracto {
   public void serializarJamesBond(JamesBond gameJB);
 
   /**
-   * // TODO completar documentación.
-   * @param tablero
+   * @brief Método serializador. Se encarga de extraer los atributos del objeto Tablero y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
+   * @param tablero Objeto Tablero del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
   public void serializarTablero(Tablero tablero);
   
@@ -46,8 +46,8 @@ public interface ConstructorSerializadorAbstracto {
   public void serializarJugador(Jugador jugador);
 
   /**
-   * // TODO completar documentación.
-   * @param pila
+   * @brief Método serializador. Se encarga de extraer los atributos del objeto Pila y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
+   * @param pila Objeto Pila del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
   public void serializarPila(Pila pila);
 
