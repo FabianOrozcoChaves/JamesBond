@@ -52,8 +52,8 @@ public class VistaTablero {
   Scene menuInicio_scene;
 
   // Temporizador
-  int temporizador = 10;
-  int segunderoTurnos = 11;  // delay de 1 segundo para cada cambio.
+  int temporizador;;
+  int segunderoTurnos;  // delay de 1 segundo para cada cambio.
   Timer timer;
   Timer timerGrafico;
 
@@ -88,7 +88,7 @@ public class VistaTablero {
   public VistaTablero() {
   }
 
-  private void init() {
+  private void init(int temporizador) {
     this.vistaComunes = new VistaCarta[4];     // Vista de las cartas comunes
     this.vistaPilaJ1 = new VistaCarta[6];      // Vista de la pila del jugador 1
     this.vistaPilaJ2 = new VistaCarta[6];      // Vista de la pila del jugador 1
@@ -108,10 +108,7 @@ public class VistaTablero {
     // menuAjustes
     this.menuAjustes = new MenuAjustes();
   
-    // Temporizador
-    this.temporizador = 10;
-    this.segunderoTurnos = 11;  // delay de 1 segundo para cada cambio.
-  
+    
     // textos
     this.pilaActiva_txt = new Text("Pila activa");
     this.pilaJ1_txt = new Text();
@@ -119,14 +116,23 @@ public class VistaTablero {
     this.comunes_txt = new Text();
     this.turno_txt = new Text();
     this.seconds = new Text();
-  
+    
     // GUI
     this.tablero = new BorderPane();
-  
+    
     // Controlador
     this.gameJB = new JamesBond();  // controlador del juego
     this.ganarJugador1 = new Button("James Bond!");
     this.ganarJugador2 = new Button("James Bond!");
+    this.gameJB.setTemporizador(temporizador);
+  
+    // Temporizador
+    this.temporizador = this.gameJB.getTemporizador();
+    this.segunderoTurnos = this.temporizador + 1;  // delay de 1 segundo para cada cambio.
+
+    // seleccionar pilas
+    this.indicadorPila = -1;
+    this.indicadorTablero = -1;
   }
 
   /**
@@ -137,16 +143,13 @@ public class VistaTablero {
    * @param mainStage Ventana principal del GUI
    * @param menuInicio Escena principal del menú de inicio del GUI
    */
-  public void construirJuego(String turnoInicial, String nombreJ1, String nombreJ2, Stage mainStage, Scene menuInicio) {
-    this.init();
+  public void construirJuego(String turnoInicial, String nombreJ1, String nombreJ2, Stage mainStage, Scene menuInicio, int temporizador) {
+    this.init(temporizador);
     this.menuInicio_scene = menuInicio;
     this.mainStage = mainStage;
 
     gameJB.inicializarTurnos(nombreJ1, nombreJ2, turnoInicial);
     gameJB.repartirCartas();
-
-    this.indicadorPila = -1;
-    this.indicadorTablero = -1;
 
     // Jugador 1
     this.jugador1 = gameJB.getJugador(1);
@@ -191,7 +194,7 @@ public class VistaTablero {
    */
   public void run() {
     this.timer  = new Timer();
-    temporizador = 10;
+    temporizador = this.gameJB.getTemporizador();
     mostrarTemporizador(seconds);
     if (gameJB.getTurnoActual() == jugador1) {
       construirEscenaJ1();
@@ -205,7 +208,7 @@ public class VistaTablero {
       @Override
       public void run() {
         gameJB.cambiarTurno();
-        temporizador = 10;
+        temporizador = gameJB.getTemporizador();
         turno = gameJB.getTurnoActual();
         System.out.println("Turno de " + turno.getNombre());
         if (turno == jugador1) {
@@ -603,14 +606,14 @@ public class VistaTablero {
     this.timer.schedule(new TimerTask() {
       @Override
       public void run() {
-        if (temporizador == 10) {
+        if (temporizador > 9) {
           seconds.setText("00:" + temporizador);
         } else {
           seconds.setText("00:0" + temporizador);
         }
         --temporizador;
         if (temporizador < 0) {
-          temporizador = 10;
+          temporizador = gameJB.getTemporizador();
         }
       }
     }, 1000, 1000);
