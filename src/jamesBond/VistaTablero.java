@@ -69,6 +69,7 @@ public class VistaTablero {
   private BorderPane tablero;
   private Scene turnoJuego; 
   private Stage mainStage;
+  private Boolean juegoPausado;
 
   // Controlador
   private JamesBond gameJB;  // controlador del juego
@@ -119,6 +120,7 @@ public class VistaTablero {
     
     // GUI
     this.tablero = new BorderPane();
+    this.juegoPausado = false;
     
     // Controlador
     this.gameJB = new JamesBond();  // controlador del juego
@@ -194,17 +196,21 @@ public class VistaTablero {
    */
   public void run() {
     this.timer  = new Timer();
-    temporizador = this.gameJB.getTemporizador();
     mostrarTemporizador(seconds);
-    if (gameJB.getTurnoActual() == jugador1) {
-      construirEscenaJ1();
-      vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
-    } else if (gameJB.getTurnoActual() == jugador2) {
-      construirEscenaJ2();
-      vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
+    if (this.juegoPausado == false) {
+      temporizador = this.gameJB.getTemporizador();
+      if (gameJB.getTurnoActual() == jugador1) {
+        construirEscenaJ1();
+        vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
+      } else if (gameJB.getTurnoActual() == jugador2) {
+        construirEscenaJ2();
+        vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
+      }
+    } else {
+      temporizador = gameJB.getTemporizador();
     }
     this.timer.schedule(new TimerTask() {
-      Jugador turno = gameJB.getTurnoActual(); 
+      Jugador turno; 
       @Override
       public void run() {
         gameJB.cambiarTurno();
@@ -227,9 +233,10 @@ public class VistaTablero {
           vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
           vistaPilaJ1[jugador1.getIndexPilaActiva()].normalizarCarta();
           if (indicadorPila != -1) 
-            vistaPilaActiva[indicadorPila].normalizarCarta();
+          vistaPilaActiva[indicadorPila].normalizarCarta();
           indicadorPila = -1;
         }
+        juegoPausado = false;
       }
     }, this.segunderoTurnos * 1000, this.segunderoTurnos * 1000);//wait 0 ms before doing the action and do it every 1000ms (1second)
   }
@@ -477,7 +484,10 @@ public class VistaTablero {
     
     menu.setOnAction(e -> {
       this.timer.cancel();
+      this.timer.purge();
       this.timerGrafico.cancel();
+      this.timerGrafico.purge();
+      this.juegoPausado = true;
       Boolean salirDeljuego = VentanaPopUp.mostrar(this.menuAjustes);
       if (salirDeljuego == true) {
         this.mainStage.setScene(menuInicio_scene);
