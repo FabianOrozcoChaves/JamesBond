@@ -185,6 +185,7 @@ public class VistaTablero {
    */
   public void run() {
     this.timer  = new Timer();
+    temporizador = 10;
     mostrarTemporizador(seconds);
     if (gameJB.getTurnoActual() == jugador1) {
       construirEscenaJ1();
