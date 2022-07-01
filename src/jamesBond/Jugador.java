@@ -139,7 +139,12 @@ public class Jugador {
     return pilas.get(posicion);
   }
 
-  public int getIndexPilaActiva(){
+  // TODO agregar a UML
+  /**
+   * Método get que devuelve la posicionde la pila activa
+   * @return int que representa la posicion de la pila activa
+   */
+  public int getIndexPilaActiva() {
     return this.pilaActiva;
   }
 }

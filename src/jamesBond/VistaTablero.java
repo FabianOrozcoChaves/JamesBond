@@ -209,21 +209,23 @@ public class VistaTablero {
         System.out.println("Turno de " + turno.getNombre());
         if (turno == jugador1) {
           construirEscenaJ1();
-          //cambiarPilaActivaAuto(jugador1);
           cambiarPilaActiva(jugador1, 0);
-          System.out.println(jugador1.getIndexPilaActiva());
+          actualizarPilasJugador(jugador1);
           vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
           vistaPilaJ2[jugador2.getIndexPilaActiva()].normalizarCarta();
-          actualizarPilasJugador(jugador1);
+          if (indicadorPila != -1) 
+            vistaPilaActiva[indicadorPila].normalizarCarta();
+          indicadorPila = -1;
         } else if (turno == jugador2) {
           construirEscenaJ2();
-          //cambiarPilaActivaAuto(jugador2);
           cambiarPilaActiva(jugador2, 0);
+          actualizarPilasJugador(jugador2);
           vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
           vistaPilaJ1[jugador1.getIndexPilaActiva()].normalizarCarta();
-          actualizarPilasJugador(jugador2);
+          if (indicadorPila != -1) 
+            vistaPilaActiva[indicadorPila].normalizarCarta();
+          indicadorPila = -1;
         }
-        //gameJB.cambiarTurno();
       }
     }, this.segunderoTurnos * 1000, this.segunderoTurnos * 1000);//wait 0 ms before doing the action and do it every 1000ms (1second)
   }
@@ -627,6 +629,7 @@ public class VistaTablero {
     }
   }
 
+  // TODO agregar a UML
   /**
    * @brief Método que intercambia las cartas y sus vistas entre el tablero y el jugador
    * @param posTablero la posicion de la carta en el tablero 
@@ -650,6 +653,10 @@ public class VistaTablero {
     this.indicadorTablero = -1;
   }
   
+  /**
+   * @brief Método que resalta la carta comun seleccionada
+   * @param posicion la posicion de la carta comun que se quiere resaltar
+   */
   public void resaltarCartaComun(int posicion) {
     if (this.indicadorTablero != -1)
         this.vistaComunes[this.indicadorTablero].normalizarCarta();
@@ -657,6 +664,10 @@ public class VistaTablero {
     this.vistaComunes[this.indicadorTablero].resaltarCarta();
   }
 
+  /**
+   * @brief Método que resalta la carta seleccionada de la pila activa
+   * @param posicion la posicion de la carta en la pila que se quiere resaltar
+   */
   public void resaltarCartaPila(int posicion) {
     if (this.indicadorPila != -1)
         this.vistaPilaActiva[this.indicadorPila].normalizarCarta();
@@ -664,6 +675,10 @@ public class VistaTablero {
     this.vistaPilaActiva[this.indicadorPila].resaltarCarta();
   }
 
+  /**
+   * @brief Actualiza las vistas de las pilas del jugador
+   * @param jugador El jugador al cual se le actualizaran las vistas de las pilas
+   */
   public void actualizarPilasJugador(Jugador jugador) {
     Carta aux;
     if (jugador == this.jugador1) {
@@ -677,11 +692,6 @@ public class VistaTablero {
         vistaPilaJ2[indexCarta].getImageView().setImage(aux.getImagen());
       }
     }
-    // for (int indexCarta = 0; indexCarta < this.vistaPilaJ2.length; indexCarta++) {
-    //   aux = this.gameJB.getJugador(2).getPila(indexCarta).getCarta(0);
-    //   vistaPilaJ2[indexCarta].getImageView().setImage(aux.getImagen());
-    // }
-
   }
 
   public void destruirTablero() {
