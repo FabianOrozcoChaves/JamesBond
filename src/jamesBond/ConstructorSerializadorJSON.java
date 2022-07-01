@@ -85,12 +85,25 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
 
   }  
   /**
-   * // TODO completar documentación.
-   * @param jugador
+   * @brief Método serializador. Se encarga de extraer las pilas y nombre de un jugador para representarlas debidamente en el objeto complejo, ya sea en formato json, xml u otro.
+   * @param jugador Objeto Jugador del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
   public void serializarJugador(Jugador jugador) {
+    
+    this.serializacion += "{\n" + sQts("nombre") + ":" + sQts(jugador.getNombre()) + ",\n" 
+      + sQts("pilas") + ":[\n";
 
+      for (int i = 0; i < jugador.getMaxPilas(); i++) {
+        this.serializacion += "{\n";
+        serializarPila(jugador.getPila(i));
+        this.serializacion += "}";
+        if (i < jugador.getMaxPilas() - 1)
+          this.serializacion += ",";
+        this.serializacion += "\n";
+      }
+    this.serializacion += "]\n}";
   }
+
   /**
    * // TODO completar documentación.
    * @param pila
@@ -98,6 +111,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
   public void serializarPila(Pila pila) {
 
   }
+  
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto Carta y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
    * @param carta Objeto Carta del que se extraerán sus atributos para guardarlos en el objeto compuesto.
