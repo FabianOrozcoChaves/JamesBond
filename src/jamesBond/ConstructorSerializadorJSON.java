@@ -52,8 +52,8 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @param coma valor de la coma
    * @return Hilera resultante con el formato json.
    */
-  private String jsonFormat(String key, String value, String coma) {
-    return sQts(key) + ":" + value + coma + "";
+  private String jsonFormatWithComa(String key, String value) {
+    return sQts(key) + ":" + value + ",";
   }
 
     /**
@@ -77,7 +77,19 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @param gameJB
    */
   public void serializarJamesBond(JamesBond gameJB) {
-
+    this.serializacion = "{" + sQts("JamesBond") + ":\n";
+    this.serializacion += "{" + sQts("Jugador1") + ":\n";
+    serializarJugador(gameJB.getJugador(1));
+    this.serializacion += "\n},";
+    this.serializacion += "{" + sQts("Jugador2") + ":\n";
+    serializarJugador(gameJB.getJugador(2));
+    this.serializacion += "\n},";
+    this.serializacion += jsonFormatWithComa("turnoActual", gameJB.getTurnoActual().getNombre()) + "\n";
+    this.serializacion += jsonFormatWithComa("temporazador", String.valueOf(gameJB.getTemporizador())) + "\n";
+    serializarTablero(gameJB.getTablero());
+    // agregar cuando implementemos turnos jugados
+    //this.serializacion += ",\n" + jsonFormat("turnosJugados", String.valueOf(gameJB.getTurnosJugados())) + "\n";
+    this.serializacion += "\n}";
   }
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto Tablero y representarlos debidamente en un objeto json.
@@ -137,7 +149,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     }
 
     // agrega inicio de carta y valor del palo
-    this.serializacion += "{" + jsonFormat("palo", sQts(String.valueOf(carta.getPalo())), ",");
+    this.serializacion += "{" + jsonFormatWithComa("palo", sQts(String.valueOf(carta.getPalo())));
     // agrega valor del número y final de carta
     this.serializacion += jsonFormat("numero", String.valueOf(carta.getNumero())) + "}";
   }}
