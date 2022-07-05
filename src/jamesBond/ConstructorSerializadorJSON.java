@@ -49,7 +49,6 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @details Para el valor, se tiene que pasar con "" previamente en caso de ser String.
    * @param key Llave/Clave json
    * @param value Valor del json asociado a la clave.
-   * @param coma valor de la coma
    * @return Hilera resultante con el formato json.
    */
   private String jsonFormatWithComa(String key, String value) {
