@@ -8,27 +8,24 @@ import javafx.scene.image.Image;
 public class Carta {
   private char palo; // Trebol (t), Pica (p), Diamante (d) o Corazon (c). 
   private int numero; // val del 1 al 13.  del 11 al 13 corresponde a la J Q y K. El numero 1 es el As.
-  private Image imagen; // imagen que utilza el GUI para mostrar una carta.
-  private String ruta; // ruta de donde esta la imagen.
+  private Image imagen; // ruta de la imagen que utilza el GUI para mostrar una carta.
 
-  /**
-   * @brief Constructor por defecto que inicializa una carata "nula".
-   */
-  public Carta() {
-    this(' ', 0, "/img/back.png");
-  }
-  
   /** 
    * @brief Constructor por parametros.
    * @param palo char con el palod e la carta. Trebol (t), Pica (p), Diamante (d) o Corazon (c). 
    * @param numero es un entero con el nuemro de la carta.
-   * @param rutaImagen string con la ruta de donde se encuntra la imagen de la carta.
    */
-  public Carta(char palo, int numero, String rutaImagen) {
+  public Carta(char palo, int numero) {
     this.palo = palo;
     this.numero = numero;
-    this.ruta = rutaImagen;
-    this.imagen = new Image(getClass().getResourceAsStream(this.ruta));
+    cargarRuta(); // carga la ruta de la imagen de la carta
+  }
+
+  /**
+   * @brief carga el string con la ruta de donde se encuentra la imagen de la carta.
+   */
+  private void cargarRuta() {
+    this.imagen = new Image(getClass().getResourceAsStream("/img/" + this.palo + "_" + this.numero + ".png"));
   }
 
   /**
