@@ -3,7 +3,7 @@ package jamesBond;
 import java.io.FileReader;
 import org.json.simple.JSONObject;
 
-public class ConstructorDeserializadorJson implements ConstructorDeserializadorAbstracto{
+public class ConstructorDeserializadorJSON implements ConstructorDeserializadorAbstracto{
   private JamesBond jamesBond;
 
   /**
