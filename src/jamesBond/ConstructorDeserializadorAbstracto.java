@@ -42,8 +42,8 @@ public interface ConstructorDeserializadorAbstracto {
   public void deserializarPila(JSONObject pila);
 
   /**
-   * Método serializador. Se encarga de extraer los atributos del objeto Carta y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
-   * @param carta Objeto Carta del que se extraerán sus atributos para guardarlos en el objeto compuesto.
+   * Método deserializador. Se encarga de cargar los valores de una carta, crear la carta y retornarla como objeto Carta.
+   * @param carta Texto en formato json que representa los atributos de la carta.
    */
-  public void deserializarCarta(JSONObject carta);
+  public Carta deserializarCarta(JSONObject carta);
 }
