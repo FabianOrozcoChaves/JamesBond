@@ -150,5 +150,5 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     // agrega inicio de carta y valor del palo
     this.serializacion += "{" + jsonFormatWithComa("palo", sQts(String.valueOf(carta.getPalo())));
     // agrega valor del número y final de carta
-    this.serializacion += jsonFormat("numero", String.valueOf(carta.getNumero())) + "}";
+    this.serializacion += jsonFormat("numero", sQts(String.valueOf(carta.getNumero()))) + "}";
   }}
