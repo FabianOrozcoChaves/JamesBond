@@ -1,6 +1,6 @@
 package jamesBond;
 
-import org.json.simple.JSONObject;
+import javax.json.JsonObject;
 import java.io.FileReader;
 
 /**
@@ -21,29 +21,29 @@ public interface ConstructorDeserializadorAbstracto {
    * // TODO completar documentación.
    * @param gameJB
    */
-  public void deserializarJamesBond(JSONObject jsonJB);
+  public void deserializarJamesBond(JsonObject jsonJB);
 
   /**
    * // TODO completar documentación.
    * @param tablero
    */
-  public void deserializarTablero(JSONObject tablero);
+  public void deserializarTablero(JsonObject tablero);
   
   /**
    * // TODO completar documentación.
    * @param jugador
    */
-  public void deserializarJugador(JSONObject jugador);
+  public void deserializarJugador(JsonObject jugador);
 
   /**
    * // TODO completar documentación.
    * @param pila
    */
-  public void deserializarPila(JSONObject pila);
+  public void deserializarPila(JsonObject pila);
 
   /**
    * Método deserializador. Se encarga de cargar los valores de una carta, crear la carta y retornarla como objeto Carta.
    * @param carta Texto en formato json que representa los atributos de la carta.
    */
-  public Carta deserializarCarta(JSONObject carta);
+  public Carta deserializarCarta(JsonObject carta);
 }
