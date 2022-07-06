@@ -15,7 +15,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    */
   public void inicioObjeto(String nombreObjeto) {
     this.serializacion = "{";
-    this.serializacion += "\n\t" + sQts(nombreObjeto) + ":";
+    this.serializacion += "\n" + sQts(nombreObjeto) + ":\n";
   }
 
   /**
@@ -26,7 +26,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @param nombreObjeto Nombre del Objeto que al que se quiere guardar/serializar el estado.
    */
   public void finObjeto() {
-    serializacion += "\n}";
+    serializacion += "}";
   }
 
   /**
@@ -76,19 +76,19 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @param gameJB
    */
   public void serializarJamesBond(JamesBond gameJB) {
-    this.serializacion = "{" + sQts("JamesBond") + ":\n";
+    inicioObjeto("JamesBond");
     this.serializacion += "{" + sQts("Jugador1") + ":\n";
     serializarJugador(gameJB.getJugador(1));
     this.serializacion += "\n},";
-    this.serializacion += "{" + sQts("Jugador2") + ":\n";
+    this.serializacion += sQts("Jugador2") + ":\n";
     serializarJugador(gameJB.getJugador(2));
-    this.serializacion += "\n},\n";
-    this.serializacion += jsonFormatWithComa("turnoActual", gameJB.getTurnoActual().getNombre()) + "\n";
+    this.serializacion += ",\n";
+    this.serializacion += jsonFormatWithComa("turnoActual", sQts(gameJB.getTurnoActual().getNombre())) + "\n";
     this.serializacion += jsonFormatWithComa("temporazador", String.valueOf(gameJB.getTemporizador())) + "\n";
     serializarTablero(gameJB.getTablero());
     // agregar cuando implementemos turnos jugados
     //this.serializacion += ",\n" + jsonFormat("turnosJugados", String.valueOf(gameJB.getTurnosJugados())) + "\n";
-    this.serializacion += "}";
+    finObjeto();
   }
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto Tablero y representarlos debidamente en un objeto json.
