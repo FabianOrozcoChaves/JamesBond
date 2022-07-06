@@ -195,18 +195,15 @@ public class VistaTablero {
   public void run() {
     this.timer  = new Timer();
     mostrarTemporizador(seconds);
-    if (this.juegoPausado == false) {
-      temporizador = this.gameJB.getTemporizador();
-      if (gameJB.getTurnoActual() == jugador1) {
-        construirEscenaJ1();
-        vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
-      } else if (gameJB.getTurnoActual() == jugador2) {
-        construirEscenaJ2();
-        vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
-      }
-    } else {
-      temporizador = gameJB.getTemporizador();
+    temporizador = this.gameJB.getTemporizador();
+    if (gameJB.getTurnoActual() == jugador1) {
+      construirEscenaJ1();
+      vistaPilaJ1[jugador1.getIndexPilaActiva()].resaltarCarta();
+    } else if (gameJB.getTurnoActual() == jugador2) {
+      construirEscenaJ2();
+      vistaPilaJ2[jugador2.getIndexPilaActiva()].resaltarCarta();
     }
+
     this.timer.schedule(new TimerTask() {
       Jugador turno; 
       @Override
@@ -234,7 +231,6 @@ public class VistaTablero {
           vistaPilaActiva[indicadorPila].normalizarCarta();
           indicadorPila = -1;
         }
-        juegoPausado = false;
       }
     }, this.segunderoTurnos * 1000, this.segunderoTurnos * 1000);//wait 0 ms before doing the action and do it every 1000ms (1second)
   }
@@ -481,27 +477,24 @@ public class VistaTablero {
     Button menu = new Button("Menú");
     
     menu.setOnAction(e -> {
-      this.timer.cancel();
-      this.timer.purge();
-      this.timerGrafico.cancel();
-      this.timerGrafico.purge();
-      this.juegoPausado = true;
       int opcionIngresada = VentanaPopUp.mostrar(this.menuAjustes);
       switch (opcionIngresada) {
         case 1:
+          // caso de guardar
           this.gameJB.guardar(new ConstructorSerializadorJSON());
+          VentanaPopUp.mostrar("Guardar juego", "El juego se ha guardado correctamente.");
           break;
         case 2:
+          // caso de cargar
+
           break;
         case 3:
+          // caso salir
           this.mainStage.setScene(menuInicio_scene);
           this.destruirTablero();
           break;
         default:
           break;
-      }
-      if (opcionIngresada != 3) {
-        this.run();
       }
     });
 
