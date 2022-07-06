@@ -3,7 +3,7 @@ package test;
 public class JsonGenerator {
   public static String generateJson(){
     StringBuilder sb = new StringBuilder();
-    sb.append("{\"JamesBond\":\n");
+    sb.append("{\n\"JamesBond\":\n");
     sb.append("{\"Jugador1\":\n");
     sb.append("{\n");
     sb.append("\"nombre\":\"Luis\",\n");
