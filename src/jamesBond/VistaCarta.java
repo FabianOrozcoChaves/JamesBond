@@ -1,9 +1,7 @@
 package jamesBond;
-import jamesBond.Carta;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Button;
 
 /**
  * Clase que representa la vista de una carta.
@@ -47,7 +45,7 @@ public class VistaCarta {
     return this.imagenVistaCarta;
   }
 
-  // TODO agregar a UML
+  //
    /**
    * @brief Resalta la carta aumentando su tamaño
    */
