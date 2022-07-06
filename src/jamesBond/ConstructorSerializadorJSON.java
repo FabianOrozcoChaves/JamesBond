@@ -15,7 +15,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    */
   public void inicioObjeto(String nombreObjeto) {
     this.serializacion = "{";
-    this.serializacion += "\n\t" + "\"" + nombreObjeto + "\" :";
+    this.serializacion += "\n\t" + sQts(nombreObjeto) + ":";
   }
 
   /**
