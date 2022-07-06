@@ -32,8 +32,14 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * // TODO completar documentación.
    * @param tablero
    */
-  public void deserializarTablero(JsonObject tablero){
-
+  public Tablero deserializarTablero(JsonArray cartas){
+    Tablero tablero = Tablero.getInstance();
+    tablero.quitarCartas();
+    for (int i = 0; i < cartas.size(); i++) {
+      JsonObject carta = cartas.getJsonObject(i);
+      tablero.agregarCarta(deserializarCarta(carta));
+    }
+    return tablero;
   }
   
   /**
@@ -48,8 +54,13 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * // TODO completar documentación.
    * @param pila
    */
-  public void deserializarPila(JsonObject pila){
-
+  public Pila deserializarPila(JsonArray cartas){
+    Pila pila = new Pila(cartas.size());
+    for (int i = 0; i < cartas.size(); i++) {
+      JsonObject carta = cartas.getJsonObject(i);
+      pila.agregarCarta(deserializarCarta(carta));
+    }
+    return pila;
   }
 
   /**
@@ -73,7 +84,6 @@ JsonObject objeto;
 try {
   InputStream fis = new FileInputStream("jamesBondExample.json");
   JsonReader reader = Json.createReader(fis);
-     
   objeto = reader.readObject();
   reader.close();
 } catch (Exception e) {
@@ -94,7 +104,7 @@ for (int i = 0; i < pilas.size(); ++i) {
   JsonArray cartas = pila.getJsonArray("pila");
   // recorre las cartas de la pila
   for (int j = 0; j < cartas.size(); j++) {
-      JsonObject carta = (JsonObject) cartas.get(j);
+      JsonObject carta = cartas.getJsonObject(j);
       char palo = carta.getString("palo").charAt(0);
       int numero = carta.getInt("numero");
         System.out.println("palo:" + palo + " numero:" + numero);

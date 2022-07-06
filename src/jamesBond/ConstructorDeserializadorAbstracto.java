@@ -1,5 +1,6 @@
 package jamesBond;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import java.io.FileReader;
 
@@ -27,7 +28,7 @@ public interface ConstructorDeserializadorAbstracto {
    * // TODO completar documentación.
    * @param tablero
    */
-  public void deserializarTablero(JsonObject tablero);
+  public Tablero deserializarTablero(JsonArray cartas);
   
   /**
    * // TODO completar documentación.
@@ -39,7 +40,7 @@ public interface ConstructorDeserializadorAbstracto {
    * // TODO completar documentación.
    * @param pila
    */
-  public void deserializarPila(JsonObject pila);
+  public Pila deserializarPila(JsonArray cartas);
 
   /**
    * Método deserializador. Se encarga de cargar los valores de una carta, crear la carta y retornarla como objeto Carta.
