@@ -1,5 +1,6 @@
 package jamesBond;
 
+import java.io.FileWriter;
 import java.util.Vector;
 
 public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstracto {
@@ -35,6 +36,19 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    */
   public String obtenerSerialización() {
     return this.serializacion;
+  }
+
+  /**
+   * @brief Método que guarda la serialización realizada previamente.
+   */
+  public void guardarSerializacion() {
+    try {
+      FileWriter file = new FileWriter("jamesBond.json", false);
+      file.write(serializacion);
+      file.close();
+    } catch (Exception e) {
+      System.out.println("No se pudo guardar el estado del juego. Vuelve a intentarlo.");
+    }
   }
 
   private String sQts(String hilera) {
