@@ -1,6 +1,7 @@
 package jamesBond;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,11 +51,12 @@ public class GUI extends Application {
    * @details modifica el atributo this.menuInicio.
    */
   public void construirMenuInicio() {
-    // indices para cceder a los botones de las diferentes opciones del menu.
+    // indices para acceder a los botones de las diferentes opciones del menu.
     int jugar = 0;
     int cargar = 1;
     int reglas = 2;
     int salir = 3;
+    int temporizador = 6;
 
     // extraemos las opciones del menu.
     String [] opciones = this.menuInicio.mostrarOpciones();
@@ -70,7 +72,7 @@ public class GUI extends Application {
 
     // jugar crea una vista del tablero que utiliza el controlador para jugar.
     botonesMenu[jugar].setOnAction(e -> {
-      this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene, 15);
+      this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene, this.menuInicio.getTemporizador());
       this.tablero.run();
 
     });
@@ -111,7 +113,7 @@ public class GUI extends Application {
 
       // asigna en la visualizacion el nombre y un check que muestra que se asigno correctamente.
       nombreJugador1.setText(nombreJugador1.getText() + " " + Character.toString(10004));
-      nombreJugador1.setEditable(false);
+      // nombreJugador1.setEditable(false);
 
     });
 
@@ -123,7 +125,7 @@ public class GUI extends Application {
 
       // asigna en la visualizacion el nombre y un check que muestra que se asigno correctamente.
       nombreJugador2.setText(nombreJugador2.getText() + " " + Character.toString(10004));
-      nombreJugador2.setEditable(false);
+      // nombreJugador2.setEditable(false);
     });
 
     // asignamos a la caja horizontal los campos de texto de los jugadores
@@ -209,8 +211,37 @@ public class GUI extends Application {
     topMenuCheckboxs.setSpacing(190);
     topMenuCheckboxs.setAlignment(Pos.CENTER);
 
+    VBox vBoxTemporizador = new VBox();
+    Label labelTemporizador = new Label(opciones[temporizador]);
+    labelTemporizador.setAlignment(Pos.CENTER);
+
+    TextField asignarTemporizador = new TextField(String.valueOf(this.menuInicio.getTemporizador()));
+    asignarTemporizador.setAlignment(Pos.CENTER);
+    asignarTemporizador.setMaxWidth(100);
+    asignarTemporizador.setOnAction(e -> {
+      int temp = 15;
+      try {
+        temp = Integer. parseInt(asignarTemporizador.getText());
+        if (temp < 0 || temp > 60) {
+          throw new Exception("El temporizador debe ser un entero entre 0 y 60");
+        }
+        this.menuInicio.asignarTemporizador(temp);
+        asignarTemporizador.setText(asignarTemporizador.getText() + " " + Character.toString(10004));
+
+      } catch (Exception a) {
+        this.menuInicio.asignarTemporizador(15);
+        asignarTemporizador.setText(asignarTemporizador.getText() + " " + Character.toString(10060));
+      }
+
+    });
+
+    vBoxTemporizador.getChildren().addAll(labelTemporizador, asignarTemporizador);
+    vBoxTemporizador.setAlignment(Pos.CENTER);
+    vBoxTemporizador.setPadding(new Insets(25));
+
+
     VBox topMenu = new VBox();
-    topMenu.getChildren().addAll(topMenuLabels, topMenuBotones, topMenuCheckboxs);
+    topMenu.getChildren().addAll(topMenuLabels, topMenuBotones, topMenuCheckboxs, vBoxTemporizador);
 
 
     // asiganamos en el layout general los conjuntos de botones.
