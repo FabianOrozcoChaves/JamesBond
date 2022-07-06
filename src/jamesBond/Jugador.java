@@ -139,7 +139,6 @@ public class Jugador {
     return pilas.get(posicion);
   }
 
-  // TODO agregar a UML
   /**
    * Método get que devuelve la posicionde la pila activa
    * @return int que representa la posicion de la pila activa
