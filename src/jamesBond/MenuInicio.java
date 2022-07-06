@@ -9,7 +9,7 @@ public class MenuInicio implements Menu {
   private String jugador2 = "Jugador 2";
   private String turnoInicial = "random";
   private String nombreJuego = "James Bond";
-
+  private int temporizador = 15;
   /**
    * @brief Constructor
    * @param nombre es un string con el nombre del juego
@@ -23,7 +23,7 @@ public class MenuInicio implements Menu {
    * @return un arreglo de hileras donde cada hilera es una opcion del menu.
    */
   public String [] mostrarOpciones() {
-    String [] opciones = new String [6];
+    String [] opciones = new String [7];
     int i = 0;
     opciones[i++] = "Jugar";
     opciones[i++] = "Cargar partida";
@@ -31,6 +31,7 @@ public class MenuInicio implements Menu {
     opciones[i++] ="Salir";
     opciones[i++] ="Jugador 1";
     opciones[i++] ="Jugador 2";
+    opciones[i++] ="Tiempo por turno (segundos):";
     return opciones;
   }
 
@@ -115,5 +116,13 @@ public class MenuInicio implements Menu {
    */
   public String getNombreJUego() {
     return this.nombreJuego;
+  }
+
+  public void asignarTemporizador(int temp) {
+    this.temporizador = temp;
+  }
+
+  public int getTemporizador() {
+    return this.temporizador;
   }
 }
