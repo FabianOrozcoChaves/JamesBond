@@ -643,7 +643,6 @@ public class VistaTablero {
     }
   }
 
-  // TODO agregar a UML
   /**
    * @brief Método que intercambia las cartas y sus vistas entre el tablero y el jugador
    * @param posTablero la posicion de la carta en el tablero 
