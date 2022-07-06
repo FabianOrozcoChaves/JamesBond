@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * @details se sobreacarga el metodo mostrar para mostrar diferentes popups.
  */
 public class VentanaPopUp {
-  static boolean volverAlMenu = false;
+  static int opcionIngresada = 4;
 
   /**
    * @brief Abre una ventana y muestra el mensaje que se le indique.
@@ -50,13 +50,12 @@ public class VentanaPopUp {
    * @brief sobrecraga del metodo que pemrite mostrar un menu de ajustes.
    * @param menuAjustes instancia de menu de ajustes.
    */
-  public static boolean mostrar(MenuAjustes menuAjustes) {
+  public static int mostrar(MenuAjustes menuAjustes) {
     Stage ventana = new Stage();
     ventana.initModality(Modality.APPLICATION_MODAL);
     ventana.setTitle(menuAjustes.getTitulo());
     ventana.setWidth(300);
     ventana.setHeight(300);
-
 
     int reglas = 0;
     int guardar = 1;
@@ -72,25 +71,31 @@ public class VentanaPopUp {
     }
 
     botones[reglas].setOnAction(e -> {
+      opcionIngresada = reglas;
       VentanaPopUp.mostrar("reglas", menuAjustes.mostrarReglas());
     });
 
     botones[guardar].setOnAction(e -> {
+      opcionIngresada = guardar;
       menuAjustes.guardarPartida();
+      ventana.close();
     });
 
     botones[cargar].setOnAction(e -> {
+      opcionIngresada = cargar;
       menuAjustes.cargarPartida();
+      ventana.close();
     });
 
     ventana.setOnCloseRequest(e -> ventana.close());
 
     botones[salir].setOnAction(e ->{
-      volverAlMenu = true;
+      opcionIngresada = salir;
       ventana.close();
     });
 
     botones[reanudar].setOnAction(e ->{
+      opcionIngresada = reanudar;
       ventana.close();
     });
 
@@ -102,6 +107,6 @@ public class VentanaPopUp {
     Scene escena = new Scene(orden);
     ventana.setScene(escena);
     ventana.showAndWait();
-    return volverAlMenu;
+    return opcionIngresada;
   }
 }
