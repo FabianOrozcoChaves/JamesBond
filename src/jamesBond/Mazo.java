@@ -44,6 +44,20 @@ public class Mazo {
   }
 
   /**
+   * @brief genera todas las cartas del mazo sin cargar las imagenes del FX
+   */
+  // TODO: agregar al UML
+  public void generaCartasSinFX() {
+    cartas.clear();
+	  char[] palos = {'P', 'D', 'C', 'T'};
+    for(char c:palos){
+	    for(int j = 1; j < 14; j++){
+	      this.cartas.add(new Carta( j, c ));
+	    }
+	  }
+  }
+
+  /**
    * @brief mezcla las cartas del mazo
    */
   public void barajar() {

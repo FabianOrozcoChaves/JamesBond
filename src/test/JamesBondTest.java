@@ -15,7 +15,7 @@ public class JamesBondTest {
     JamesBond controlador = new JamesBond();
     controlador.inicializarTurnos("Luis", "Juan"
         , "Luis");
-    controlador.repartirCartas();
+    controlador.repartirCartasSinBarajar();
     Assert.assertEquals(0, controlador.getCartasRestantesMazo());
   }
 
@@ -24,7 +24,7 @@ public class JamesBondTest {
     JamesBond controlador = new JamesBond();
     controlador.inicializarTurnos("Luis", "Juan"
         , "Luis");
-    controlador.repartirCartas();
+    controlador.repartirCartasSinBarajar();
     Jugador jugador1 = controlador.getJugador(1);
     controlador.getJugador(1).cambiarPila(5);
     Pila pila = jugador1.pilaActiva();

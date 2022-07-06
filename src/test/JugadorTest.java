@@ -28,7 +28,7 @@ public class JugadorTest {
     Jugador jugador = new Jugador();
     inciarJugador(jugador, true);
     Assert.assertEquals(jugador.pilasIguales(), true);
-    Carta carta = new Carta('P', 13);
+    Carta carta = new Carta(13, 'P');
     jugador.intercambiarCarta(carta, 0);
     Assert.assertEquals(jugador.pilasIguales(), false);
   }
@@ -36,14 +36,14 @@ public class JugadorTest {
   private void iniciarPilaIguales(Pila pila, int numero){
     char[] palos = {'P', 'D', 'C', 'T'};
     for (int i = 0; i < palos.length; i++) {
-      pila.agregarCarta(new Carta(palos[i], numero));
+      pila.agregarCarta(new Carta(numero, palos[i]));
     }
   }
 
   private void iniciarPilaDiferente(Pila pila, int numero){
     char[] palos = {'P', 'D', 'C', 'T'};
     for (int i = 0; i < palos.length; i++) {
-      pila.agregarCarta(new Carta(palos[i], numero+i));
+      pila.agregarCarta(new Carta(numero+i, palos[i]));
     }
   }
 

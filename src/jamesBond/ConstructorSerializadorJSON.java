@@ -82,25 +82,23 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     this.serializacion += "\n},";
     this.serializacion += "{" + sQts("Jugador2") + ":\n";
     serializarJugador(gameJB.getJugador(2));
-    this.serializacion += "\n},";
+    this.serializacion += "\n},\n";
     this.serializacion += jsonFormatWithComa("turnoActual", gameJB.getTurnoActual().getNombre()) + "\n";
     this.serializacion += jsonFormatWithComa("temporazador", String.valueOf(gameJB.getTemporizador())) + "\n";
     serializarTablero(gameJB.getTablero());
     // agregar cuando implementemos turnos jugados
     //this.serializacion += ",\n" + jsonFormat("turnosJugados", String.valueOf(gameJB.getTurnosJugados())) + "\n";
-    this.serializacion += "\n}";
+    this.serializacion += "}";
   }
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto Tablero y representarlos debidamente en un objeto json.
    * @param Tablero Objeto Tablero del que se extraerán sus atributos para guardarlos en el objeto json.
    */
   public void serializarTablero(Tablero tablero) {
-    this.serializacion += "\n" + sQts("Tablero") + ":[\n";
+    this.serializacion += sQts("Tablero") + ":[\n";
     Vector<Carta> cartas = tablero.getCartas();
-    for (Carta carta : cartas) {
-      serializarCarta(carta);
-    }
-    this.serializacion += ":]\n";
+    serializarVectorCartas(cartas);
+    this.serializacion += "]\n";
   }
     
   /**
@@ -128,12 +126,10 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @param pila Objeto Pila del que se extraerán sus atributos para guardarlos en el objeto json.
    */
   public void serializarPila(Pila pila) {
-    this.serializacion += "\n" + sQts("pila") + ":[\n";
+    this.serializacion += sQts("pila") + ":[\n";
     Vector<Carta> cartas = pila.getCartas();
-    for (Carta carta : cartas) {
-      serializarCarta(carta);
-    }
-    this.serializacion += ":]\n";
+    serializarVectorCartas(cartas);
+    this.serializacion += "]\n";
   }
   
   /**
@@ -141,14 +137,19 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @param carta Objeto Carta del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
   public void serializarCarta(Carta carta) {
-    // comprueba si es o no la primer carta de la pila (para no agregar coma).
-    if ( this.serializacion.strip().endsWith("[\n") == false ) {
-      // si no es la primera, agrega coma al inicio.
-      this.serializacion += ",";
-    }
-
     // agrega inicio de carta y valor del palo
     this.serializacion += "{" + jsonFormatWithComa("palo", sQts(String.valueOf(carta.getPalo())));
     // agrega valor del número y final de carta
     this.serializacion += jsonFormat("numero", sQts(String.valueOf(carta.getNumero()))) + "}";
-  }}
+  }
+
+  private void serializarVectorCartas(Vector<Carta> cartas){
+    for (int i = 0; i < cartas.size(); i++) {
+      serializarCarta(cartas.get(i));
+      if( i < cartas.size() - 1){
+        serializacion += ",";  
+      }
+      serializacion += "\n";
+    }
+  }
+}

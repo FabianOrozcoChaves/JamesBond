@@ -11,12 +11,12 @@ public class CartaTest {
 
   @Before
   public void setUp() throws Exception {
-    carta1 = new Carta('P', 1);
+    carta1 = new Carta(1, 'P');
   }
 	
   @Test
   public void constructores() {
-    Carta carta2 = new Carta('C',2);
+    Carta carta2 = new Carta(2, 'C');
     Assert.assertEquals(carta2.getNumero(), 2);
     Assert.assertEquals(carta2.getPalo(), 'C');
     Assert.assertEquals(carta1.getNumero(), 1);
@@ -25,8 +25,8 @@ public class CartaTest {
 
   @Test
   public void toStringYCartasEspeciales(){
-    Carta carta2 = new Carta('D', 13);
-    Carta carta3 = new Carta('C', 9);
+    Carta carta2 = new Carta(13, 'D');
+    Carta carta3 = new Carta(9, 'C');
     Assert.assertEquals(carta1.toString(), "A de P");
     Assert.assertEquals(carta2.toString(), "K de D");
     Assert.assertEquals(carta3.toString(), "9 de C");

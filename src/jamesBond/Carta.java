@@ -21,6 +21,17 @@ public class Carta {
     cargarRuta(); // carga la ruta de la imagen de la carta
   }
 
+  /** 
+   * @brief Constructor por parametros no carga la imagen se usa para los unit test.
+   * @param numero es un entero con el nuemro de la carta.
+   * @param palo char con el palod e la carta. Trebol (t), Pica (p), Diamante (d) o Corazon (c). 
+   */
+  // TODO: agregar UML?
+  public Carta(int numero, char palo) {
+    this.palo = palo;
+    this.numero = numero;
+  }
+
   /**
    * @brief carga el string con la ruta de donde se encuentra la imagen de la carta.
    */

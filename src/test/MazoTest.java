@@ -13,7 +13,7 @@ public class MazoTest {
   @Before
   public void setUp() throws Exception {
     this.mazo = Mazo.getInstance();
-    this.mazo.generaCartas();
+    this.mazo.generaCartasSinFX();
   }
 	
   @Test

@@ -16,12 +16,12 @@ public class TableroTest {
     Carta carta = tablero.getCarta(0);
     Assert.assertEquals(carta.getNumero(), 1);
     Assert.assertEquals(carta.getPalo(), 'P');
-    carta = new Carta('C', 1);
+    carta = new Carta(1, 'C');
     tablero.agregarCarta(carta);
     carta = tablero.getCarta(3);
     Assert.assertEquals(carta.getNumero(), 1);
     Assert.assertEquals(carta.getPalo(), 'C');
-    carta = new Carta('D', 2);
+    carta = new Carta(2, 'D');
     tablero.cambiarCarta(3, carta);
     carta = tablero.getCarta(3);
     Assert.assertEquals(carta.getNumero(), 2);
@@ -30,9 +30,10 @@ public class TableroTest {
 
   private void iniciarTablero(){
     this.tablero = Tablero.getInstance();
-    Carta carta1 = new Carta('P', 1);
-    Carta carta2 = new Carta('D', 1);
-    Carta carta3 = new Carta('T', 1);
+    tablero.quitarCartas();
+    Carta carta1 = new Carta(1, 'P');
+    Carta carta2 = new Carta(1, 'D');
+    Carta carta3 = new Carta(1, 'T');
     tablero.agregarCarta(carta1);
     tablero.agregarCarta(carta2);
     tablero.agregarCarta(carta3);

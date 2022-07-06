@@ -69,4 +69,12 @@ public class Tablero {
   public Vector<Carta> getCartas() {
 	  return this.cartasComunes;
   }
+
+  // TODO: agregar metodo al UML
+  /**
+   * @brief hace clear al vetor de cartas comunes
+   */
+  public void quitarCartas() {
+	  this.cartasComunes.clear();
+  }
 }

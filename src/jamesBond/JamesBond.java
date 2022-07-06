@@ -23,12 +23,19 @@ public class JamesBond {
   }
 
   /**
-   * @brief Reparte las cartas del mazo, 24 a cada jugador y 4 al tablero.
+   * @brief Genera las cartas del mazo, las baraja y luego las reparte.
    */
   public void repartirCartas() {
     mazo.generaCartas();
     mazo.barajar();
+    repartir();
+  }
 
+  /**
+   * @brief Reparte las cartas del mazo, 24 a cada jugador y 4 al tablero.
+   */
+  // TODO: agregar al UML
+  private void repartir(){
     for (int i = 0; i < 6; i++) {
       Pila pilaJugador1 = new Pila(4);
       Pila pilaJugador2 = new Pila(4);
@@ -42,6 +49,15 @@ public class JamesBond {
     for(int i = 0; i < 4; i++){
       tablero.agregarCarta(mazo.getCarta());
     }
+  }
+
+  /**
+   * @brief Genera las cartas del mazo y las reparte.
+   */
+  // TODO: agregar al UML
+  public void repartirCartasSinBarajar(){
+    mazo.generaCartasSinFX();
+    repartir();
   }
 
    /**
@@ -70,6 +86,7 @@ public class JamesBond {
   public void inicializarTurnos(String nombreJugador1, String nombreJugador2, String turnoInicial) {
     jugador1 = new Jugador(nombreJugador1);
     jugador2 = new Jugador(nombreJugador2);
+    tablero.quitarCartas();
 
     if (turnoInicial.equals(nombreJugador1))
       turnoActual = jugador1;
