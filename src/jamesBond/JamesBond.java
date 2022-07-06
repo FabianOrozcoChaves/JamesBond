@@ -1,5 +1,7 @@
 package jamesBond;
 
+import java.io.FileWriter;
+
 /**
  * Clase JamesBond.
  * Clase controladora
@@ -172,5 +174,21 @@ public class JamesBond {
    */
   public Jugador getTurnoActual() {
     return this.turnoActual;
+  }
+
+  /**
+   * // TODO agregar documentación
+   * @param constructor
+   */
+  public void guardar(ConstructorSerializadorAbstracto constructor) {
+    constructor.serializarJamesBond(this);
+    String serializacion = constructor.obtenerSerialización();
+    try {
+      FileWriter file = new FileWriter("jamesBond.json", false);
+      file.write(serializacion);
+      file.close();
+    } catch (Exception e) {
+      System.out.println("Falló el guardado");
+    }
   }
 }
