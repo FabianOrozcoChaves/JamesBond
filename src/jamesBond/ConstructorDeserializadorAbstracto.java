@@ -11,18 +11,13 @@ import java.io.FileReader;
  */
 public interface ConstructorDeserializadorAbstracto {
 
-  /**
-   * // TODO completar implementación
-   */
-  public JamesBond obtenerDeserialización(FileReader archivoJson);
-
   /* DESERIALIZADORES */
   
   /**
    * // TODO completar documentación.
    * @param gameJB
    */
-  public void deserializarJamesBond(JsonObject jsonJB);
+  public void deserializarJamesBond(JsonObject jsonJB, JamesBond jamesBond);
 
   /**
    * // TODO completar documentación.

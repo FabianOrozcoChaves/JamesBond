@@ -10,14 +10,6 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 
 public class ConstructorDeserializadorJSON implements ConstructorDeserializadorAbstracto{
-  private JamesBond jamesBond;
-
-  /**
-   * // TODO completar implementación
-   */
-  public JamesBond obtenerDeserialización(FileReader archivoJson){
-    return jamesBond;
-  }
 
   /* DESERIALIZADORES */
   
@@ -25,7 +17,7 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * // TODO completar documentación.
    * @param gameJB
    */
-  public void deserializarJamesBond(JsonObject jsonJB){
+  public void deserializarJamesBond(JsonObject jsonJB, JamesBond jamesBond){
   }
 
   /**
