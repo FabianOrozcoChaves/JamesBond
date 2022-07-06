@@ -33,7 +33,7 @@ public class MenuAjustes implements Menu {
    * @brief Metodo que permite guardar una partida.
    */
   public void guardarPartida() {
-    System.out.println("Se debe ewscribir en un archivo el estado actual.");
+    System.out.println("Guardando el estado actual.");
     
   }
 
