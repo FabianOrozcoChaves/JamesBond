@@ -61,7 +61,7 @@ public class Tablero {
 	  return this.cartasComunes.get(posicion);
   }
 
-  // TODO: agregar metodo al UML
+  //
   /**
    * @brief devuelve las cartas comunes del juego
    * @return un vector de cartas con las cartas comunes
