@@ -251,27 +251,27 @@ public class VistaTablero {
     HBox bottomMenu = new HBox();
     this.ganarJugador1 = new Button("James Bond!");
     this.ganarJugador1.setOnAction(e -> {
-      System.out.println("Jugador 1 grito james bond");
+      System.out.println("Jugador 1 gritó james bond");
       Boolean ganador = this.gameJB.revisarPilas(this.gameJB.getJugador(1));
       if (ganador == true) {
         VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(1).getNombre());
         this.mainStage.setScene(menuInicio_scene);
         this.destruirTablero();
       } else {
-        VentanaPopUp.mostrar("Ganador", "Aun no has ganado, sigue jugando");
+        VentanaPopUp.mostrar("Ganador", "Aún no has ganado, sigue jugando");
       }
 
     });
     this.ganarJugador2 = new Button("James Bond!");
     this.ganarJugador2.setOnAction(e -> {
-      System.out.println("Jugador 2 grito james bond");
-      Boolean ganador = this.gameJB.revisarPilas(this.gameJB.getJugador(0));
+      System.out.println("Jugador 2 gritó james bond");
+      Boolean ganador = this.gameJB.revisarPilas(this.gameJB.getJugador(2));
       if (ganador == true) {
-        VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(1).getNombre());
+        VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(2).getNombre());
         this.mainStage.setScene(menuInicio_scene);
         this.destruirTablero();
       } else {
-        VentanaPopUp.mostrar("Ganador", "Aun no has ganado, sigue jugando");
+        VentanaPopUp.mostrar("Ganador", "Aún no has ganado, sigue jugando");
       }
     });
 
@@ -486,11 +486,21 @@ public class VistaTablero {
       this.timerGrafico.cancel();
       this.timerGrafico.purge();
       this.juegoPausado = true;
-      Boolean salirDeljuego = VentanaPopUp.mostrar(this.menuAjustes);
-      if (salirDeljuego == true) {
-        this.mainStage.setScene(menuInicio_scene);
-        this.destruirTablero();
-      } else {
+      int opcionIngresada = VentanaPopUp.mostrar(this.menuAjustes);
+      switch (opcionIngresada) {
+        case 1:
+          this.gameJB.guardar(new ConstructorSerializadorJSON());
+          break;
+        case 2:
+          break;
+        case 3:
+          this.mainStage.setScene(menuInicio_scene);
+          this.destruirTablero();
+          break;
+        default:
+          break;
+      }
+      if (opcionIngresada != 3) {
         this.run();
       }
     });
