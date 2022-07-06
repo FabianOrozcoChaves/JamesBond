@@ -56,7 +56,7 @@ public class VentanaPopUp {
     ventana.setTitle(menuAjustes.getTitulo());
     ventana.setWidth(300);
     ventana.setHeight(300);
-
+    opcionIngresada = 4;
     int reglas = 0;
     int guardar = 1;
     int cargar = 2;
