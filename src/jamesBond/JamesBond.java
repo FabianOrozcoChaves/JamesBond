@@ -1,6 +1,12 @@
 package jamesBond;
 
+import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.InputStream;
+
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.Json;
 
 /**
  * Clase JamesBond.
@@ -177,18 +183,20 @@ public class JamesBond {
   }
 
   /**
-   * // TODO agregar documentación
-   * @param constructor
+   * Método que guarda el estado del juego en un archivo.
+   * @param constructor Constructor que serializa (guarda) el jamesBond.
    */
   public void guardar(ConstructorSerializadorAbstracto constructor) {
     constructor.serializarJamesBond(this);
-    String serializacion = constructor.obtenerSerialización();
-    try {
-      FileWriter file = new FileWriter("jamesBond.json", false);
-      file.write(serializacion);
-      file.close();
-    } catch (Exception e) {
-      System.out.println("Falló el guardado");
-    }
+    constructor.guardarSerializacion();
+  }
+
+  /**
+   * @brief Método que carga el estado del juego desde un archivo guardado anteriormente.
+   * @param constructor Constructor que deserializa (carga) el jamesBond por referencia.
+   */
+  public void cargar(ConstructorDeserializadorAbstracto constructor) {
+    // Cambia la instancia por referencia
+    constructor.deserializarJamesBond(this);
   }
 }
