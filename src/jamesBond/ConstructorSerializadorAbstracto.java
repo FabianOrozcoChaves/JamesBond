@@ -25,6 +25,11 @@ public interface ConstructorSerializadorAbstracto {
    */
   public String obtenerSerialización();
 
+  /**
+   * @brief Método que se encarga de crear/sobreescribir un archivo con la serialización previamente realizada.
+   */
+  public void guardarSerializacion();
+
   /* SERIALIZADORES */
   
   /**
