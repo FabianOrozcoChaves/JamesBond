@@ -52,12 +52,22 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
     return tablero;
   }
   
-  /**
-   * // TODO completar documentación.
-   * @param jugador
+   /**
+   * @brief Método deserializador. Se encarga de cargar los valores de un Jugador, crear el Jugador y retornarlo como objeto Jugador.
+   * @param jugador Texto en formato json que representa los atributos del Jugador.
+   * @return Jugador con los atributos cargados
    */
   public Jugador deserializarJugador(JsonObject jugador){
-    Jugador temp = new Jugador();
+    String nombre = jugador.get("nombre").getAsString();
+    Jugador temp = new Jugador(nombre);
+    JsonArray pilas = jugador.getAsJsonArray("pilas");
+
+    for (int i = 0; i < temp.getMaxPilas(); i++) {
+      JsonObject pilaObject = pilas.get(i).getAsJsonObject();
+      JsonArray pilaArray = pilaObject.getAsJsonArray("pila");
+      temp.agregarPila(deserializarPila(pilaArray));
+    }
+
     return temp;
   }
 
