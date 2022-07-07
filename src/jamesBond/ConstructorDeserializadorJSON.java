@@ -1,13 +1,11 @@
 package jamesBond;
 
-import java.io.FileInputStream;
+import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.InputStream;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 public class ConstructorDeserializadorJSON implements ConstructorDeserializadorAbstracto{
 
@@ -22,16 +20,22 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
     JsonObject objeto;
     // lee archivo
     try {
-      InputStream file = new FileInputStream("jamesBond.json");
-      JsonReader reader = Json.createReader(file);
-      objeto = reader.readObject();
-      reader.close();
-
-      // TODO deserializar
-
+      BufferedReader bufferedReader = new BufferedReader(new FileReader("jamesBond.json"));
+      Gson gson = new Gson();
+      objeto = gson.fromJson(bufferedReader, JsonObject.class);
+      deserializar(jamesBond, objeto);
     } catch (Exception e) {
       System.out.println("No se pudo cargar el archivo \"jamesBond.json\". Vuelve a intentarlo.");
     }
+  }
+
+  public void deserializar(JamesBond jamesBond, JsonObject objetoJson){
+    Tablero tablero = deserializarTablero(objetoJson.get("Tablero").getAsJsonArray());
+    Jugador jugador1 = deserializarJugador(objetoJson.get("Jugador1").getAsJsonObject());
+    Jugador jugador2 = deserializarJugador(objetoJson.get("Jugador2").getAsJsonObject());
+    Jugador turnoActual = jugador1.getNombre().equals(objetoJson.get("turnoActual").getAsString()) ? jugador1 : jugador2;
+    int temporizador = objetoJson.get("temporizador").getAsInt();
+    jamesBond.cargarEstado(jugador1, jugador2, turnoActual, temporizador, tablero);
   }
 
   /**
@@ -42,7 +46,7 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
     Tablero tablero = Tablero.getInstance();
     tablero.quitarCartas();
     for (int i = 0; i < cartas.size(); i++) {
-      JsonObject carta = cartas.getJsonObject(i);
+      JsonObject carta = cartas.get(i).getAsJsonObject();
       tablero.agregarCarta(deserializarCarta(carta));
     }
     return tablero;
@@ -52,8 +56,9 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * // TODO completar documentación.
    * @param jugador
    */
-  public void deserializarJugador(JsonObject jugador){
-
+  public Jugador deserializarJugador(JsonObject jugador){
+    Jugador temp = new Jugador();
+    return temp;
   }
 
   /**
@@ -63,7 +68,7 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
   public Pila deserializarPila(JsonArray cartas){
     Pila pila = new Pila(cartas.size());
     for (int i = 0; i < cartas.size(); i++) {
-      JsonObject carta = cartas.getJsonObject(i);
+      JsonObject carta = cartas.get(i).getAsJsonObject();
       pila.agregarCarta(deserializarCarta(carta));
     }
     return pila;
@@ -75,8 +80,8 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * @return Carta con los atributos cargados
    */
   public Carta deserializarCarta(JsonObject carta) {
-    char palo = carta.getString("palo").charAt(0);
-    int numero = carta.getInt("numero");
+    char palo = carta.get("palo").getAsCharacter();
+    int numero = carta.get("numero").getAsInt();
     return new Carta(palo, numero);
   }
 }   

@@ -58,7 +58,7 @@ public class JsonGenerator {
     sb.append("}\n");
     sb.append("]\n");
     sb.append("}\n");
-    sb.append("},{\"Jugador2\":\n");
+    sb.append("},\"Jugador2\":\n");
     sb.append("{\n");
     sb.append("\"nombre\":\"Juan\",\n");
     sb.append("\"pilas\":[\n");
@@ -111,10 +111,9 @@ public class JsonGenerator {
     sb.append("]\n");
     sb.append("}\n");
     sb.append("]\n");
-    sb.append("}\n");
     sb.append("},\n");
-    sb.append("\"turnoActual\":Luis,\n");
-    sb.append("\"temporazador\":0,\n");
+    sb.append("\"turnoActual\":\"Luis\",\n");
+    sb.append("\"temporizador\":\"0\",\n");
     sb.append("\"Tablero\":[\n");
     sb.append("{\"palo\":\"T\",\"numero\":\"10\"},\n");
     sb.append("{\"palo\":\"T\",\"numero\":\"11\"},\n");

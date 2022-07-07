@@ -98,7 +98,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     serializarJugador(gameJB.getJugador(2));
     this.serializacion += ",\n";
     this.serializacion += jsonFormatWithComa("turnoActual", sQts(gameJB.getTurnoActual().getNombre())) + "\n";
-    this.serializacion += jsonFormatWithComa("temporazador", String.valueOf(gameJB.getTemporizador())) + "\n";
+    this.serializacion += jsonFormatWithComa("temporizador", sQts(String.valueOf(gameJB.getTemporizador()))) + "\n";
     serializarTablero(gameJB.getTablero());
     // agregar cuando implementemos turnos jugados
     //this.serializacion += ",\n" + jsonFormat("turnosJugados", String.valueOf(gameJB.getTurnosJugados())) + "\n";

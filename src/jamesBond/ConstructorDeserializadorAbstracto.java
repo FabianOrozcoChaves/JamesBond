@@ -1,8 +1,7 @@
 package jamesBond;
 
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import java.io.FileReader;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 /**
  * Interface ConstructorDeserializadorAbstracto
@@ -29,7 +28,7 @@ public interface ConstructorDeserializadorAbstracto {
    * // TODO completar documentación.
    * @param jugador
    */
-  public void deserializarJugador(JsonObject jugador);
+  public Jugador deserializarJugador(JsonObject jugador);
 
   /**
    * // TODO completar documentación.

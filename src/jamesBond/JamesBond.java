@@ -1,13 +1,5 @@
 package jamesBond;
 
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.InputStream;
-
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import javax.json.Json;
-
 /**
  * Clase JamesBond.
  * Clase controladora
@@ -102,6 +94,23 @@ public class JamesBond {
       turnoActual = jugador2;
     else
       randomizarTurno();
+  }
+
+  // TODO agregar al UML
+  /**
+   * @brief Método encargado de inicializar el estado del juego en el punto donde se guardo
+   * @param jugador1 Jugador que representa al jugador 1
+   * @param jugador2 Jugador que representa al jugador 2
+   * @param turnoInicial Jugador que tiene el turno actual
+   * @param temporizador int que representa la duracion de los turnos
+   * @param tablero Tablero que muestra
+   */
+  public void cargarEstado(Jugador jugador1, Jugador Jugador, Jugador turnoActual, int temporizador, Tablero tablero) {
+    this.jugador1 = jugador1;
+    this.jugador1 = jugador2;
+    this.turnoActual = turnoActual;
+    this.temporizador = temporizador;
+    this.tablero = tablero;
   }
 
   /**
