@@ -57,7 +57,6 @@ public class JsonGenerator {
     sb.append("]\n");
     sb.append("}\n");
     sb.append("]\n");
-    sb.append("}\n");
     sb.append("},\"Jugador2\":\n");
     sb.append("{\n");
     sb.append("\"nombre\":\"Juan\",\n");
@@ -120,6 +119,7 @@ public class JsonGenerator {
     sb.append("{\"palo\":\"T\",\"numero\":\"12\"},\n");
     sb.append("{\"palo\":\"T\",\"numero\":\"13\"}\n");
     sb.append("]\n");
+    sb.append("}\n");
     sb.append("}");
     return sb.toString();
   }

@@ -8,6 +8,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class ConstructorDeserializadorJSON implements ConstructorDeserializadorAbstracto{
+  boolean test = false;
 
   /* DESERIALIZADORES */
   
@@ -23,24 +24,31 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
       BufferedReader bufferedReader = new BufferedReader(new FileReader("jamesBond.json"));
       Gson gson = new Gson();
       objeto = gson.fromJson(bufferedReader, JsonObject.class);
-      deserializar(jamesBond, objeto);
+      deserializar(jamesBond, objeto.get("JamesBond").getAsJsonObject());
     } catch (Exception e) {
       System.out.println("No se pudo cargar el archivo \"jamesBond.json\". Vuelve a intentarlo.");
     }
   }
 
+  /**
+   * @brief Método deserializador de ayuda para deserializar se separa y se hace publico para las pruebas.
+   * @param jamesBond juego que representa el estado actual de juego.
+   * @param objetoJson un objecto Json que contiene el estado en el cual se guardo el juego.
+   */
+  // TODO: agregar UML
   public void deserializar(JamesBond jamesBond, JsonObject objetoJson){
     Tablero tablero = deserializarTablero(objetoJson.get("Tablero").getAsJsonArray());
-    Jugador jugador1 = deserializarJugador(objetoJson.get("Jugador1").getAsJsonObject());
     Jugador jugador2 = deserializarJugador(objetoJson.get("Jugador2").getAsJsonObject());
+    Jugador jugador1 = deserializarJugador(objetoJson.get("Jugador1").getAsJsonObject());
     Jugador turnoActual = jugador1.getNombre().equals(objetoJson.get("turnoActual").getAsString()) ? jugador1 : jugador2;
     int temporizador = objetoJson.get("temporizador").getAsInt();
     jamesBond.cargarEstado(jugador1, jugador2, turnoActual, temporizador, tablero);
   }
 
   /**
-   * // TODO completar documentación.
-   * @param tablero
+   * @brief Método deserializador. Se encarga de cargar los valores del tablero, restaurar el estado del Tablero en el que se guardo.
+   * @param Cartas Texto en formato json que representa las cartas en comunes que posee el tablero.
+   * @return Tablero con el estado en el que se guardo.
    */
   public Tablero deserializarTablero(JsonArray cartas){
     Tablero tablero = Tablero.getInstance();
@@ -72,8 +80,9 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
   }
 
   /**
-   * // TODO completar documentación.
-   * @param pila
+   * @brief Método deserializador. Se encarga de cargar los valores de una pila, restaurar el estado en el que se guardo.
+   * @param Cartas Texto en formato json que representa las cartas que se encuentran el la pila.
+   * @return Pila con el estado en el que se guardo.
    */
   public Pila deserializarPila(JsonArray cartas){
     Pila pila = new Pila(cartas.size());
@@ -92,45 +101,13 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
   public Carta deserializarCarta(JsonObject carta) {
     char palo = carta.get("palo").getAsCharacter();
     int numero = carta.get("numero").getAsInt();
-    return new Carta(palo, numero);
-  }
-}   
-
- /**FORMA DE DESERIALIZAR
-
- public static void main(String[] args){
-
-// accede al objeto en general
-JsonObject objeto;
-try {
-  InputStream fis = new FileInputStream("jamesBondExample.json");
-  JsonReader reader = Json.createReader(fis);
-  objeto = reader.readObject();
-  reader.close();
-} catch (Exception e) {
-  e.printStackTrace();
-  return;
-}
-
-// accede al objeto jamesbond
-JsonObject jamesbond = objeto.getJsonObject("JamesBond");
-// accede al jugador
-JsonObject jugador1 = jamesbond.getJsonObject("Jugador1");
-// accede las pilas del jugador
-JsonArray pilas = jugador1.getJsonArray("pilas");
-// recorre las pilas del jugador
-for (int i = 0; i < pilas.size(); ++i) {
-  JsonObject pila = pilas.getJsonObject(i);
-  // accede a las cartas de la pila actual
-  JsonArray cartas = pila.getJsonArray("pila");
-  // recorre las cartas de la pila
-  for (int j = 0; j < cartas.size(); j++) {
-      JsonObject carta = cartas.getJsonObject(j);
-      char palo = carta.getString("palo").charAt(0);
-      int numero = carta.getInt("numero");
-        System.out.println("palo:" + palo + " numero:" + numero);
-        // construirCarta(palo, numero);
-      }
+    if(!test){
+      return new Carta(palo, numero); 
     }
+    return new Carta(numero, palo);
   }
-}*/
+
+  public void setTest(boolean test){
+    this.test = test;
+  }
+}

@@ -93,7 +93,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     inicioObjeto("JamesBond");
     this.serializacion += "{" + sQts("Jugador1") + ":\n";
     serializarJugador(gameJB.getJugador(1));
-    this.serializacion += "\n},";
+    this.serializacion += ",";
     this.serializacion += sQts("Jugador2") + ":\n";
     serializarJugador(gameJB.getJugador(2));
     this.serializacion += ",\n";
@@ -102,6 +102,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     serializarTablero(gameJB.getTablero());
     // agregar cuando implementemos turnos jugados
     //this.serializacion += ",\n" + jsonFormat("turnosJugados", String.valueOf(gameJB.getTurnosJugados())) + "\n";
+    this.serializacion += "}\n";
     finObjeto();
   }
   /**

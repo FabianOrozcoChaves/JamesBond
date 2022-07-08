@@ -105,9 +105,9 @@ public class JamesBond {
    * @param temporizador int que representa la duracion de los turnos
    * @param tablero Tablero que muestra
    */
-  public void cargarEstado(Jugador jugador1, Jugador Jugador, Jugador turnoActual, int temporizador, Tablero tablero) {
+  public void cargarEstado(Jugador jugador1, Jugador jugador2, Jugador turnoActual, int temporizador, Tablero tablero) {
     this.jugador1 = jugador1;
-    this.jugador1 = jugador2;
+    this.jugador2 = jugador2;
     this.turnoActual = turnoActual;
     this.temporizador = temporizador;
     this.tablero = tablero;
