@@ -486,7 +486,8 @@ public class VistaTablero {
           break;
         case 2:
           // caso de cargar
-
+          this.gameJB.cargar(new ConstructorDeserializadorJSON());
+          VentanaPopUp.mostrar("Cargar juego", "El juego se ha cargado correctamente.");
           break;
         case 3:
           // caso salir
