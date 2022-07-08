@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import test.JamesBondTest;
 
 /**
  * Clase gráfica del tablero.
@@ -87,7 +88,7 @@ public class VistaTablero {
   public VistaTablero() {
   }
 
-  private void init(int temporizador) {
+  private void init(int temporizador, JamesBond controlador, String turnoInicial, String nombreJ1, String nombreJ2) {
     this.vistaComunes = new VistaCarta[4];     // Vista de las cartas comunes
     this.vistaPilaJ1 = new VistaCarta[6];      // Vista de la pila del jugador 1
     this.vistaPilaJ2 = new VistaCarta[6];      // Vista de la pila del jugador 1
@@ -121,10 +122,16 @@ public class VistaTablero {
     this.juegoPausado = false;
     
     // Controlador
-    this.gameJB = new JamesBond();  // controlador del juego
+    if (controlador == null) {
+      this.gameJB = new JamesBond();  // controlador del juego
+      this.gameJB.setTemporizador(temporizador);
+      gameJB.inicializarTurnos(nombreJ1, nombreJ2, turnoInicial);
+    gameJB.repartirCartas();
+    } else {
+      this.gameJB = controlador;
+    }
     this.ganarJugador1 = new Button("James Bond!");
     this.ganarJugador2 = new Button("James Bond!");
-    this.gameJB.setTemporizador(temporizador);
   
     // Temporizador
     this.temporizador = this.gameJB.getTemporizador();
@@ -143,33 +150,30 @@ public class VistaTablero {
    * @param mainStage Ventana principal del GUI
    * @param menuInicio Escena principal del menú de inicio del GUI
    */
-  public void construirJuego(String turnoInicial, String nombreJ1, String nombreJ2, Stage mainStage, Scene menuInicio, int temporizador) {
-    this.init(temporizador);
+  public void construirJuego(String turnoInicial, String nombreJ1, String nombreJ2, Stage mainStage, Scene menuInicio, int temporizador, JamesBond controlador) {
     this.menuInicio_scene = menuInicio;
+    this.init(temporizador, controlador, turnoInicial, nombreJ1, nombreJ2);
     this.mainStage = mainStage;
-
-    gameJB.inicializarTurnos(nombreJ1, nombreJ2, turnoInicial);
-    gameJB.repartirCartas();
 
     // Jugador 1
     this.jugador1 = gameJB.getJugador(1);
     pilas_vbox[1] = new VBox();
     pilas_vbox[1].getChildren().add(this.pilaJ1_txt);
-    inicializarPilas(this.jugador1, pilaJ1_hbx, vistaPilaJ1, pilas_vbox[1]);
+    this.inicializarPilas(this.jugador1, pilaJ1_hbx, vistaPilaJ1, pilas_vbox[1]);
 
     // Jugador 2
     this.jugador2 = gameJB.getJugador(2);
     pilas_vbox[2] = new VBox();
     pilas_vbox[2].getChildren().add(this.pilaJ2_txt);
-    inicializarPilas(this.jugador2, pilaJ2_hbx, vistaPilaJ2, pilas_vbox[2]);
+    this.inicializarPilas(this.jugador2, pilaJ2_hbx, vistaPilaJ2, pilas_vbox[2]);
 
     // PilaActiva
-    inicializarPilaActiva(gameJB.getTurnoActual());
+    this.inicializarPilaActiva(gameJB.getTurnoActual());
 
     // inicializa comunes
     Tablero tablero = gameJB.getTablero();
-    inicializarCartasComunes(tablero);
-    definirTextos(this.jugador1.getNombre(), this.jugador2.getNombre());
+    this.inicializarCartasComunes(tablero);
+    this.definirTextos(this.jugador1.getNombre(), this.jugador2.getNombre());
 
     // barra superior
     this.inicializarBarraTop();
@@ -486,7 +490,14 @@ public class VistaTablero {
           break;
         case 2:
           // caso de cargar
-          this.gameJB.cargar(new ConstructorDeserializadorJSON());
+
+          Stage mainStageCopy = this.mainStage;
+          Scene menuInicioSceneCopy = this.menuInicio_scene;
+          this.destruirTablero();
+          JamesBond nuevoJB = new JamesBond();
+          nuevoJB.cargar(new ConstructorDeserializadorJSON());
+          construirJuego(nuevoJB.getTurnoActual().getNombre(), nuevoJB.getJugador(1).getNombre(), nuevoJB.getJugador(2).getNombre(), mainStageCopy, menuInicioSceneCopy, nuevoJB.getTemporizador(), nuevoJB);
+          this.run();
           VentanaPopUp.mostrar("Cargar juego", "El juego se ha cargado correctamente.");
           break;
         case 3:

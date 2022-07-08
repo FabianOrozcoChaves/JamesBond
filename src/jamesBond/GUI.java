@@ -9,9 +9,14 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
+
 
 /**
  * @class Clase GUI.
@@ -72,14 +77,17 @@ public class GUI extends Application {
 
     // jugar crea una vista del tablero que utiliza el controlador para jugar.
     botonesMenu[jugar].setOnAction(e -> {
-      this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene, this.menuInicio.getTemporizador());
+      this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene, this.menuInicio.getTemporizador(), null);
       this.tablero.run();
-
     });
 
     // opcion cargar no ha sido implementada, por ahora solo hace un print.
     botonesMenu[cargar].setOnAction(e ->{
       System.out.println("Cargar");
+      JamesBond nuevoJB = new JamesBond();
+      nuevoJB.cargar(new ConstructorDeserializadorJSON());
+      this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene, this.menuInicio.getTemporizador(), nuevoJB);
+      this.tablero.run();
     });
 
     // opcion reglas muestra las reglas del juego.
@@ -248,7 +256,7 @@ public class GUI extends Application {
     BorderPane borderpane = new BorderPane();
     borderpane.setTop(topMenu);
     borderpane.setCenter(centerMenu);
-
+    borderpane.setBackground(new Background(new BackgroundFill(Color.web("#c8b4cc"), new CornerRadii(0), Insets.EMPTY)));
     this.menuIncio_scene = new Scene(borderpane, this.anchoVentana, this.alturaVentana);
   }
 
