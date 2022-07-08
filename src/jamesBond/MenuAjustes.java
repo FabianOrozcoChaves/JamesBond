@@ -4,7 +4,7 @@ package jamesBond;
  * @class MenuAjustes
  * @brief clase que maneja las acciones del menu de ajustes.
  */
-public class MenuAjustes implements Menu {
+public class MenuAjustes {
   private String titulo = "Menu de ajustes"; 
 
   /**
