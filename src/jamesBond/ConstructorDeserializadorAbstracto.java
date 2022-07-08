@@ -13,32 +13,37 @@ public interface ConstructorDeserializadorAbstracto {
   /* DESERIALIZADORES */
   
   /**
-   * // TODO completar documentación.
-   * @param gameJB
+   * @brief Método deserializador. Se encarga de cargar los valores del JamesBond y restaurando el estado en el que se guardo.
+   * @param jamesBond un objecto json que representa al controlador JamesBond.
+   * @return JamesBond con el estado en el que se guardo.
    */
   public void deserializarJamesBond(JamesBond jamesBond);
 
   /**
-   * // TODO completar documentación.
-   * @param tablero
+   * @brief Método deserializador. Se encarga de cargar los valores de un Tablero, restaurando el estado en el que se guardo.
+   * @param cartas un objecto json que representa las cartas comunes.
+   * @return Tablero con el estado en el que se guardo.
    */
   public Tablero deserializarTablero(JsonArray cartas);
   
   /**
-   * // TODO completar documentación.
-   * @param jugador
+   * @brief Método deserializador. Se encarga de cargar los valores de un Jugador, restaurando el estado en el que se guardo.
+   * @param jugador un objecto json que representa al Jugador.
+   * @return Jugador con el estado en el que se guardo.
    */
   public Jugador deserializarJugador(JsonObject jugador);
 
   /**
-   * // TODO completar documentación.
-   * @param pila
+   * @brief Método deserializador. Se encarga de cargar los valores de una pila, restaurando el estado en el que se guardo.
+   * @param cartas un objecto json que representa las cartas de la pila.
+   * @return Pila con el estado en el que se guardo.
    */
   public Pila deserializarPila(JsonArray cartas);
 
   /**
    * Método deserializador. Se encarga de cargar los valores de una carta, crear la carta y retornarla como objeto Carta.
-   * @param carta Texto en formato json que representa los atributos de la carta.
+   * @param carta un objecto json que representa atributos de la carta.
+   * @return Carta con el estado en el que se guardo.
    */
   public Carta deserializarCarta(JsonObject carta);
 }

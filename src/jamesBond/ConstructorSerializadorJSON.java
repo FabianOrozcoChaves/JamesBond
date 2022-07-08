@@ -86,7 +86,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
   /* SERIALIZADORES */
 
   /**
-   * // TODO completar documentación.
+   * @brief Método serializador. Se encarga de extraer los atributos del objeto JamesBond y representarlos debidamente en un objeto json.
    * @param gameJB
    */
   public void serializarJamesBond(JamesBond gameJB) {

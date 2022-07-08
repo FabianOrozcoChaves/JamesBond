@@ -44,9 +44,8 @@ public class Mazo {
   }
 
   /**
-   * @brief genera todas las cartas del mazo sin cargar las imagenes del FX
+   * @brief genera todas las cartas del mazo sin cargar las imagenes del FX se usa para el unit test
    */
-  // TODO: agregar al UML
   public void generaCartasSinFX() {
     cartas.clear();
 	  char[] palos = {'P', 'D', 'C', 'T'};
