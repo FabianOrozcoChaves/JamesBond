@@ -12,9 +12,11 @@ En Windows:
 
 ## Ejecución
 
-Estando en la carpeta raíz del proyecto, en **`powershell`** / **`CMD`**, ejecute el siguiente comando:  
-`java --module-path <JavaFX_lib_path> --add-modules javafx.controls --enable-preview -jar JamesBond.jar`, reemplazando "<JavaFX_lib_path>" por la ruta donde tiene ubicado la librería del sdk de javafx.  
-Por ejemplo:  `java --module-path C:\javafx-sdk-18.0.1\lib\ --add-modules javafx.controls --enable-preview -jar JamesBond.jar`
+- Opción 1: es darle doble click al archivo [out/JamesBond.jar](./out) o al archivo [out/jamesBond.exe](./out)
+
+- Opción 2: Estando en la carpeta raíz del proyecto, en **`powershell`** / **`CMD`**, ejecute el siguiente comando:  
+`java -jar out/JamesBond.jar`
+
 
 ## Rama más actualizada
 
