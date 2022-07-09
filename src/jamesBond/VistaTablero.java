@@ -67,7 +67,6 @@ public class VistaTablero {
   private BorderPane tablero;
   private Scene turnoJuego; 
   private Stage mainStage;
-  private Boolean juegoPausado;
 
   // Controlador
   private JamesBond gameJB;  // controlador del juego
@@ -118,7 +117,6 @@ public class VistaTablero {
     
     // GUI
     this.tablero = new BorderPane();
-    this.juegoPausado = false;
     
     // Controlador
     if (controlador == null) {
