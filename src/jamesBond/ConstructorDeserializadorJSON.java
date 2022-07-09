@@ -39,7 +39,6 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * @param jamesBond juego que representa el estado actual de juego.
    * @param objetoJson un objecto Json que contiene el estado en el cual se guardo el juego.
    */
-  // TODO: agregar UML
   public void deserializar(JamesBond jamesBond, JsonObject objetoJson){
     Tablero tablero = deserializarTablero(objetoJson.get("Tablero").getAsJsonArray());
     Jugador jugador2 = deserializarJugador(objetoJson.get("Jugador2").getAsJsonObject());
@@ -85,7 +84,7 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
 
   /**
    * @brief Método deserializador. Se encarga de cargar los valores de una pila, restaurar el estado en el que se guardo.
-   * @param Cartas Texto en formato json que representa las cartas que se encuentran el la pila.
+   * @param Cartas Texto en formato json que representa las cartas que se encuentra la pila.
    * @return Pila con el estado en el que se guardo.
    */
   public Pila deserializarPila(JsonArray cartas){

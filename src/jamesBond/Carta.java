@@ -26,7 +26,6 @@ public class Carta {
    * @param numero es un entero con el nuemro de la carta.
    * @param palo char con el palod e la carta. Trebol (t), Pica (p), Diamante (d) o Corazon (c). 
    */
-  // TODO: agregar UML?
   public Carta(int numero, char palo) {
     this.palo = palo;
     this.numero = numero;

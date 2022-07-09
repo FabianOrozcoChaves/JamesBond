@@ -35,7 +35,6 @@ public class Tablero {
    * @param cartaEntrante carta que será introducida en las cartas comunes. Viene del jugador.
    * @return la carta en la posicion solicitada
    */
-  // TODO: cambiar nombre del metodo en UML, agregar parametro y hacer void.
   public Carta cambiarCarta(int posicion, Carta cartaEntrante) {
 	if(posicion > this.cartasComunes.size() && posicion < 0){
 		return null;
@@ -70,7 +69,6 @@ public class Tablero {
 	  return this.cartasComunes;
   }
 
-  // TODO: agregar metodo al UML
   /**
    * @brief hace clear al vetor de cartas comunes
    */

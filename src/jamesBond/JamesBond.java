@@ -34,7 +34,6 @@ public class JamesBond {
   /**
    * @brief Reparte las cartas del mazo, 24 a cada jugador y 4 al tablero.
    */
-  // TODO: agregar al UML
   private void repartir(){
     for (int i = 0; i < 6; i++) {
       Pila pilaJugador1 = new Pila(4);
@@ -52,9 +51,8 @@ public class JamesBond {
   }
 
   /**
-   * @brief Genera las cartas del mazo y las reparte.
+   * @brief Genera las cartas del mazo y las reparte se utiliza para los unit test.
    */
-  // TODO: agregar al UML
   public void repartirCartasSinBarajar(){
     mazo.generaCartasSinFX();
     repartir();
@@ -96,7 +94,6 @@ public class JamesBond {
       randomizarTurno();
   }
 
-  // TODO agregar al UML
   /**
    * @brief Método encargado de inicializar el estado del juego en el punto donde se guardo
    * @param jugador1 Jugador que representa al jugador 1
