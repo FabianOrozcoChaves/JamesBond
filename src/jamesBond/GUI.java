@@ -85,9 +85,12 @@ public class GUI extends Application {
     botonesMenu[cargar].setOnAction(e ->{
       System.out.println("Cargar");
       JamesBond nuevoJB = new JamesBond();
-      nuevoJB.cargar(new ConstructorDeserializadorJSON());
-      this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene, this.menuInicio.getTemporizador(), nuevoJB);
-      this.tablero.run();
+      if (nuevoJB.cargar(new ConstructorDeserializadorJSON())) {
+        this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene, this.menuInicio.getTemporizador(), nuevoJB);
+        this.tablero.run();
+      } else {
+        VentanaPopUp.mostrar("JamesBond", "No existe una partida guardada previamente.");
+      }
     });
 
     // opcion reglas muestra las reglas del juego.

@@ -16,7 +16,7 @@ public interface ConstructorDeserializadorAbstracto {
    * // TODO completar documentación.
    * @param gameJB
    */
-  public void deserializarJamesBond(JamesBond jamesBond);
+  public boolean deserializarJamesBond(JamesBond jamesBond);
 
   /**
    * // TODO completar documentación.

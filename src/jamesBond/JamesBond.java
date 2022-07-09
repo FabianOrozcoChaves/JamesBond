@@ -204,8 +204,8 @@ public class JamesBond {
    * @brief Método que carga el estado del juego desde un archivo guardado anteriormente.
    * @param constructor Constructor que deserializa (carga) el jamesBond por referencia.
    */
-  public void cargar(ConstructorDeserializadorAbstracto constructor) {
+  public boolean cargar(ConstructorDeserializadorAbstracto constructor) {
     // Cambia la instancia por referencia
-    constructor.deserializarJamesBond(this);
+    return constructor.deserializarJamesBond(this);
   }
 }

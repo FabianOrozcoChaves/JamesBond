@@ -16,18 +16,22 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * Método que lee el archivo y carga los nuevos atributos para el jamesBond
    * @param jamesBond juego que representa el estado actual de juego.
    */
-  public void deserializarJamesBond(JamesBond jamesBond){
+  public boolean deserializarJamesBond(JamesBond jamesBond){
     // objeto general
     JsonObject objeto;
     // lee archivo
     try {
-      BufferedReader bufferedReader = new BufferedReader(new FileReader("jamesBond.json"));
+      FileReader file = new FileReader("jamesBond.json");
+      BufferedReader bufferedReader = new BufferedReader(file);
       Gson gson = new Gson();
       objeto = gson.fromJson(bufferedReader, JsonObject.class);
       deserializar(jamesBond, objeto.get("JamesBond").getAsJsonObject());
+      file.close();
+      return true;
     } catch (Exception e) {
       System.out.println("No se pudo cargar el archivo \"jamesBond.json\". Vuelve a intentarlo.");
     }
+    return false;
   }
 
   /**

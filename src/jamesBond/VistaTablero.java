@@ -493,12 +493,15 @@ public class VistaTablero {
 
           Stage mainStageCopy = this.mainStage;
           Scene menuInicioSceneCopy = this.menuInicio_scene;
-          this.destruirTablero();
           JamesBond nuevoJB = new JamesBond();
-          nuevoJB.cargar(new ConstructorDeserializadorJSON());
-          construirJuego(nuevoJB.getTurnoActual().getNombre(), nuevoJB.getJugador(1).getNombre(), nuevoJB.getJugador(2).getNombre(), mainStageCopy, menuInicioSceneCopy, nuevoJB.getTemporizador(), nuevoJB);
-          this.run();
-          VentanaPopUp.mostrar("Cargar juego", "El juego se ha cargado correctamente.");
+          String mensaje = "No existe una partida guardada previamente.";
+          if (nuevoJB.cargar(new ConstructorDeserializadorJSON())) {
+            this.destruirTablero();
+            construirJuego(nuevoJB.getTurnoActual().getNombre(), nuevoJB.getJugador(1).getNombre(), nuevoJB.getJugador(2).getNombre(), mainStageCopy, menuInicioSceneCopy, nuevoJB.getTemporizador(), nuevoJB);
+            this.run();
+            mensaje = "El juego se ha cargado correctamente.";
+          }
+          VentanaPopUp.mostrar("Cargar juego", mensaje);
           break;
         case 3:
           // caso salir
