@@ -1,0 +1,10 @@
+Diferencias funcionales:
+1) Ocean's Eleven NO requiere esconder las cartas de las manos, todas deben mostrarse. 21 requiere una oculta y las
+demás descubiertas. Y otros juegos las requieren todas cubiertas.
+2) James Bond es concurrente, no hay turnos, se pueden implementar de diversas formas en un juego de computadora.
+3) Spite & Malice se juega con dos mazos completos, 104 cartas.
+4) Algunos juegos usan la baraja española, como "Escoba" (4 palos, 10 cartas por palo), otros la baraja francesa 
+   (4 palos, 13 cartas por palo).
+5) Algunos juegos se basan en una serie de partidas, se acumulan puntos en cada partida, y al final se suman los
+   puntos en la mano de cada jugador. Por tanto requieren un acumulador de puntaje continuamente en la Vista.
+ 
