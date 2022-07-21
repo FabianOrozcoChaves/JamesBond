@@ -17,6 +17,11 @@ En Windows:
 - Opción 2: Estando en la carpeta raíz del proyecto, en **`powershell`** / **`CMD`**, ejecute el siguiente comando:  
 `java -jar out/JamesBond.jar`
 
+## Video demostración del juego
+
+- Link del video en drive:
+<https://drive.google.com/file/d/1Nh4GdTlieDKJX4_gm9bmr8XSaZ6IMXk_/view?usp=sharing>
+
 
 ## Rama más actualizada
 
