@@ -1,7 +1,5 @@
 package marda;
 
-import marda.ContenedorDeCartasMarda;
-
 class JugadorMarda extends  ContenedorDeCartasMarda {
     protected String nombre;
 
