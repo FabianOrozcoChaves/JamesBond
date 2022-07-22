@@ -1,11 +1,18 @@
 package MARDA;
 
-// import GrupoDeCartas;
+import java.util.Vector;
 
-abstract class ContenedorDeCartasMarda {
-    protected Vector<GrupoDeCartas> gruposDeCartas;
+class ContenedorDeCartasMarda {
+    protected Vector<GrupoDeCartasMarda> gruposDeCartas;
 
-    public abstract void agregarGrupoDeCartas(GrupoDeCartas grupo);
-    public abstract void quitarGrupoDeCartas(int indice);
-    public abstract GrupoDeCartas getGrupoDeCartas(int indice);
+    public void agregarGrupoDeCartas(GrupoDeCartasMarda grupo){
+        this.gruposDeCartas.add(grupo);
+    }
+
+    public void quitarGrupoDeCartas(int indice){
+        this.gruposDeCartas.removeElementAt(indice);
+    }
+    public GrupoDeCartasMarda getGrupoDeCartas(int indice){
+        return this.gruposDeCartas.get(indice);
+    }
 }

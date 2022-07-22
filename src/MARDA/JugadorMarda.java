@@ -1,8 +1,6 @@
 package MARDA;
 
-import ContenedorDeCartasMarda;
-
-abstract class JugadorMarda extends  ContenedorDeCartasMarda {
+class JugadorMarda extends  ContenedorDeCartasMarda {
     protected String nombre;
 
     public void setNombre(String nombre){
