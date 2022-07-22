@@ -1,4 +1,4 @@
-package MARDA;
+package marda;
 
 import java.util.Collections;
 import java.util.Vector;

@@ -1,4 +1,4 @@
-package MARDA;
+package marda;
 
 import javafx.scene.layout.Pane;
 import jamesBond.VistaCarta;

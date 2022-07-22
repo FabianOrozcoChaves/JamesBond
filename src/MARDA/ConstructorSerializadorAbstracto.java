@@ -1,4 +1,4 @@
-package MARDA;
+package marda;
 
 /**
  * Interface ConstructorSerializadorAbstracto

@@ -1,4 +1,4 @@
-package MARDA;
+package marda;
 
 import java.io.FileWriter;
 import java.util.Vector;

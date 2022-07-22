@@ -1,4 +1,4 @@
-package MARDA;
+package marda;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
