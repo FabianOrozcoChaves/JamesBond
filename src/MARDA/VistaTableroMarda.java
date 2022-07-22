@@ -1,8 +1,14 @@
 package MARDA;
 
+import javafx.scene.layout.Pane;
+import jamesBond.VistaCarta;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 
 public class VistaTableroMarda {
   private int anchoVentana; // ancho de la ventana en pixeles.
@@ -13,19 +19,29 @@ public class VistaTableroMarda {
   private VBox seccionCentro;
   private HBox seccionNorte;
   private HBox seccionSur;
+  private Scene tableroEscena;
 
   VistaTableroMarda() {
     this.init();
-
   }
 
-  private void construirTablero() {
+  private void construirTablero(Stage ventanaPrincipal) {
     this.estructura.setTop(this.seccionNorte);
     this.estructura.setLeft(this.seccionOeste);
     this.estructura.setRight(this.seccionEste);
     this.estructura.setBottom(this.seccionSur);
     this.estructura.setCenter(this.seccionCentro);
+    this.tableroEscena = new Scene(this.estructura, this.anchoVentana, this.alturaVentana);
+    ventanaPrincipal.setScene(this.tableroEscena);
   }
+
+  public void agregarElemento(Pane seccion, Node elemento) {
+    seccion.getChildren().addAll(elemento);
+  }
+
+  /*public VistaCarta [] crearArregloVistaCarta(GrupoDeCartas cartas) {
+
+  }*/
 
   public VBox getSeccionCentro() {
     return this.seccionCentro;
