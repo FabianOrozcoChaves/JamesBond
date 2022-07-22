@@ -69,33 +69,7 @@ public class Carta {
    */
   public String toString() {
     String resultado = "";
-    resultado += this.convertirNumeroAString() + " de " + this.palo;
-    return resultado;
-  }
-
-  /**
-   * @brief Convierte un numeor a su respectiva representacion en char segun la carta.
-   * @details este metodo es utilizado para el toString de testing.
-   * @return String con el numeor o letra segun la carta.
-   */
-  private String convertirNumeroAString() {
-    String resultado = "";
-    switch(this.numero){
-      case 11:
-        resultado += 'J';
-      break;
-      case 12:
-        resultado += 'Q';
-      break;
-      case 13:
-        resultado += 'K';
-      break;
-      case 1:
-        resultado += 'A';
-      break;
-      default:
-        resultado += this.numero;
-    }
+    resultado += this.numero + " de " + this.palo;
     return resultado;
   }
 }
