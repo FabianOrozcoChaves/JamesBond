@@ -1,8 +1,8 @@
-package MARDA;
+package marda;
 
 import java.util.Vector;
 
-class ContenedorDeCartasMarda {
+public class ContenedorDeCartasMarda {
     protected Vector<GrupoDeCartasMarda> gruposDeCartas;
 
     public void agregarGrupoDeCartas(GrupoDeCartasMarda grupo){
