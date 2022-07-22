@@ -2,7 +2,7 @@ package MARDA;
 
 import ContenedorDeCartasMarda;
 
-abstract class ContenedorDeCartasMarda extends  ContenedorDeCartasMarda {
+abstract class JugadorMarda extends  ContenedorDeCartasMarda {
     protected String nombre;
 
     public void setNombre(String nombre){
