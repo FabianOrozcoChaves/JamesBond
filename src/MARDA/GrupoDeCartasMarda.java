@@ -16,12 +16,27 @@ public class GrupoDeCartasMarda {
   }
 
   /**
+   * @brief Constructor por parámetros. Inicializa atributos de la clase
+   */
+  public GrupoDeCartasMarda(int cantidadCartas) {
+    this.cartas = new Vector<Carta>(cantidadCartas);
+  }
+
+  /**
    * @brief Método que agrega una carta al vector de cartas.
    * @param carta Carta que se quiere agregar.
    * @param indice Posicion en la que se quiere agregar.
    */
-  public void agregarCarta(Carta carta, int indice) {
+  public void agregarCarta(marda.Carta carta, int indice) {
     this.cartas.set(indice, carta);
+  }
+
+  /**
+   * @brief Método que agrega una carta al FINAL al vector de cartas.
+   * @param carta Carta que se quiere agregar.
+   */
+  public void agregarCarta(marda.Carta carta) {
+    this.cartas.add(carta);
   }
 
   /**
@@ -73,5 +88,22 @@ public class GrupoDeCartasMarda {
    */
   public Vector<Carta> getCartas() {
     return this.cartas;
+  }
+
+  /**
+   * @brief Método que limpia todo el vector de cartas, lo restablece.
+   */
+  public void clear() {
+    this.cartas.clear();
+  }
+
+  /**
+   * @brief Método que retorna la última carta del vector.
+   */
+  public Carta topNpop() {
+    if(this.cartas.size() < 1){
+		  return null;
+	  }
+    return this.cartas.remove(0);
   }
 }
