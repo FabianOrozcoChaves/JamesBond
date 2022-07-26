@@ -2,11 +2,18 @@ package marda;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import marda.VistaTableroMarda;
 
-public abstract class PantallaInicio extends Application {
-  public abstract void start(Stage stage);
+public class PantallaInicio extends Application {
+  public void start(Stage stage) {
+    VistaTableroMarda x = new VistaTableroMarda();
+    x.init();
+    x.construirTableroMarda(stage);
+    stage.show();
+
+  }
+
   public static void main(String[] args) {
-    System.out.println("James Bond");
     Application.launch(args);
   }
 }
