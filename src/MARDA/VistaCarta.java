@@ -1,6 +1,6 @@
 package marda;
 
-import jamesBond.Carta;
+import marda.Carta;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import marda.Carta;
