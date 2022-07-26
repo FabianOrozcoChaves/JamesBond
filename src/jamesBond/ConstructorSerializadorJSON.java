@@ -3,7 +3,7 @@ package jamesBond;
 import java.io.FileWriter;
 import java.util.Vector;
 
-import marda.Carta;
+import marda.*;
 
 public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstracto {
     
@@ -91,7 +91,8 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @brief Método serializador. Se encarga de extraer los atributos del objeto JamesBond y representarlos debidamente en un objeto json.
    * @param gameJB
    */
-  public void serializarJamesBond(JamesBond gameJB) {
+  public void serializarJuego(JuegoMarda juego) {
+    JamesBond gameJB = (JamesBond)juego;
     inicioObjeto("JamesBond");
     this.serializacion += "{" + sQts("Jugador1") + ":\n";
     serializarJugador(gameJB.getJugador(1));
@@ -113,7 +114,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    */
   public void serializarTablero(Tablero tablero) {
     this.serializacion += sQts("Tablero") + ":[\n";
-    Vector<Carta> cartas = tablero.getCartas();
+    Vector<Carta> cartas = tablero.getCartas().getCartas();
     serializarVectorCartas(cartas);
     this.serializacion += "]\n";
   }
@@ -122,29 +123,29 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @brief Método serializador. Se encarga de extraer las pilas y nombre de un jugador para representarlas debidamente en el objeto complejo, ya sea en formato json, xml u otro.
    * @param jugador Objeto Jugador del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
-  public void serializarJugador(Jugador jugador) {
-    
+  public void serializarJugador(JugadorMarda jugador) {
+    // Cast
     this.serializacion += "{\n" + sQts("nombre") + ":" + sQts(jugador.getNombre()) + ",\n" 
       + sQts("pilas") + ":[\n";
 
-      for (int i = 0; i < jugador.getMaxPilas(); i++) {
+      for (int i = 0; i < jugador.getGrupoDeCartas(0).getCartas().size(); i++) {
         this.serializacion += "{\n";
-        serializarPila(jugador.getPila(i));
+        serializarGrupoDeCartas(jugador.getGrupoDeCartas(i));
         this.serializacion += "}";
-        if (i < jugador.getMaxPilas() - 1)
+        if (i < jugador.getGrupoDeCartas(0).getCartas().size() - 1)
           this.serializacion += ",";
         this.serializacion += "\n";
       }
     this.serializacion += "]\n}";
   }
-
+  // TODO Documetacion
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto Pila y representarlos debidamente en un objeto json.
    * @param pila Objeto Pila del que se extraerán sus atributos para guardarlos en el objeto json.
    */
-  public void serializarPila(Pila pila) {
-    this.serializacion += sQts("pila") + ":[\n";
-    Vector<Carta> cartas = pila.getCartas();
+  public void serializarGrupoDeCartas(GrupoDeCartasMarda grupoCartas) {
+    this.serializacion += sQts("GrupoDeCartas") + ":[\n";
+    Vector<Carta> cartas = grupoCartas.getCartas();
     serializarVectorCartas(cartas);
     this.serializacion += "]\n";
   }

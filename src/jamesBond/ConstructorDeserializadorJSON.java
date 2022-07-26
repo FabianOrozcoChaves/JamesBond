@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import marda.Carta;
+import marda.*;
 
 public class ConstructorDeserializadorJSON implements ConstructorDeserializadorAbstracto{
   boolean test = false;
@@ -18,7 +18,8 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * Método que lee el archivo y carga los nuevos atributos para el jamesBond
    * @param jamesBond juego que representa el estado actual de juego.
    */
-  public boolean deserializarJamesBond(JamesBond jamesBond){
+  public boolean deserializarJuego(JuegoMarda juego){
+    JamesBond jamesBond = (JamesBond)juego;
     // objeto general
     JsonObject objeto;
     // lee archivo
@@ -41,10 +42,11 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * @param jamesBond juego que representa el estado actual de juego.
    * @param objetoJson un objecto Json que contiene el estado en el cual se guardo el juego.
    */
-  public void deserializar(JamesBond jamesBond, JsonObject objetoJson){
+  public void deserializar(JuegoMarda juego, JsonObject objetoJson){
+    JamesBond jamesBond = new JamesBond();
     Tablero tablero = deserializarTablero(objetoJson.get("Tablero").getAsJsonArray());
-    Jugador jugador2 = deserializarJugador(objetoJson.get("Jugador2").getAsJsonObject());
-    Jugador jugador1 = deserializarJugador(objetoJson.get("Jugador1").getAsJsonObject());
+    Jugador jugador2 = (Jugador)deserializarJugador(objetoJson.get("Jugador2").getAsJsonObject());
+    Jugador jugador1 = (Jugador)deserializarJugador(objetoJson.get("Jugador1").getAsJsonObject());
     Jugador turnoActual = jugador1.getNombre().equals(objetoJson.get("turnoActual").getAsString()) ? jugador1 : jugador2;
     int temporizador = objetoJson.get("temporizador").getAsInt();
     jamesBond.cargarEstado(jugador1, jugador2, turnoActual, temporizador, tablero);
@@ -56,7 +58,7 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * @return Tablero con el estado en el que se guardo.
    */
   public Tablero deserializarTablero(JsonArray cartas){
-    Tablero tablero = Tablero.getInstance();
+    Tablero tablero = new Tablero();
     tablero.quitarCartas();
     for (int i = 0; i < cartas.size(); i++) {
       JsonObject carta = cartas.get(i).getAsJsonObject();
@@ -70,32 +72,32 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * @param jugador Texto en formato json que representa los atributos del Jugador.
    * @return Jugador con los atributos cargados
    */
-  public Jugador deserializarJugador(JsonObject jugador){
+  public JugadorMarda deserializarJugador(JsonObject jugador){
     String nombre = jugador.get("nombre").getAsString();
     Jugador temp = new Jugador(nombre);
     JsonArray pilas = jugador.getAsJsonArray("pilas");
 
-    for (int i = 0; i < temp.getMaxPilas(); i++) {
+    for (int i = 0; i < temp.getGrupoDeCartas(0).getCartas().size(); i++) {
       JsonObject pilaObject = pilas.get(i).getAsJsonObject();
       JsonArray pilaArray = pilaObject.getAsJsonArray("pila");
-      temp.agregarPila(deserializarPila(pilaArray));
+      temp.agregarPila(deserializarGrupoDeCartasMarda(pilaArray));
     }
 
     return temp;
   }
-
+  // TODO Documentación
   /**
    * @brief Método deserializador. Se encarga de cargar los valores de una pila, restaurar el estado en el que se guardo.
    * @param Cartas Texto en formato json que representa las cartas que se encuentra la pila.
    * @return Pila con el estado en el que se guardo.
    */
-  public Pila deserializarPila(JsonArray cartas){
-    Pila pila = new Pila(cartas.size());
+  public GrupoDeCartasMarda deserializarGrupoDeCartasMarda(JsonArray cartas){
+    GrupoDeCartasMarda grupoDeCartas = new GrupoDeCartasMarda();
     for (int i = 0; i < cartas.size(); i++) {
       JsonObject carta = cartas.get(i).getAsJsonObject();
-      pila.agregarCarta(deserializarCarta(carta));
+      grupoDeCartas.agregarCarta(deserializarCarta(carta));
     }
-    return pila;
+    return grupoDeCartas;
   }
 
   /**

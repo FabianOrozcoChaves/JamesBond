@@ -2,6 +2,7 @@ package marda;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import jamesBond.Tablero;
 
 /**
  * Interface ConstructorDeserializadorAbstracto
@@ -11,11 +12,10 @@ import com.google.gson.JsonObject;
 public interface ConstructorDeserializadorAbstracto {
 
   /* DESERIALIZADORES */
-  // TODO: Corregir documentacion
   /**
    * @brief Método deserializador. Se encarga de cargar los valores del JuegoMarda y restaurando el estado en el que se guardo.
    * @param juego un objecto json que representa al controlador JuegoMarda.
-   * @return JamesBond con el estado en el que se guardo.
+   * @return boolean true si se cargo exitosamente el juego, false en caso contrario.
    */
   public boolean deserializarJuego(JuegoMarda juego);
 
@@ -31,7 +31,7 @@ public interface ConstructorDeserializadorAbstracto {
    * @param jugador un objecto json que representa al Jugador.
    * @return Jugador con el estado en el que se guardo.
    */
-  public Jugador deserializarJugador(JsonObject jugador);
+  public JugadorMarda deserializarJugador(JsonObject jugador);
 
   /**
    * @brief Método deserializador. Se encarga de cargar los valores de una pila, restaurando el estado en el que se guardo.
