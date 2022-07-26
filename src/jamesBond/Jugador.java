@@ -1,7 +1,4 @@
 package jamesBond;
-
-import java.util.Vector;
-
 import marda.Carta;
 import marda.GrupoDeCartasMarda;
 import marda.JugadorMarda;
@@ -13,13 +10,14 @@ import marda.JugadorMarda;
  */
 public class Jugador extends JugadorMarda {
   private int pilaActiva;  // indica la posición en el vector de la pila que se encuentra activa (la que el jugador posee en mano)
+  private final int maxPilas = 6;  // cantidad máxima de pilas por jugador (pensado para versiones futuras del juego)
 
   /**
    * @brief Constructor. Inicializa atributos de la clase
    * @param nombre string que representa el nombre del jugador
    * @param maxPilas cantidad de pilas que puede poseer un jugador.
    */
-  public Jugador(final String nombre, final int maxPilas) {
+  public Jugador(final String nombre) {
     super();
     super.nombre = nombre;
     this.pilaActiva = 0;
@@ -30,13 +28,6 @@ public class Jugador extends JugadorMarda {
    */
   public Jugador() {
     this("Player");
-  }
-
-  /**
-   * @brief Constructor por omision. Inicializa atributos de la clase
-   */
-  public Jugador(String nombre) {
-    this(nombre, 6);
   }
 
   /**
@@ -104,5 +95,13 @@ public class Jugador extends JugadorMarda {
    */
   public int getIndexPilaActiva() {
     return this.pilaActiva;
+  }
+
+  /**
+   * Método get que devuelve el atributo de la clase
+   * @return int que representa la cantidad máxima de pilas que puede tener el jugador
+   */
+  public int getMaxPilas(){
+    return this.maxPilas;
   }
 }
