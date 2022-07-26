@@ -33,10 +33,9 @@ public interface ConstructorSerializadorAbstracto {
 
   /* SERIALIZADORES */
   
-  // TODO: Corregir documentacion
   /**
-   * @brief Método serializador. Se encarga de extraer los atributos del objeto Tablero y representarlos debidamente en un objeto json.
-   * @param Tablero Objeto Tablero del que se extraerán sus atributos para guardarlos en el objeto json.
+   * @brief Método serializador. Se encarga de extraer los atributos del objeto JuegoMarda y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
+   * @param Tablero Objeto JuegoMarda del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
   public void serializarJuego(JuegoMarda juego);
 

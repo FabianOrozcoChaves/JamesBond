@@ -215,16 +215,6 @@ public class JamesBond extends marda.JuegoMarda{
     return (Jugador) this.turnoActual;
   }
   
-    // TODO ver qué hacer con estos métodos.
-  
-    // /**
-    //  * @brief Genera las cartas del mazo y las reparte se utiliza para los unit test.
-    //  */
-    // public void repartirCartasSinBarajar(){
-    //   mazo.generaCartasSinFX();
-    //   repartir();
-    // }
-  
     /**
      * @brief Método encargado de inicializar el estado del juego en el punto donde se guardo
      * @param jugador1 Jugador que representa al jugador 1
