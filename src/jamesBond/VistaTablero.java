@@ -629,7 +629,7 @@ public class VistaTablero extends VistaTableroMarda {
    */
    public void cambiarPilaActiva(Jugador jugador, int index) {
     jugador.cambiarPila(index);
-    Pila pilaActiva = jugador.pilaActiva();
+    Pila pilaActiva = jugador.getPilaActiva();
     
     for (int indexCarta = 0; indexCarta < vistaPilaActiva.length; indexCarta++) {
       vistaPilaActiva[indexCarta].getImageView().setImage(pilaActiva.getCarta(indexCarta).getImagen());
@@ -642,7 +642,7 @@ public class VistaTablero extends VistaTableroMarda {
    * @param posJugador La posicion de la carta del jugador
    */
   public void intercambiarCarta(int posTablero, int posJugador) {
-    Pila pilaActiva =  gameJB.getTurnoActual().pilaActiva();
+    Pila pilaActiva =  gameJB.getTurnoActual().getPilaActiva();
     Carta auxPila = pilaActiva.getCarta(posJugador);
     Carta auxComunes = gameJB.getTablero().getCarta(posTablero);
 
