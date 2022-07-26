@@ -2,15 +2,17 @@ package jamesBond;
 
 import java.util.Vector;
 
+import marda.Carta;
+import marda.GrupoDeCartasMarda;
+import marda.JugadorMarda;
+
 /**
  * Clase Jugador.
  * Representa una persona que juega James Bond.
  * Puede realizar acciones válidas expuestas en el diseño del juego.
  */
-public class Jugador {
-  private String nombre;
+public class Jugador extends JugadorMarda {
   private int maxPilas;  // cantidad máxima de pilas por jugador (pensado para versiones futuras del juego)
-  private Vector<Pila> pilas;
   private int pilaActiva;  // indica la posición en el vector de la pila que se encuentra activa (la que el jugador posee en mano)
 
   /**
@@ -21,7 +23,7 @@ public class Jugador {
   public Jugador(final String nombre, final int maxPilas) {
     this.nombre = nombre;
     this.maxPilas = maxPilas;
-    this.pilas = new Vector<Pila>();
+    this.gruposDeCartas = new Vector<GrupoDeCartasMarda>();
     this.pilaActiva = 0;
   }
 
@@ -118,7 +120,7 @@ public class Jugador {
    * Método que agrega una Pila al vector de pilas del jugador
    * @param pila que representa la pila que se quiere agregar a las pilas del jugador
    */
-  public void agregarPila(Pila pila){
+  public void agregarPila(GrupoDeCartasMarda pila){
     this.pilas.add(pila);
   }
 

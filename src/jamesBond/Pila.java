@@ -2,6 +2,8 @@ package jamesBond;
 
 import java.util.Vector;
 
+import marda.Carta;
+
 /**
  * Clase Pila.
  * Representa una cantidad de cartas que posee un jugador.

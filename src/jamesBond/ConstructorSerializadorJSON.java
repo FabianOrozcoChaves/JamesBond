@@ -3,6 +3,8 @@ package jamesBond;
 import java.io.FileWriter;
 import java.util.Vector;
 
+import marda.Carta;
+
 public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstracto {
     
   private String serializacion;

@@ -1,5 +1,7 @@
 package jamesBond;
 
+import marda.Carta;
+
 /**
  * Interface ConstructorSerializadorAbstracto
  * Esta interfaz permite implementar un patrón de diseño creacional: Patrón Constructor.

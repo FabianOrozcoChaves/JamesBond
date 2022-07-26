@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import marda.Carta;
+
 public class ConstructorDeserializadorJSON implements ConstructorDeserializadorAbstracto{
   boolean test = false;
 

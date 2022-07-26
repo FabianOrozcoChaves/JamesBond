@@ -2,32 +2,24 @@ package jamesBond;
 
 import java.util.Vector;
 
+import marda.Carta;
+import marda.ContenedorDeCartasMarda;
+import marda.GrupoDeCartasMarda;
+
 /**
  * Clase Tablero.
  * Representa la mesa donde donde se va juegar James Bond.
  * Contiene las cartas comunes
  */
-public class Tablero {
-  private static Tablero tablero;
+public class Tablero extends ContenedorDeCartasMarda {
   private Vector<Carta> cartasComunes;
 
   /**
-   * @brief Constructor privado de la clase.
+   * @brief Constructor de la clase.
    */
-  private Tablero() {
+  public Tablero() {
     cartasComunes = new Vector<Carta>();
   }
-
-  /**
-   * @brief Se usa para poder instanciar la clase ya que es un singletoon
-   * @return la unica instancia de la clase.
-   */
-  public static Tablero getInstance() {
-	if(tablero == null){
-	  tablero =  new Tablero();
-	}
-	return tablero;
-   }
 
   /**
    * @brief elimina una de las cartas comunes del tablero

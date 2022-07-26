@@ -3,6 +3,8 @@ package jamesBond;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import marda.Carta;
+
 /**
  * Interface ConstructorDeserializadorAbstracto
  * Esta interfaz permite implementar un patrón de diseño creacional: Patrón Constructor.
