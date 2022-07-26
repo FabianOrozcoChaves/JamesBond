@@ -21,6 +21,7 @@ import marda.Carta;
 import marda.VistaCarta;
 import marda.VistaTableroMarda;
 import marda.GrupoDeCartasMarda;
+import marda.JugadorMarda;
 
 /**
  * Clase gráfica del tablero.
@@ -234,8 +235,8 @@ public class VistaTablero extends VistaTableroMarda {
     this.ganarJugador1 = new Button("James Bond!");
     this.ganarJugador1.setOnAction(e -> {
       System.out.println("Jugador 1 gritó james bond");
-      Boolean ganador = this.gameJB.revisarPilas(this.gameJB.getJugador(1));
-      if (ganador == true) {
+      JugadorMarda ganador = this.gameJB.decidirGanador();
+      if (ganador == this.gameJB.getJugador(1)) {
         VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(1).getNombre());
         this.ventanaPrincipal.setScene(menuInicio_scene);
         this.destruirTablero();
@@ -247,8 +248,8 @@ public class VistaTablero extends VistaTableroMarda {
     this.ganarJugador2 = new Button("James Bond!");
     this.ganarJugador2.setOnAction(e -> {
       System.out.println("Jugador 2 gritó james bond");
-      Boolean ganador = this.gameJB.revisarPilas(this.gameJB.getJugador(2));
-      if (ganador == true) {
+      JugadorMarda ganador = this.gameJB.decidirGanador();
+      if (ganador == this.gameJB.getJugador(2)) {
         VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(2).getNombre());
         this.ventanaPrincipal.setScene(menuInicio_scene);
         this.destruirTablero();
@@ -466,7 +467,7 @@ public class VistaTablero extends VistaTableroMarda {
           Scene menuInicioSceneCopy = this.menuInicio_scene;
           JamesBond nuevoJB = new JamesBond();
           String mensaje = "No existe una partida guardada previamente.";
-          if (nuevoJB.cargar(new ConstructorDeserializadorJSON(), this.gameJB)) {
+          if (nuevoJB.cargar(new ConstructorDeserializadorJSON(), nuevoJB)) {
             this.destruirTablero();
             this.construirJuego(nuevoJB.getTurnoActual().getNombre(), nuevoJB.getJugador(1).getNombre(), nuevoJB.getJugador(2).getNombre(), mainStageCopy, menuInicioSceneCopy, nuevoJB.getTemporizador(), nuevoJB);
             this.run();
