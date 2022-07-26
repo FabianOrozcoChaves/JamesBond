@@ -38,7 +38,7 @@ public class Tablero extends ContenedorDeCartasMarda {
    * @return pila que representa la que el jugador tiene en mano actualmente.
    */
   public void agregarCarta(Carta carta) {
-	  this.getGrupoDeCartas(0).agregarCarta(carta);
+	  super.getGrupoDeCartas(0).agregarCarta(carta);
   }
 
   /**
@@ -47,7 +47,7 @@ public class Tablero extends ContenedorDeCartasMarda {
    * @return la carta que se encuentra en ese posicion
    */
   public Carta getCarta(int posicion) {
-	  return this.getGrupoDeCartas(0).getCarta(posicion);
+	  return super.getGrupoDeCartas(0).getCarta(posicion);
   }
 
   //
