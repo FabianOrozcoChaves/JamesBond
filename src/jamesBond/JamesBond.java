@@ -226,21 +226,21 @@ public class JamesBond extends marda.JuegoMarda{
     //   repartir();
     // }
   
-    // /**
-    //  * @brief Método encargado de inicializar el estado del juego en el punto donde se guardo
-    //  * @param jugador1 Jugador que representa al jugador 1
-    //  * @param jugador2 Jugador que representa al jugador 2
-    //  * @param turnoInicial Jugador que tiene el turno actual
-    //  * @param temporizador int que representa la duracion de los turnos
-    //  * @param tablero Tablero que muestra
-    //  */
-    // public void cargarEstado(Jugador jugador1, Jugador jugador2, Jugador turnoActual, int temporizador, Tablero tablero) {
-    //   this.jugador1 = jugador1;
-    //   this.jugador2 = jugador2;
-    //   this.turnoActual = turnoActual;
-    //   this.temporizador = temporizador;
-    //   this.tablero = tablero;
-    // }
+    /**
+     * @brief Método encargado de inicializar el estado del juego en el punto donde se guardo
+     * @param jugador1 Jugador que representa al jugador 1
+     * @param jugador2 Jugador que representa al jugador 2
+     * @param turnoInicial Jugador que tiene el turno actual
+     * @param temporizador int que representa la duracion de los turnos
+     * @param tablero Tablero que muestra
+     */
+    public void cargarEstado(Jugador jugador1, Jugador jugador2, Jugador turnoActual, int temporizador, Tablero tablero) {
+      this.jugador1 = jugador1;
+      this.jugador2 = jugador2;
+      this.turnoActual = turnoActual;
+      this.temporizador = temporizador;
+      this.tablero = tablero;
+    }
   
     // /**
     //  * @brief Método que devuelve la cantidad de cartas restantes en el mazo
