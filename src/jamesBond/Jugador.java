@@ -12,7 +12,6 @@ import marda.JugadorMarda;
  * Puede realizar acciones válidas expuestas en el diseño del juego.
  */
 public class Jugador extends JugadorMarda {
-  private int maxPilas;  // cantidad máxima de pilas por jugador (pensado para versiones futuras del juego)
   private int pilaActiva;  // indica la posición en el vector de la pila que se encuentra activa (la que el jugador posee en mano)
 
   /**
@@ -21,9 +20,8 @@ public class Jugador extends JugadorMarda {
    * @param maxPilas cantidad de pilas que puede poseer un jugador.
    */
   public Jugador(final String nombre, final int maxPilas) {
-    this.nombre = nombre;
-    this.maxPilas = maxPilas;
-    this.gruposDeCartas = new Vector<GrupoDeCartasMarda>();
+    super();
+    super.nombre = nombre;
     this.pilaActiva = 0;
   }
 
@@ -31,7 +29,7 @@ public class Jugador extends JugadorMarda {
    * @brief Constructor por omision. Inicializa atributos de la clase
    */
   public Jugador() {
-    this("Player", 6);
+    this("Player");
   }
 
   /**
@@ -50,30 +48,11 @@ public class Jugador extends JugadorMarda {
   }
 
   /**
-   * @brief Método que muestra (retorna al GUI) la pila activa.
-   * @return null en caso de que las pila esté vacía, la Pila activa en caso contrario.
-   */
-  public Pila mostrarPila() {
-    // Verifica si la pila no está vacía.
-    return this.pilas.elementAt(this.pilaActiva).isEmpty() == false ? 
-    this.pilas.elementAt(this.pilaActiva) : null;
-  }
-
-  /**
    * Metodo de visualizacion
    * @return pila que representa la que el jugador tiene en mano actualmente.
    */
-  public Pila pilaActiva(){
-    return this.pilas.elementAt(this.pilaActiva);
-  }
-
-  /**
-   * @brief Método que esconde (retorna al GUI) la pila activa.
-   * @return null en caso de que las pila esté vacía, la Pila activa en caso contrario.
-   */
-  public Pila esconderPila() {
-    // Verifica si la pila no está vacía.
-    return this.pilaActiva().isEmpty() ? null : pilaActiva();
+  public GrupoDeCartasMarda getPilaActiva(){
+    return this.getGrupoDeCartas(this.pilaActiva);
   }
 
   /**
@@ -83,8 +62,7 @@ public class Jugador extends JugadorMarda {
    * @return Carta que representa la carta que fue sacada de la mesa
    */
   public Carta intercambiarCarta(Carta cartaEntrante, int posicionSaliente) {
-    Carta cartaSaliente = pilaActiva().cambiarCarta(posicionSaliente, cartaEntrante);
-    return cartaSaliente;
+    return getPilaActiva().cambiarCarta(posicionSaliente, cartaEntrante);
   }
 
   /**
@@ -94,26 +72,13 @@ public class Jugador extends JugadorMarda {
    */
   public boolean pilasIguales() {
     boolean pilasIguales = true;
-    for (int pila = 0; pila < maxPilas && pilasIguales; pila++) {
-      pilasIguales = pilas.elementAt(pila).cartasIguales();
+    for (int pila = 0; pila < super.size() && pilasIguales; pila++) {
+      GrupoDeCartasMarda pilaActual = super.getGrupoDeCartas(pila);
+      for (int carta = 0; carta < pilaActual.getCartas().size() && pilasIguales; ++carta) {
+        pilasIguales = pilaActual.getCarta(0).getNumero() == pilaActual.getCarta(carta).getNumero();
+      }
     }
     return pilasIguales;
-  }
-
-  /**
-   * Método get que devuelve el atributo de la clase
-   * @return String que representa el nombre del jugador
-   */
-  public String getNombre(){
-    return this.nombre;
-  }
-
-  /**
-   * Método get que devuelve el atributo de la clase
-   * @return int que representa la cantidad máxima de pilas que puede tener el jugador
-   */
-  public int getMaxPilas(){
-    return this.maxPilas;
   }
 
   /**
@@ -121,15 +86,7 @@ public class Jugador extends JugadorMarda {
    * @param pila que representa la pila que se quiere agregar a las pilas del jugador
    */
   public void agregarPila(GrupoDeCartasMarda pila){
-    this.pilas.add(pila);
-  }
-
-  /**
-   * Método set que asigna el nombre al jugador.
-   * @param nombre string que representa el nombre que se le asignará al jugador
-   */
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
+    super.agregarGrupoDeCartas(pila);
   }
 
   /**
@@ -137,8 +94,8 @@ public class Jugador extends JugadorMarda {
    * @param posicion int que representa la posición de la pila en el arreglo.
    * @return Pila que se quiere acceder.
    */
-  public Pila getPila(int posicion){
-    return pilas.get(posicion);
+  public GrupoDeCartasMarda getPila(int posicion){
+    return super.getGrupoDeCartas(posicion);
   }
 
   /**
