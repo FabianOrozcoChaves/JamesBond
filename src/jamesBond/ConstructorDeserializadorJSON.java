@@ -43,13 +43,12 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * @param objetoJson un objecto Json que contiene el estado en el cual se guardo el juego.
    */
   public void deserializar(JuegoMarda juego, JsonObject objetoJson){
-    JamesBond jamesBond = new JamesBond();
     Tablero tablero = deserializarTablero(objetoJson.get("Tablero").getAsJsonArray());
     Jugador jugador2 = (Jugador)deserializarJugador(objetoJson.get("Jugador2").getAsJsonObject());
     Jugador jugador1 = (Jugador)deserializarJugador(objetoJson.get("Jugador1").getAsJsonObject());
     Jugador turnoActual = jugador1.getNombre().equals(objetoJson.get("turnoActual").getAsString()) ? jugador1 : jugador2;
     int temporizador = objetoJson.get("temporizador").getAsInt();
-    jamesBond.cargarEstado(jugador1, jugador2, turnoActual, temporizador, tablero);
+    ((JamesBond) juego).cargarEstado(jugador1, jugador2, turnoActual, temporizador, tablero);
   }
 
   /**
