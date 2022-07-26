@@ -1,7 +1,6 @@
-package MARDA;
+package marda;
 
 import javafx.scene.layout.Pane;
-import jamesBond.VistaCarta;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -21,11 +20,7 @@ public class VistaTableroMarda {
   private HBox seccionSur;
   private Scene tableroEscena;
 
-  VistaTableroMarda() {
-    this.init();
-  }
-
-  private void construirTablero(Stage ventanaPrincipal) {
+  public void construirTableroMarda(Stage ventanaPrincipal) {
     this.estructura.setTop(this.seccionNorte);
     this.estructura.setLeft(this.seccionOeste);
     this.estructura.setRight(this.seccionEste);
@@ -65,7 +60,7 @@ public class VistaTableroMarda {
 
   public void init() {
     this.anchoVentana = 1000;
-    this.alturaVentana = 600;
+    this.alturaVentana = 650;
     this.estructura = new BorderPane();
     this.seccionEste = new VBox();
     this.seccionOeste = new VBox();
@@ -75,7 +70,7 @@ public class VistaTableroMarda {
   }
 
 
-  public void destruirTablero() {
+  public void destruirTableroMarda() {
     this.anchoVentana = 0;
     this.alturaVentana = 0;
     this.estructura = null;
@@ -86,4 +81,15 @@ public class VistaTableroMarda {
     this.seccionSur = null;
   }
 
+  public int getAnchoVentana() {
+    return this.anchoVentana;
+  }
+
+  public int getAlturaVentana() {
+    return this.alturaVentana;
+  }
+
+  public BorderPane getEstructura() {
+    return this.estructura;
+  }
 }
