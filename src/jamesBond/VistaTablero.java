@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import marda.Carta;
 import marda.VistaCarta;
 import marda.VistaTableroMarda;
+import marda.GrupoDeCartasMarda;
 
 /**
  * Clase gráfica del tablero.
@@ -456,7 +457,7 @@ public class VistaTablero extends VistaTableroMarda {
       switch (opcionIngresada) {
         case 1:
           // caso de guardar
-          this.gameJB.guardar(new ConstructorSerializadorJSON());
+          this.gameJB.guardar(new ConstructorSerializadorJSON(), this.gameJB);
           VentanaPopUp.mostrar("Guardar juego", "El juego se ha guardado correctamente.");
           break;
         case 2:
@@ -466,9 +467,9 @@ public class VistaTablero extends VistaTableroMarda {
           Scene menuInicioSceneCopy = this.menuInicio_scene;
           JamesBond nuevoJB = new JamesBond();
           String mensaje = "No existe una partida guardada previamente.";
-          if (nuevoJB.cargar(new ConstructorDeserializadorJSON())) {
+          if (nuevoJB.cargar(new ConstructorDeserializadorJSON(), this.gameJB)) {
             this.destruirTablero();
-            construirJuego(nuevoJB.getTurnoActual().getNombre(), nuevoJB.getJugador(1).getNombre(), nuevoJB.getJugador(2).getNombre(), mainStageCopy, menuInicioSceneCopy, nuevoJB.getTemporizador(), nuevoJB);
+            this.construirJuego(nuevoJB.getTurnoActual().getNombre(), nuevoJB.getJugador(1).getNombre(), nuevoJB.getJugador(2).getNombre(), mainStageCopy, menuInicioSceneCopy, nuevoJB.getTemporizador(), nuevoJB);
             this.run();
             mensaje = "El juego se ha cargado correctamente.";
           }
@@ -527,7 +528,7 @@ public class VistaTablero extends VistaTableroMarda {
    * @param jugador jugador del juego que posee una pila activa cuando es su turno.
    */
   public void inicializarPilaActiva(Jugador jugador) {
-    Pila pilaActiva = jugador.pilaActiva();
+    GrupoDeCartasMarda pilaActiva = jugador.getPilaActiva();
     // asigna el hbox y vbox de la pila activa
     this.pilaActiva_hbx.setAlignment(Pos.BOTTOM_CENTER);
     this.pilaActiva_vbx.getChildren().addAll(this.pilaActiva_txt, pilaActiva_hbx);
@@ -629,7 +630,7 @@ public class VistaTablero extends VistaTableroMarda {
    */
    public void cambiarPilaActiva(Jugador jugador, int index) {
     jugador.cambiarPila(index);
-    Pila pilaActiva = jugador.getPilaActiva();
+    GrupoDeCartasMarda pilaActiva = jugador.getPilaActiva();
     
     for (int indexCarta = 0; indexCarta < vistaPilaActiva.length; indexCarta++) {
       vistaPilaActiva[indexCarta].getImageView().setImage(pilaActiva.getCarta(indexCarta).getImagen());
@@ -642,7 +643,7 @@ public class VistaTablero extends VistaTableroMarda {
    * @param posJugador La posicion de la carta del jugador
    */
   public void intercambiarCarta(int posTablero, int posJugador) {
-    Pila pilaActiva =  gameJB.getTurnoActual().getPilaActiva();
+    GrupoDeCartasMarda pilaActiva =  gameJB.getTurnoActual().getPilaActiva();
     Carta auxPila = pilaActiva.getCarta(posJugador);
     Carta auxComunes = gameJB.getTablero().getCarta(posTablero);
 
