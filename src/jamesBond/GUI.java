@@ -85,7 +85,7 @@ public class GUI extends Application {
     botonesMenu[cargar].setOnAction(e ->{
       System.out.println("Cargar");
       JamesBond nuevoJB = new JamesBond();
-      if (nuevoJB.cargar(new ConstructorDeserializadorJSON())) {
+      if (nuevoJB.cargar(new ConstructorDeserializadorJSON(), nuevoJB)) {
         this.tablero.construirJuego(this.menuInicio.getTurnoInicial(), this.menuInicio.getJugadorJ1(), this.menuInicio.getJugadorJ2(), this.mainStage, this.menuIncio_scene, this.menuInicio.getTemporizador(), nuevoJB);
         this.tablero.run();
       } else {
