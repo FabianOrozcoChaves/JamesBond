@@ -2,7 +2,7 @@ package test;
 
 import jamesBond.JamesBond;
 import jamesBond.Jugador;
-import jamesBond.Carta;
+import marda.Carta;
 import jamesBond.ConstructorDeserializadorJSON;
 
 import org.junit.Assert;

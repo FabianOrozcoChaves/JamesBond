@@ -1,7 +1,7 @@
 package test;
 
-import jamesBond.Carta;
 import jamesBond.Pila;
+import marda.Carta;
 
 import org.junit.Assert;
 import org.junit.Before;

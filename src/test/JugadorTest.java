@@ -1,8 +1,8 @@
 package test;
 
-import jamesBond.Carta;
 import jamesBond.Jugador;
 import jamesBond.Pila;
+import marda.Carta;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,10 +1,10 @@
 package test;
 
-import jamesBond.Carta;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import marda.Carta;
 
 public class CartaTest {
   Carta carta1;

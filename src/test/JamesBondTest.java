@@ -3,7 +3,7 @@ package test;
 import jamesBond.JamesBond;
 import jamesBond.Jugador;
 import jamesBond.Pila;
-import jamesBond.Carta;
+import marda.Carta;
 
 import org.junit.Assert;
 import org.junit.Test;
