@@ -1,9 +1,6 @@
 package marda;
-
-import marda.Carta;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import marda.Carta;
 
 /**
  * Clase que representa la vista de una carta.
