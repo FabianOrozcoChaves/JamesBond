@@ -112,8 +112,6 @@ public class JamesBond extends marda.JuegoMarda{
    * @brief Reparte las cartas del mazo, 24 a cada jugador y 4 al tablero.
    */
   private void repartir(){
-    int contadorMazo = 0;
-    int contadorPila = 0;
     for (int i = 0; i < 6; i++) {
       GrupoDeCartasMarda pilaJugador1 = new GrupoDeCartasMarda(4);
       GrupoDeCartasMarda pilaJugador2 = new GrupoDeCartasMarda(4);
@@ -130,32 +128,25 @@ public class JamesBond extends marda.JuegoMarda{
     }
   }
 
-  // /**
-  //  * @brief Genera las cartas del mazo y las reparte se utiliza para los unit test.
-  //  */
-  // public void repartirCartasSinBarajar(){
-  //   mazo.generaCartasSinFX();
-  //   repartir();
-  // }
-
-  //  /**
-  //  * @brief Método que intercambia las cartas entre el tablero y el jugador
-  //  * @param posTablero la posicion de la carta en el tablero 
-  //  * @param posJugador La posicion de la carta del jugador
-  //  */
-  // public void intercambiarCarta(int posTablero, int posJugador) {
-  //   Carta cartaJugador = tablero.getCarta(posTablero);
-  //   Carta cartaTablero;
-
-  //   if (turnoActual.equals(jugador1))
-  //     cartaTablero = jugador1.intercambiarCarta(cartaJugador, posJugador);
-  //   else
-  //     cartaTablero = jugador2.intercambiarCarta(cartaJugador, posJugador);
-
-  //   tablero.cambiarCarta(posTablero, cartaTablero);
-  // }
-
    /**
+   * @brief Método que intercambia las cartas entre el tablero y el jugador
+   * @param posTablero la posicion de la carta en el tablero 
+   * @param posJugador La posicion de la carta del jugador
+   */
+  public void intercambiarCarta(int posTablero, int posJugador) {
+    // TODO revisar si es en la posición 0 del grupo de cartas (creo que es mazo)
+    Carta cartaJugador = tablero.getGrupoDeCartas(0).getCarta(posTablero);
+    Carta cartaTablero;
+
+    if (turnoActual.equals(jugador1))
+      cartaTablero = ((Jugador) jugador1).intercambiarCarta(cartaJugador, posJugador);
+    else
+      cartaTablero = ((Jugador) jugador2).intercambiarCarta(cartaJugador, posJugador);
+  
+    ((Tablero) tablero).cambiarCarta(posTablero, cartaTablero);
+  }
+  
+  /**
    * @brief Método encargado de inicializar los turnos y asignar los nombres a los jugadores
    * @param nombreJugador1 El nombre para el jugador 1 
    * @param nombreJugador2 El nombre para el jugador 2
@@ -168,23 +159,6 @@ public class JamesBond extends marda.JuegoMarda{
 
     asignarTurnoInicial(jugadorInicial);
   }
-
-  // /**
-  //  * @brief Método encargado de inicializar el estado del juego en el punto donde se guardo
-  //  * @param jugador1 Jugador que representa al jugador 1
-  //  * @param jugador2 Jugador que representa al jugador 2
-  //  * @param turnoInicial Jugador que tiene el turno actual
-  //  * @param temporizador int que representa la duracion de los turnos
-  //  * @param tablero Tablero que muestra
-  //  */
-  // public void cargarEstado(Jugador jugador1, Jugador jugador2, Jugador turnoActual, int temporizador, Tablero tablero) {
-  //   this.jugador1 = jugador1;
-  //   this.jugador2 = jugador2;
-  //   this.turnoActual = turnoActual;
-  //   this.temporizador = temporizador;
-  //   this.tablero = tablero;
-  // }
-
   /**
    * @brief Método que elige el primer turno al azar
    */
@@ -201,69 +175,79 @@ public class JamesBond extends marda.JuegoMarda{
     return jugador.pilasIguales();
   }
 
-  // /**
-  //  * @brief Método que asigna el tiempo de duración de cada turno
-  //  */
-  // public void setTemporizador(int tiempo) {
-  //   temporizador = tiempo;
-  // }
+  /**
+   * @brief Método que asigna el tiempo de duración de cada turno
+   */
+  public void setTemporizador(int segundos) {
+    temporizador = segundos;
+  }
 
-  // /**
-  //  * @brief Método que devuelve el tiempo de duración de cada turno
-  //  * @return int del tiempo en segundos
-  //  */
-  // public int getTemporizador() {
-  //   return temporizador;
-  // }
+  /**
+   * @brief Método que devuelve el tiempo de duración de cada turno
+   * @return int del tiempo en segundos
+   */
+  public int getTemporizador() {
+    return temporizador;
+  }
 
-  // /**
-  //  * @brief Método que devuelve la cantidad de cartas restantes en el mazo
-  //  * @return int cartas restantes en el mazo
-  //  */
-  // public int getCartasRestantesMazo() {
-  //   return mazo.getCartasRestantes();
-  // }
 
-  //  /**
-  //  * @brief Método que devuelve un jugador
-  //  * @param numJugador el numero de jugador
-  //  * @return objeto Jugador del jugador solicitado
-  //  */
-  // public Jugador getJugador(int numJugador) {
-  //   return numJugador == 1 ? jugador1 : jugador2;
-  // }
+   /**
+   * @brief Método que devuelve un jugador
+   * @param numJugador el numero de jugador
+   * @return objeto Jugador del jugador solicitado
+   */
+  public Jugador getJugador(int numJugador) {
+    return numJugador == 1 ? (Jugador) jugador1 : (Jugador) jugador2;
+  }
 
-  // /**
-  //  * @brief Método que devuelve el tablero
-  //  * @return objeto Tablero del tablero creado para la partida
-  //  */
-  // public Tablero getTablero() {
-  //   return tablero;
-  // }
+  /**
+   * @brief Método que devuelve el tablero
+   * @return objeto Tablero del tablero creado para la partida
+   */
+  public Tablero getTablero() {
+    return (Tablero) this.tablero;
+  }
 
-  // /**
-  //  * @brief Método que devuelve el jugador el cual tiene el turno actual
-  //  * @return objeto Jugador del jugador con el turno actual
-  //  */
-  // public Jugador getTurnoActual() {
-  //   return this.turnoActual;
-  // }
-
-  // /**
-  //  * Método que guarda el estado del juego en un archivo.
-  //  * @param constructor Constructor que serializa (guarda) el jamesBond.
-  //  */
-  // public void guardar(ConstructorSerializadorAbstracto constructor) {
-  //   constructor.serializarJamesBond(this);
-  //   constructor.guardarSerializacion();
-  // }
-
-  // /**
-  //  * @brief Método que carga el estado del juego desde un archivo guardado anteriormente.
-  //  * @param constructor Constructor que deserializa (carga) el jamesBond por referencia.
-  //  */
-  // public boolean cargar(ConstructorDeserializadorAbstracto constructor) {
-  //   // Cambia la instancia por referencia
-  //   return constructor.deserializarJamesBond(this);
-  // }
+  /**
+   * @brief Método que devuelve el jugador el cual tiene el turno actual
+   * @return objeto Jugador del jugador con el turno actual
+   */
+  public Jugador getTurnoActual() {
+    return (Jugador) this.turnoActual;
+  }
+  
+    // TODO ver qué hacer con estos métodos.
+  
+    // /**
+    //  * @brief Genera las cartas del mazo y las reparte se utiliza para los unit test.
+    //  */
+    // public void repartirCartasSinBarajar(){
+    //   mazo.generaCartasSinFX();
+    //   repartir();
+    // }
+  
+    // /**
+    //  * @brief Método encargado de inicializar el estado del juego en el punto donde se guardo
+    //  * @param jugador1 Jugador que representa al jugador 1
+    //  * @param jugador2 Jugador que representa al jugador 2
+    //  * @param turnoInicial Jugador que tiene el turno actual
+    //  * @param temporizador int que representa la duracion de los turnos
+    //  * @param tablero Tablero que muestra
+    //  */
+    // public void cargarEstado(Jugador jugador1, Jugador jugador2, Jugador turnoActual, int temporizador, Tablero tablero) {
+    //   this.jugador1 = jugador1;
+    //   this.jugador2 = jugador2;
+    //   this.turnoActual = turnoActual;
+    //   this.temporizador = temporizador;
+    //   this.tablero = tablero;
+    // }
+  
+    // /**
+    //  * @brief Método que devuelve la cantidad de cartas restantes en el mazo
+    //  * @return int cartas restantes en el mazo
+    //  */
+    // public int getCartasRestantesMazo() {
+      //   return this.mazo.getCartasRestantes();
+    // }
+    
 }
