@@ -48,4 +48,11 @@ public abstract class JuegoMarda implements IArbitroMarda {
   public boolean cargar (ConstructorDeserializadorAbstracto constructor, JuegoMarda juego) {
     return constructor.deserializarJuego(juego);
   }
+
+  public JugadorMarda getJugadorMarda(int jugador) {
+    if (jugador == 1) {
+      return this.jugador1;
+    }
+    return  this.jugador2;
+  }
 }
