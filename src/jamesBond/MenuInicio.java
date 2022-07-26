@@ -7,7 +7,7 @@ package jamesBond;
 public class MenuInicio {
   private String jugador1 = "Jugador 1";
   private String jugador2 = "Jugador 2";
-  private int turnoInicial = 3;
+  private String turnoInicial = "random";
   private String nombreJuego = "James Bond";
   private int temporizador = 15;
   /**
@@ -89,7 +89,7 @@ public class MenuInicio {
    * @brief Metodo para acceder al nombre del jugador que tiene el turno inicial.
    * @return un string con el nombre del jugador que inicia el juego.
    */
-  public int getTurnoInicial() {
+  public String getTurnoInicial() {
     return turnoInicial;
   }
 
@@ -106,7 +106,7 @@ public class MenuInicio {
    * @deatils modifica el artributo del menu this.turnoInicial
    * @param jugadorInicial string cone l niombre del jugador con el primer turno
    */
-  public void asignarTurnoInicial(int jugadorInicial) {
+  public void asignarTurnoInicial(String jugadorInicial) {
     this.turnoInicial = jugadorInicial;
   }
 

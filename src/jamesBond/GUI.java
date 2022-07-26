@@ -170,7 +170,7 @@ public class GUI extends Application {
       // si ningun checbox es seleccionado se escoge el random
       if (!checkJugador1.isSelected() && !checkJugador2.isSelected()) {
         checkRandom.setSelected(true);
-        this.menuInicio.asignarTurnoInicial(3);
+        this.menuInicio.asignarTurnoInicial("random");
         System.out.println("El turno inicial es aleatorio");
 
         // el checkbox del otro jugador esta seleccionado y se selecciona el actual, se deselecciona el del otro jugador
@@ -181,7 +181,7 @@ public class GUI extends Application {
 
       // si el actual fue seleccionado asignamos en la instacia del menu de incio el turno inicial.
       if (checkJugador1.isSelected()) {
-        this.menuInicio.asignarTurnoInicial(1);
+        this.menuInicio.asignarTurnoInicial(this.menuInicio.getJugadorJ1());
         System.out.println("El turno inicial lo tiene " + this.menuInicio.getTurnoInicial());
       }
     });
@@ -191,7 +191,7 @@ public class GUI extends Application {
 
       if (!checkJugador1.isSelected() && !checkJugador2.isSelected()) {
         checkRandom.setSelected(true);
-        this.menuInicio.asignarTurnoInicial(3);
+        this.menuInicio.asignarTurnoInicial("random");
         System.out.println("El turno inicial es aleatorio");
         // el checkbox del otro jugador esta seleccionado y se selecciona el actual, se deselecciona el del otro jugador
       } else if (checkJugador1.isSelected() || checkRandom.isSelected()) {
@@ -201,7 +201,7 @@ public class GUI extends Application {
 
       // si el actual fue seleccionado asignamos en la instacia del menu de incio el turno inicial.
       if (checkJugador2.isSelected()) {
-        this.menuInicio.asignarTurnoInicial(2);
+        this.menuInicio.asignarTurnoInicial(this.menuInicio.getJugadorJ2());
         System.out.println("El turno inicial lo tiene " + this.menuInicio.getTurnoInicial());
       }
     });
@@ -214,7 +214,7 @@ public class GUI extends Application {
       }
 
       // se asigna en el menu de inicio que el turno es aleatorio
-      this.menuInicio.asignarTurnoInicial(3);
+      this.menuInicio.asignarTurnoInicial("random");
       System.out.println("El turno inicial es aleatorio");
       checkRandom.setSelected(true);
     });

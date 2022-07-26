@@ -82,7 +82,7 @@ public class VistaTablero extends VistaTableroMarda {
     this.init();
   }
 
-  private void init(int temporizador, JamesBond controlador, int turnoInicial, String nombreJ1, String nombreJ2) {
+  private void init(int temporizador, JamesBond controlador, String turnoInicial, String nombreJ1, String nombreJ2) {
     super.init();
     this.getEstructura().setBackground(new Background(new BackgroundFill(Color.web("#008000"), new CornerRadii(0), Insets.EMPTY)));;
     this.vistaComunes = new VistaCarta[4];     // Vista de las cartas comunes
@@ -140,7 +140,7 @@ public class VistaTablero extends VistaTableroMarda {
    * @param ventanaPrincipal Ventana principal del GUI
    * @param menuInicio Escena principal del menú de inicio del GUI
    */
-  public void construirJuego(int turnoInicial, String nombreJ1, String nombreJ2, Stage ventanaPrincipal, Scene menuInicio, int temporizador, JamesBond controlador) {
+  public void construirJuego(String turnoInicial, String nombreJ1, String nombreJ2, Stage ventanaPrincipal, Scene menuInicio, int temporizador, JamesBond controlador) {
     this.menuInicio_scene = menuInicio;
     this.init(temporizador, controlador, turnoInicial, nombreJ1, nombreJ2);
     this.ventanaPrincipal = ventanaPrincipal;
