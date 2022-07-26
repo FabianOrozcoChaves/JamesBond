@@ -1,5 +1,6 @@
 package marda;
 
+import jamesBond.Tablero;
 /**
  * Interface ConstructorSerializadorAbstracto
  * Esta interfaz permite implementar un patrón de diseño creacional: Patrón Constructor.
