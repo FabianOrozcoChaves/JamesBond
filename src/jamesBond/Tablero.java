@@ -1,7 +1,5 @@
 package jamesBond;
 
-import java.util.Vector;
-
 import marda.Carta;
 import marda.ContenedorDeCartasMarda;
 import marda.GrupoDeCartasMarda;
@@ -12,13 +10,13 @@ import marda.GrupoDeCartasMarda;
  * Contiene las cartas comunes
  */
 public class Tablero extends ContenedorDeCartasMarda {
-  private Vector<Carta> cartasComunes;
 
   /**
    * @brief Constructor de la clase.
    */
   public Tablero() {
-    cartasComunes = new Vector<Carta>();
+    super();
+    super.agregarGrupoDeCartas(new GrupoDeCartasMarda());
   }
 
   /**
@@ -28,10 +26,10 @@ public class Tablero extends ContenedorDeCartasMarda {
    * @return la carta en la posicion solicitada
    */
   public Carta cambiarCarta(int posicion, Carta cartaEntrante) {
-	if(posicion > this.cartasComunes.size() && posicion < 0){
-		return null;
-	}
-    return this.cartasComunes.set(posicion, cartaEntrante);
+    if(posicion > super.getGrupoDeCartas(0).getCartas().size() && posicion < 0) {
+      return null;
+    }
+    return super.getGrupoDeCartas(0).cambiarCarta(posicion, cartaEntrante);
   }
   
   /**
@@ -40,7 +38,7 @@ public class Tablero extends ContenedorDeCartasMarda {
    * @return pila que representa la que el jugador tiene en mano actualmente.
    */
   public void agregarCarta(Carta carta) {
-	  this.cartasComunes.add(carta);
+	  this.getGrupoDeCartas(0).agregarCarta(carta);
   }
 
   /**
@@ -49,7 +47,7 @@ public class Tablero extends ContenedorDeCartasMarda {
    * @return la carta que se encuentra en ese posicion
    */
   public Carta getCarta(int posicion) {
-	  return this.cartasComunes.get(posicion);
+	  return this.getGrupoDeCartas(0).getCarta(posicion);
   }
 
   //
@@ -57,14 +55,14 @@ public class Tablero extends ContenedorDeCartasMarda {
    * @brief devuelve las cartas comunes del juego
    * @return un vector de cartas con las cartas comunes
    */
-  public Vector<Carta> getCartas() {
-	  return this.cartasComunes;
+  public GrupoDeCartasMarda getCartas() {
+	  return super.getGrupoDeCartas(0);
   }
 
   /**
-   * @brief hace clear al vetor de cartas comunes
+   * @brief hace clear al vector de cartas comunes
    */
   public void quitarCartas() {
-	  this.cartasComunes.clear();
+    super.getGrupoDeCartas(0).clear();
   }
 }
