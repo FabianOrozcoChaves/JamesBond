@@ -128,11 +128,11 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     this.serializacion += "{\n" + sQts("nombre") + ":" + sQts(jugador.getNombre()) + ",\n" 
       + sQts("pilas") + ":[\n";
 
-      for (int i = 0; i < jugador.getGrupoDeCartas(0).getCartas().size(); i++) {
+      for (int i = 0; i < jugador.size(); i++) {
         this.serializacion += "{\n";
         serializarGrupoDeCartas(jugador.getGrupoDeCartas(i));
         this.serializacion += "}";
-        if (i < jugador.getGrupoDeCartas(0).getCartas().size() - 1)
+        if (i < jugador.size() - 1)
           this.serializacion += ",";
         this.serializacion += "\n";
       }

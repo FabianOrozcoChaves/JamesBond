@@ -32,7 +32,7 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
       file.close();
       return true;
     } catch (Exception e) {
-      System.out.println("No se pudo cargar el archivo \"jamesBond.json\". Vuelve a intentarlo.");
+      System.out.println("No se pudo cargar el archivo \"jamesBond.json\". Vuelve a intentarlo." + e);
     }
     return false;
   }
@@ -76,9 +76,9 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
     Jugador temp = new Jugador(nombre);
     JsonArray pilas = jugador.getAsJsonArray("pilas");
 
-    for (int i = 0; i < temp.getGrupoDeCartas(0).getCartas().size(); i++) {
+    for (int i = 0; i < temp.getMaxPilas(); i++) {
       JsonObject pilaObject = pilas.get(i).getAsJsonObject();
-      JsonArray pilaArray = pilaObject.getAsJsonArray("pila");
+      JsonArray pilaArray = pilaObject.getAsJsonArray("GrupoDeCartas");
       temp.agregarPila(deserializarGrupoDeCartasMarda(pilaArray));
     }
 
