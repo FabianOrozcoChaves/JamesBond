@@ -84,7 +84,6 @@ public class VistaTablero extends VistaTableroMarda {
 
   private void init(int temporizador, JamesBond controlador, String turnoInicial, String nombreJ1, String nombreJ2) {
     super.init();
-    this.getEstructura().setBackground(new Background(new BackgroundFill(Color.web("#008000"), new CornerRadii(0), Insets.EMPTY)));;
     this.vistaComunes = new VistaCarta[4];     // Vista de las cartas comunes
     this.vistaPilaJ1 = new VistaCarta[6];      // Vista de la pila del jugador 1
     this.vistaPilaJ2 = new VistaCarta[6];      // Vista de la pila del jugador 1
