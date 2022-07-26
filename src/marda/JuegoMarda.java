@@ -8,7 +8,6 @@ public abstract class JuegoMarda implements IArbitroMarda {
   protected JugadorMarda jugador2;
   protected ContenedorDeCartasMarda tablero;
   protected JugadorMarda turnoActual;  // jugador con el turno actual.
-  protected IPantallaInicio pantallaInicio;  // pantalla inicial del juego.
 
   // MÉTODO PLANTILLA
   /**
