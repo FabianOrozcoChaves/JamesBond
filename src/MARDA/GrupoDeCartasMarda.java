@@ -23,15 +23,6 @@ public class GrupoDeCartasMarda {
   }
 
   /**
-   * @brief Método que agrega una carta al vector de cartas.
-   * @param carta Carta que se quiere agregar.
-   * @param indice Posicion en la que se quiere agregar.
-   */
-  public void agregarCarta(marda.Carta carta, int indice) {
-    this.cartas.set(indice, carta);
-  }
-
-  /**
    * @brief Método que agrega una carta al FINAL al vector de cartas.
    * @param carta Carta que se quiere agregar.
    */
@@ -105,5 +96,20 @@ public class GrupoDeCartasMarda {
 		  return null;
 	  }
     return this.cartas.remove(0);
+  }
+
+  public Boolean isEmpty() {
+    return this.cartas.isEmpty();
+  }
+
+  /**
+   * Método que intercambia una carta comun (que está en la mesa), con una de la pila activa del jugador.
+   * @param cartaEntrante carta que será introducida en el grupo de cartas.
+   * @param posicionSaliente posicion de la carta que será sacada del grupo de cartas.
+   * @return Carta que representa la carta que fue sacada de la mesa
+   */
+  public Carta cambiarCarta(int posicionSaliente, Carta cartaEntrante) {
+    // set retorna la carta que esta reemplazando la nueva carta en posicion posicionSaliente.
+    return this.cartas.set(posicionSaliente, cartaEntrante);
   }
 }
