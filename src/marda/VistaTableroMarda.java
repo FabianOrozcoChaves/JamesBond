@@ -1,11 +1,16 @@
 package marda;
 
 import javafx.scene.layout.Pane;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -20,6 +25,10 @@ public class VistaTableroMarda {
   private HBox seccionSur;
   private Scene tableroEscena;
 
+  public VistaTableroMarda() {
+    this.init();
+  }
+
   public void construirTableroMarda(Stage ventanaPrincipal) {
     this.estructura.setTop(this.seccionNorte);
     this.estructura.setLeft(this.seccionOeste);
@@ -27,6 +36,8 @@ public class VistaTableroMarda {
     this.estructura.setBottom(this.seccionSur);
     this.estructura.setCenter(this.seccionCentro);
     this.tableroEscena = new Scene(this.estructura, this.anchoVentana, this.alturaVentana);
+    this.estructura.setBackground(new Background(new BackgroundFill(Color.web("#008000"), new CornerRadii(0), Insets.EMPTY)));
+
     ventanaPrincipal.setScene(this.tableroEscena);
   }
 
