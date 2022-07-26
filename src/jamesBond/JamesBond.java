@@ -100,10 +100,9 @@ public class JamesBond extends marda.JuegoMarda{
   public void llenarMazo() {
     this.mazo.clear();
 	  char[] palos = {'P', 'D', 'C', 'T'};
-    int cartaActual = 0;
     for(char c:palos){
 	    for(int j = 1; j < 14; j++){
-	      this.mazo.agregarCarta(new Carta( c, j ), ++cartaActual);
+	      this.mazo.agregarCarta(new Carta( c, j ));
 	    }
 	  }
   }
