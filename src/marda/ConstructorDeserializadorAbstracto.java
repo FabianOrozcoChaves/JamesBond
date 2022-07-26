@@ -2,7 +2,6 @@ package marda;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import jamesBond.Tablero;
 
 /**
  * Interface ConstructorDeserializadorAbstracto
@@ -22,9 +21,9 @@ public interface ConstructorDeserializadorAbstracto {
   /**
    * @brief Método deserializador. Se encarga de cargar los valores de un Tablero, restaurando el estado en el que se guardo.
    * @param cartas un objecto json que representa las cartas comunes.
-   * @return Tablero con el estado en el que se guardo.
+   * @return ContenedorDeCartasMarda con el estado en el que se guardo.
    */
-  public Tablero deserializarTablero(JsonArray cartas);
+  public ContenedorDeCartasMarda deserializarTablero(JsonArray cartas);
   
   /**
    * @brief Método deserializador. Se encarga de cargar los valores de un Jugador, restaurando el estado en el que se guardo.

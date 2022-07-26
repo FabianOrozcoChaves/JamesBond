@@ -43,7 +43,7 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
    * @param objetoJson un objecto Json que contiene el estado en el cual se guardo el juego.
    */
   public void deserializar(JuegoMarda juego, JsonObject objetoJson){
-    Tablero tablero = deserializarTablero(objetoJson.get("Tablero").getAsJsonArray());
+    Tablero tablero = (Tablero)deserializarTablero(objetoJson.get("Tablero").getAsJsonArray());
     Jugador jugador2 = (Jugador)deserializarJugador(objetoJson.get("Jugador2").getAsJsonObject());
     Jugador jugador1 = (Jugador)deserializarJugador(objetoJson.get("Jugador1").getAsJsonObject());
     Jugador turnoActual = jugador1.getNombre().equals(objetoJson.get("turnoActual").getAsString()) ? jugador1 : jugador2;
@@ -54,9 +54,9 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
   /**
    * @brief Método deserializador. Se encarga de cargar los valores del tablero, restaurar el estado del Tablero en el que se guardo.
    * @param Cartas Texto en formato json que representa las cartas en comunes que posee el tablero.
-   * @return Tablero con el estado en el que se guardo.
+   * @return ContenedorDeCartasMarda con el estado en el que se guardo.
    */
-  public Tablero deserializarTablero(JsonArray cartas){
+  public ContenedorDeCartasMarda deserializarTablero(JsonArray cartas){
     Tablero tablero = new Tablero();
     tablero.quitarCartas();
     for (int i = 0; i < cartas.size(); i++) {
@@ -67,9 +67,9 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
   }
   
    /**
-   * @brief Método deserializador. Se encarga de cargar los valores de un Jugador, crear el Jugador y retornarlo como objeto Jugador.
+   * @brief Método deserializador. Se encarga de cargar los valores de un Jugador, crear el Jugador y retornarlo como objeto JugadorMarda.
    * @param jugador Texto en formato json que representa los atributos del Jugador.
-   * @return Jugador con los atributos cargados
+   * @return JugadorMarda con los atributos cargados
    */
   public JugadorMarda deserializarJugador(JsonObject jugador){
     String nombre = jugador.get("nombre").getAsString();
@@ -84,11 +84,11 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
 
     return temp;
   }
-  // TODO Documentación
+  
   /**
-   * @brief Método deserializador. Se encarga de cargar los valores de una pila, restaurar el estado en el que se guardo.
-   * @param Cartas Texto en formato json que representa las cartas que se encuentra la pila.
-   * @return Pila con el estado en el que se guardo.
+   * @brief Método deserializador. Se encarga de cargar los valores de un GrupoDeCartasMarda, restaurando el estado en el que se guardo.
+   * @param Cartas Texto en formato json que representa las cartas que se encuentra la GrupoDeCartasMarda.
+   * @return GrupoDeCartasMarda con el estado en el que se guardo.
    */
   public GrupoDeCartasMarda deserializarGrupoDeCartasMarda(JsonArray cartas){
     GrupoDeCartasMarda grupoDeCartas = new GrupoDeCartasMarda();
