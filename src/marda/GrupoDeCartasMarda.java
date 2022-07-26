@@ -72,7 +72,6 @@ public class GrupoDeCartasMarda {
 	  Collections.shuffle(this.cartas);
   }
 
-  // TODO Agregar a UML
   /**
    * Método que da el vector de cartas para ser visualizado (para el GUI).
    * @return Vector de tipo Carta que contiene todas las cartas de la pila.

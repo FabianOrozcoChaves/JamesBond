@@ -2,7 +2,6 @@ package marda;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import marda.VistaTableroMarda;
 
 public class PantallaInicio extends Application {
   public void start(Stage stage) {
