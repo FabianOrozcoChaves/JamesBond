@@ -26,7 +26,7 @@ interface IArbitroMarda {
   /**
    * @brief Metodo que asigna el jugador que tendra el turno inicial.
    * @details modifica el artributo del JuegoMarda <turnoActual>
-   * @param jugador int que indica el jugador con el primer turno. 1: J1 | 2: J2 | 3: random.
+   * @param nombreJugador String que indica el nombre del jugador con el primer turno.
    */
-  public void asignarTurnoInicial(int jugador);
+  public void asignarTurnoInicial(String nombreJugador);
 }
