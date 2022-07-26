@@ -57,13 +57,13 @@ public class JamesBond extends marda.JuegoMarda{
   /**
    * @brief Metodo que asigna el jugador que tendra el turno inicial.
    * @details modifica el artributo del JuegoMarda <turnoActual>
-   * @param jugador int que indica el jugador con el primer turno. 1: J1 | 2: J2 | 3: random.
+   * @param nombreJugador String que indica el nombre del jugador con el primer turno
    */
   @Override
-  public void asignarTurnoInicial(int jugador) {
-    if (jugador == 1)
+  public void asignarTurnoInicial(String nombreJugador) {
+    if (nombreJugador.equals(jugador1.getNombre()))
       this.turnoActual = jugador1;
-    else if (jugador == 2)
+    else if (nombreJugador.equals(jugador2.getNombre()))
       this.turnoActual = jugador2;
     else
       randomizarTurno();
@@ -149,9 +149,9 @@ public class JamesBond extends marda.JuegoMarda{
    * @brief Método encargado de inicializar los turnos y asignar los nombres a los jugadores
    * @param nombreJugador1 El nombre para el jugador 1 
    * @param nombreJugador2 El nombre para el jugador 2
-   * @param turnoInicial int que indica el jugador con el primer turno. 1: J1 | 2: J2 | 3: random.
+   * @param nombreJugador String que indica el nombre del jugador con el primer turno
    */
-  public void inicializarTurnos(String nombreJugador1, String nombreJugador2, int jugadorInicial) {
+  public void inicializarTurnos(String nombreJugador1, String nombreJugador2, String jugadorInicial) {
     this.jugador1 = new Jugador(nombreJugador1);
     this.jugador2 = new Jugador(nombreJugador2);
     // tablero.quitarCartas();
