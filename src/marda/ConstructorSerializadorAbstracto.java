@@ -1,6 +1,5 @@
 package marda;
 
-import jamesBond.Tablero;
 /**
  * Interface ConstructorSerializadorAbstracto
  * Esta interfaz permite implementar un patrón de diseño creacional: Patrón Constructor.
@@ -43,7 +42,7 @@ public interface ConstructorSerializadorAbstracto {
    * @brief Método serializador. Se encarga de extraer los atributos del objeto Tablero y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
    * @param tablero Objeto Tablero del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
-  public void serializarTablero(Tablero tablero);
+  public void serializarTablero(ContenedorDeCartasMarda tablero);
   
   /**
    * @brief Método serializador. Se encarga de extraer las pilas y nombre de un jugador para representarlas debidamente en el objeto complejo, ya sea en formato json, xml u otro.

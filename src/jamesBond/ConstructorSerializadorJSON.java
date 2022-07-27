@@ -112,9 +112,9 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
    * @brief Método serializador. Se encarga de extraer los atributos del objeto Tablero y representarlos debidamente en un objeto json.
    * @param Tablero Objeto Tablero del que se extraerán sus atributos para guardarlos en el objeto json.
    */
-  public void serializarTablero(Tablero tablero) {
+  public void serializarTablero(ContenedorDeCartasMarda tablero) {
     this.serializacion += sQts("Tablero") + ":[\n";
-    Vector<Carta> cartas = tablero.getCartas().getCartas();
+    Vector<Carta> cartas = tablero.getGrupoDeCartas(0).getCartas();
     serializarVectorCartas(cartas);
     this.serializacion += "]\n";
   }
