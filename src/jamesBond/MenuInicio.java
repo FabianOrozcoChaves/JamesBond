@@ -52,7 +52,7 @@ public class MenuInicio {
   }
 
   /** 
-   * @brief Permite asegnarle un nombre al jugador 1.
+   * @brief Permite asignarle un nombre al jugador 1.
    * @deaails modifica el atributo del menu this.jugador1.
    * @param nombre es el string con el nombre que se desea asignar.
   */
