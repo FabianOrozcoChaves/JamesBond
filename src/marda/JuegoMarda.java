@@ -9,21 +9,6 @@ public abstract class JuegoMarda implements IArbitroMarda {
   protected ContenedorDeCartasMarda tablero;
   protected JugadorMarda turnoActual;  // jugador con el turno actual.
 
-  // MÉTODO PLANTILLA
-  /**
-   * @brief método plantilla que corre el juego, se encarga del flujo general.
-   * @details Si un juego tiene más de una partida, puede implementar este método dentro de un ciclo.
-   */
-  public void run() {
-    start();
-    while (decidirGanador() == null) {
-      cambiarTurno();
-    }
-    System.out.println(decidirGanador().getNombre() + " ha ganado");
-    // TODO mostrar ganador en GUI.
-  }
-
-
   /**
    * @brief inicializa los juegos concretos.
    */
