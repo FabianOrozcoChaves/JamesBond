@@ -66,7 +66,7 @@ public class GrupoDeCartasMarda {
   }
 
   /**
-   * @brief mezcla las cartas del mazo
+   * @brief mezcla las cartas del GrupoDeCartasMarda
    */
   public void barajar() {
 	  Collections.shuffle(this.cartas);
@@ -89,6 +89,7 @@ public class GrupoDeCartasMarda {
 
   /**
    * @brief Método que retorna la última carta del vector.
+   * @return objeto Carta que representa la ultima carta del vector.
    */
   public Carta topNpop() {
     if(this.cartas.size() < 1){
@@ -97,6 +98,10 @@ public class GrupoDeCartasMarda {
     return this.cartas.remove(0);
   }
 
+  /**
+   * @brief Método que retorna un valor booleano que representa si el vector de cartas está vacío
+   * @return True si el vector de cartas está vacío, false en caso contrario.
+   */
   public Boolean isEmpty() {
     return this.cartas.isEmpty();
   }
