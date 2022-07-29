@@ -13,22 +13,33 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
+/**
+ * @class calse gráfica del tablero marda.
+ * @details Construye un layout automatico con secciones definidas para mostrar elementos graficos.
+ */
 public class VistaTableroMarda {
   private int anchoVentana; // ancho de la ventana en pixeles.
   private int alturaVentana; // altura de la ventana en pixeles.
-  private BorderPane estructura;
-  private VBox seccionEste;
-  private VBox seccionOeste;
-  private VBox seccionCentro;
-  private HBox seccionNorte;
-  private HBox seccionSur;
-  private Scene tableroEscena;
+  private BorderPane estructura; // contiene las 5 secciones del tablero
+  private VBox seccionEste; // seccion que esta a la derecha
+  private VBox seccionOeste; // seccion que esta a la izquierda
+  private VBox seccionCentro; // seccion que esta a en el centro
+  private HBox seccionNorte; // seccion que esta a la superior
+  private HBox seccionSur; // seccion que esta a la inferior
+  private Scene tableroEscena; // escena requeridad por javafx para mostrar los elementos
 
+  /**
+   * @brief Construtor
+   * @details para poder mostrar en pantalla el tablero es necesario llamar construirTableroMarda(Stage)
+   */
   public VistaTableroMarda() {
     this.init();
   }
 
+  /**
+   * @brief Construtor
+   * @details este metodo 
+   */
   public void construirTableroMarda(Stage ventanaPrincipal) {
     this.estructura.setTop(this.seccionNorte);
     this.estructura.setLeft(this.seccionOeste);
