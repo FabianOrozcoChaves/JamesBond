@@ -95,10 +95,10 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     JamesBond gameJB = (JamesBond)juego;
     inicioObjeto("JamesBond");
     this.serializacion += "{" + sQts("Jugador1") + ":\n";
-    serializarJugador(gameJB.getJugador(1));
+    serializarJugador(gameJB.getJugadorMarda(1));
     this.serializacion += ",";
     this.serializacion += sQts("Jugador2") + ":\n";
-    serializarJugador(gameJB.getJugador(2));
+    serializarJugador(gameJB.getJugadorMarda(2));
     this.serializacion += ",\n";
     this.serializacion += jsonFormatWithComa("turnoActual", sQts(gameJB.getTurnoActual().getNombre())) + "\n";
     this.serializacion += jsonFormatWithComa("temporizador", sQts(String.valueOf(gameJB.getTemporizador()))) + "\n";

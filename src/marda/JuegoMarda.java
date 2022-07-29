@@ -1,7 +1,8 @@
 package marda;
 
 /**
- * Clase que representa un juego genérico de cartas.
+ * @brief Clase que representa un juego genérico de cartas.
+ * @details Código reutilizable.
  */
 public abstract class JuegoMarda implements IArbitroMarda {
   protected JugadorMarda jugador1;
@@ -9,23 +10,9 @@ public abstract class JuegoMarda implements IArbitroMarda {
   protected ContenedorDeCartasMarda tablero;
   protected JugadorMarda turnoActual;  // jugador con el turno actual.
 
-  // MÉTODO PLANTILLA
-  /**
-   * @brief método plantilla que corre el juego, se encarga del flujo general.
-   * @details Si un juego tiene más de una partida, puede implementar este método dentro de un ciclo.
-   */
-  public void run() {
-    start();
-    while (decidirGanador() == null) {
-      cambiarTurno();
-    }
-    System.out.println(decidirGanador().getNombre() + " ha ganado");
-    // TODO mostrar ganador en GUI.
-  }
-
-
   /**
    * @brief inicializa los juegos concretos.
+   * @brief Código reutilizable. Utilizado por el GUI para realizar métodos iniciales del juego concreto.
    */
   abstract public void start(); // método del concreto
 
@@ -49,10 +36,12 @@ public abstract class JuegoMarda implements IArbitroMarda {
     return constructor.deserializarJuego(juego);
   }
 
+  /**
+   * @brief Método que devuelve el jugador mediante un int como identificador.
+   * @param jugador entero que representa el jugador deseado. 1: Jugador 1. diferente de 1: Jugador 2
+   * @return JugadorMarda deseado. jugador1 si el parámetro es 1, jugador2 si el parámetro es otro.
+   */
   public JugadorMarda getJugadorMarda(int jugador) {
-    if (jugador == 1) {
-      return this.jugador1;
-    }
-    return  this.jugador2;
+    return (jugador == 1) ? this.jugador1 : this.jugador2;
   }
 }

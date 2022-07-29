@@ -141,13 +141,13 @@ public class VistaTablero extends VistaTableroMarda {
     this.ventanaPrincipal = ventanaPrincipal;
 
     // Jugador 1
-    this.jugador1 = gameJB.getJugador(1);
+    this.jugador1 = (Jugador) gameJB.getJugadorMarda(1);
     super.agregarElemento(super.getSeccionOeste(), this.pilaJ1_txt);
     this.inicializarPilas(this.jugador1, pilaJ1_hbx, vistaPilaJ1, super.getSeccionOeste());
 
 
     // Jugador 2
-    this.jugador2 = gameJB.getJugador(2);
+    this.jugador2 = (Jugador) gameJB.getJugadorMarda(2);
     super.agregarElemento(super.getSeccionEste(), this.pilaJ2_txt);
     this.inicializarPilas(this.jugador2, pilaJ2_hbx, vistaPilaJ2, super.getSeccionEste());
 
@@ -231,8 +231,8 @@ public class VistaTablero extends VistaTableroMarda {
     this.ganarJugador1.setOnAction(e -> {
       System.out.println("Jugador 1 gritó james bond");
       JugadorMarda ganador = this.gameJB.decidirGanador();
-      if (ganador == this.gameJB.getJugador(1)) {
-        VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(1).getNombre());
+      if (ganador == this.gameJB.getJugadorMarda(1)) {
+        VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugadorMarda(1).getNombre());
         this.ventanaPrincipal.setScene(menuInicio_scene);
         this.destruirTablero();
       } else {
@@ -244,8 +244,8 @@ public class VistaTablero extends VistaTableroMarda {
     this.ganarJugador2.setOnAction(e -> {
       System.out.println("Jugador 2 gritó james bond");
       JugadorMarda ganador = this.gameJB.decidirGanador();
-      if (ganador == this.gameJB.getJugador(2)) {
-        VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugador(2).getNombre());
+      if (ganador == this.gameJB.getJugadorMarda(2)) {
+        VentanaPopUp.mostrar("Ganador", "El ganador es " + this.gameJB.getJugadorMarda(2).getNombre());
         this.ventanaPrincipal.setScene(menuInicio_scene);
         this.destruirTablero();
       } else {
@@ -464,7 +464,7 @@ public class VistaTablero extends VistaTableroMarda {
           String mensaje = "No existe una partida guardada previamente.";
           if (nuevoJB.cargar(new ConstructorDeserializadorJSON(), nuevoJB)) {
             this.destruirTablero();
-            this.construirJuego(nuevoJB.getTurnoActual().getNombre(), nuevoJB.getJugador(1).getNombre(), nuevoJB.getJugador(2).getNombre(), mainStageCopy, menuInicioSceneCopy, nuevoJB.getTemporizador(), nuevoJB);
+            this.construirJuego(nuevoJB.getTurnoActual().getNombre(), nuevoJB.getJugadorMarda(1).getNombre(), nuevoJB.getJugadorMarda(2).getNombre(), mainStageCopy, menuInicioSceneCopy, nuevoJB.getTemporizador(), nuevoJB);
             this.run();
             mensaje = "El juego se ha cargado correctamente.";
           }

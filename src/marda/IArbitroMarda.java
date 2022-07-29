@@ -1,7 +1,8 @@
 package marda;
 
 /**
- * Interfaz que valida las jugadas del juegoMARDA.
+ * @brief Interfaz que valida las jugadas del juegoMarda.
+ * @details Código reutilizable
  */
 interface IArbitroMarda {
 
@@ -14,9 +15,10 @@ interface IArbitroMarda {
   /**
    * @brief Decide si la jugada efectuada es válida.
    * @details el juego concreto debe tener get de la carta escogida y su dueño para verificar el turno actual.
+   * @param jugador jugador que se va a validar
    * @return Booleano que indica si la jugada es válida.
    */
-  public Boolean validarJugada();
+  public Boolean validarJugada(JugadorMarda jugador);
 
   /**
    * @brief Cambia de turno entre jugadores.

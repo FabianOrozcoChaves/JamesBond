@@ -3,9 +3,8 @@ import marda.*;
 import marda.Carta;
 
 /**
- * Clase JamesBond.
- * Clase controladora
- * Encargada de control de las jugadas, turnos y determinar ganadores.
+ * @brief Clase JamesBond, controladora
+ * @details Encargada de control de las jugadas, turnos y determinar ganadores.
  */
 public class JamesBond extends marda.JuegoMarda{
   
@@ -34,13 +33,12 @@ public class JamesBond extends marda.JuegoMarda{
   }
 
   /**
-   * @brief Decide si la jugada efectuada es válida.
-   * @return Booleano que indica si la jugada es válida.
+   * @brief Decide si la jugada efectuada es válida dependiendo del turno actual
+   * @return Booleano que indica si la jugada es válida. True en caso de que sea el turno del jugador indicado por parámetro.
    */
   @Override
-  public Boolean validarJugada() {
-    // En el caso de JamesBond, la validación se realiza mediante eventos y vistas.
-    return true;
+  public Boolean validarJugada(JugadorMarda jugador) {
+    return turnoActual.equals(jugador);
   }
 
   /**
@@ -70,7 +68,6 @@ public class JamesBond extends marda.JuegoMarda{
   }
 
   // MÉTODOS DE JUEGOMARDA
-
   /**
    * @brief inicializa el juego JamesBond. Reparte las cartas
    */
@@ -82,7 +79,6 @@ public class JamesBond extends marda.JuegoMarda{
   }
 
   // MÉTODOS DE JAMESBOND PROPIOS.
-
   /**
    * @brief Constructor. Inicializa atributos de la clase
    */
@@ -133,11 +129,10 @@ public class JamesBond extends marda.JuegoMarda{
    * @param posJugador La posicion de la carta del jugador
    */
   public void intercambiarCarta(int posTablero, int posJugador) {
-    // TODO revisar si es en la posición 0 del grupo de cartas (creo que es mazo)
     Carta cartaJugador = tablero.getGrupoDeCartas(0).getCarta(posTablero);
     Carta cartaTablero;
 
-    if (turnoActual.equals(jugador1))
+    if (validarJugada(jugador1))
       cartaTablero = ((Jugador) jugador1).intercambiarCarta(cartaJugador, posJugador);
     else
       cartaTablero = ((Jugador) jugador2).intercambiarCarta(cartaJugador, posJugador);
@@ -189,16 +184,6 @@ public class JamesBond extends marda.JuegoMarda{
     return temporizador;
   }
 
-
-   /**
-   * @brief Método que devuelve un jugador
-   * @param numJugador el numero de jugador
-   * @return objeto Jugador del jugador solicitado
-   */
-  public Jugador getJugador(int numJugador) {
-    return numJugador == 1 ? (Jugador) jugador1 : (Jugador) jugador2;
-  }
-
   /**
    * @brief Método que devuelve el tablero
    * @return objeto Tablero del tablero creado para la partida
@@ -215,28 +200,19 @@ public class JamesBond extends marda.JuegoMarda{
     return (Jugador) this.turnoActual;
   }
   
-    /**
-     * @brief Método encargado de inicializar el estado del juego en el punto donde se guardo
-     * @param jugador1 Jugador que representa al jugador 1
-     * @param jugador2 Jugador que representa al jugador 2
-     * @param turnoInicial Jugador que tiene el turno actual
-     * @param temporizador int que representa la duracion de los turnos
-     * @param tablero Tablero que muestra
-     */
-    public void cargarEstado(Jugador jugador1, Jugador jugador2, Jugador turnoActual, int temporizador, Tablero tablero) {
-      this.jugador1 = jugador1;
-      this.jugador2 = jugador2;
-      this.turnoActual = turnoActual;
-      this.temporizador = temporizador;
-      this.tablero = tablero;
-    }
-  
-    // /**
-    //  * @brief Método que devuelve la cantidad de cartas restantes en el mazo
-    //  * @return int cartas restantes en el mazo
-    //  */
-    // public int getCartasRestantesMazo() {
-      //   return this.mazo.getCartasRestantes();
-    // }
-    
+  /**
+   * @brief Método encargado de inicializar el estado del juego en el punto donde se guardo
+   * @param jugador1 Jugador que representa al jugador 1
+   * @param jugador2 Jugador que representa al jugador 2
+   * @param turnoInicial Jugador que tiene el turno actual
+   * @param temporizador int que representa la duracion de los turnos
+   * @param tablero Tablero que muestra
+   */
+  public void cargarEstado(Jugador jugador1, Jugador jugador2, Jugador turnoActual, int temporizador, Tablero tablero) {
+    this.jugador1 = jugador1;
+    this.jugador2 = jugador2;
+    this.turnoActual = turnoActual;
+    this.temporizador = temporizador;
+    this.tablero = tablero;
+  }
 }
