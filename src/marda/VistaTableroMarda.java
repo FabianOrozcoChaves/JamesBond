@@ -37,8 +37,9 @@ public class VistaTableroMarda {
   }
 
   /**
-   * @brief Construtor
-   * @details este metodo 
+   * @brief Construye las secciones del tablero
+   * @details las secciones se asigana vacias, para que muestren algo se deben agregar los elementos usando agregarElemento(Pane, elemento)
+   * @param ventanaPrincipal es el Stage que se recibe por parametro en el metodo start(Stage) de javaFX en la clase GUI
    */
   public void construirTableroMarda(Stage ventanaPrincipal) {
     this.estructura.setTop(this.seccionNorte);
@@ -52,35 +53,67 @@ public class VistaTableroMarda {
     ventanaPrincipal.setScene(this.tableroEscena);
   }
 
+  /**
+   * @brief Metodo para agregar elementos graficos a una seccion del tablero.
+   * @details Se pueden agregar elementos de javaFX que hereden de node. Estos son cajas de texto, imagenes, botones, etc.
+   * @param seccion es la seccion a la que se le desea agregar el elemento. Con los metodo get se obtiene la seccion.
+   * @param elemento es el nodo de javaFX que se desea agregar como botones, imegenes, texto y entrada de datos.
+   */
   public void agregarElemento(Pane seccion, Node elemento) {
     seccion.getChildren().addAll(elemento);
   }
 
-  /*public VistaCarta [] crearArregloVistaCarta(GrupoDeCartas cartas) {
-
-  }*/
-
+  /**
+   * @brief Devuelve el conetendor de la seccion central
+   * @details al devolver el contenedor se puede agregar objetos a este o configurar la posicion y otras caracteristicas de javaFX
+   * @return el VBox o conetendor vertical de la seccion central
+   */
   public VBox getSeccionCentro() {
     return this.seccionCentro;
   }
-
+  
+  /**
+   * @brief Devuelve el conetendor de la seccion inferior
+   * @details al devolver el contenedor se puede agregar objetos a este o configurar la posicion y otras caracteristicas de javaFX
+   * @return el HBox o conetendor horizontal de la seccion inferior
+   */
   public HBox getSeccionSur() {
     return this.seccionSur;
   }
 
+  /**
+   * @brief Devuelve el conetendor de la seccion superior
+   * @details al devolver el contenedor se puede agregar objetos a este o configurar la posicion y otras caracteristicas de javaFX
+   * @return el HBox o conetendor horizontal de la seccion superior
+   */
   public HBox getSeccionNorte() {
     return this.seccionNorte;
   }
 
+  /**
+   * @brief Devuelve el conetendor de la seccion de la izquierda
+   * @details al devolver el contenedor se puede agregar objetos a este o configurar la posicion y otras caracteristicas de javaFX
+   * @return el VBox o conetendor vertical de la seccion de la izquierda
+   */
   public VBox getSeccionOeste() {
     return this.seccionOeste;
   }
 
+  /**
+   * @brief Devuelve el conetendor de la seccion de la derecha
+   * @details al devolver el contenedor se puede agregar objetos a este o configurar la posicion y otras caracteristicas de javaFX
+   * @return el VBox o conetendor vertical de la seccion de la derecha
+   */
   public VBox getSeccionEste() {
     return this.seccionEste;
   }
 
-  public void init() {
+
+  /**
+   * @brief Inicializa las instancias de las secciones
+   * @details este solo las inicializ y deja las instancias vacias. Lo elemntos se deben agregar a mano
+   */
+  protected void init() {
     this.anchoVentana = 1000;
     this.alturaVentana = 650;
     this.estructura = new BorderPane();
@@ -91,7 +124,9 @@ public class VistaTableroMarda {
     this.seccionSur  = new HBox();
   }
 
-
+  /**
+   * @brief Elimina todos los elementos del tablero
+   */
   public void destruirTableroMarda() {
     this.anchoVentana = 0;
     this.alturaVentana = 0;
@@ -103,15 +138,19 @@ public class VistaTableroMarda {
     this.seccionSur = null;
   }
 
+  /**
+   * @brief Devuelve el ancho de la ventana que se esta usando
+   * @return un entero con el ancho de la ventana
+   */
   public int getAnchoVentana() {
     return this.anchoVentana;
   }
 
+  /**
+   * @brief Devuelve la altura de la ventana que se esta usando
+   * @return un entero con el ancho de la ventana
+   */
   public int getAlturaVentana() {
     return this.alturaVentana;
-  }
-
-  public BorderPane getEstructura() {
-    return this.estructura;
   }
 }
