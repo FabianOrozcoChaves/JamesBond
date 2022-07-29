@@ -16,7 +16,7 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
   
   /**
    * Método que lee el archivo y carga los nuevos atributos para el jamesBond
-   * @param jamesBond juego que representa el estado actual de juego.
+   * @param juego juegoMarda que representa el estado actual de juego.
    */
   public boolean deserializarJuego(JuegoMarda juego){
     JamesBond jamesBond = (JamesBond)juego;
@@ -39,8 +39,8 @@ public class ConstructorDeserializadorJSON implements ConstructorDeserializadorA
 
   /**
    * @brief Método deserializador de ayuda para deserializar se separa y se hace publico para las pruebas.
-   * @param jamesBond juego que representa el estado actual de juego.
-   * @param objetoJson un objecto Json que contiene el estado en el cual se guardo el juego.
+   * @param juego juegoMarda que representa el estado actual de juego.
+   * @param objetoJson un objeto Json que contiene el estado en el cual se guardo el juego.
    */
   public void deserializar(JuegoMarda juego, JsonObject objetoJson){
     Tablero tablero = (Tablero)deserializarTablero(objetoJson.get("Tablero").getAsJsonArray());

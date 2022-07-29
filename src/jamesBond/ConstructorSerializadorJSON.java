@@ -89,7 +89,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
 
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto JamesBond y representarlos debidamente en un objeto json.
-   * @param gameJB
+   * @param juego Objeto JuegoMarda del que se extraerán sus atributos para guardarlos en el objeto json.
    */
   public void serializarJuego(JuegoMarda juego) {
     JamesBond gameJB = (JamesBond)juego;
@@ -103,8 +103,6 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     this.serializacion += jsonFormatWithComa("turnoActual", sQts(gameJB.getTurnoActual().getNombre())) + "\n";
     this.serializacion += jsonFormatWithComa("temporizador", sQts(String.valueOf(gameJB.getTemporizador()))) + "\n";
     serializarTablero(gameJB.getTablero());
-    // agregar cuando implementemos turnos jugados
-    //this.serializacion += ",\n" + jsonFormat("turnosJugados", String.valueOf(gameJB.getTurnosJugados())) + "\n";
     this.serializacion += "}\n";
     finObjeto();
   }
@@ -121,7 +119,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
     
   /**
    * @brief Método serializador. Se encarga de extraer las pilas y nombre de un jugador para representarlos debidamente en un objeto json.
-   * @param jugador Objeto Jugador del que se extraerán sus atributos para guardarlos en el objeto compuesto.
+   * @param jugador Objeto JugadorMarda del que se extraerán sus atributos para guardarlos en el objeto json.
    */
   public void serializarJugador(JugadorMarda jugador) {
     // Cast
@@ -141,7 +139,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
   
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto GrupoDeCartasMarda y representarlos debidamente en un objeto json.
-   * @param pila Objeto GrupoDeCartasMarda del que se extraerán sus atributos para guardarlos en el objeto json.
+   * @param grupoCartas Objeto GrupoDeCartasMarda del que se extraerán sus atributos para guardarlos en el objeto json.
    */
   public void serializarGrupoDeCartas(GrupoDeCartasMarda grupoCartas) {
     this.serializacion += sQts("GrupoDeCartas") + ":[\n";
@@ -152,7 +150,7 @@ public class ConstructorSerializadorJSON implements ConstructorSerializadorAbstr
   
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto Carta y representarlos debidamente en un objeto json.
-   * @param carta Objeto Carta del que se extraerán sus atributos para guardarlos en el objeto compuesto.
+   * @param carta Objeto Carta del que se extraerán sus atributos para guardarlos en el objeto json.
    */
   public void serializarCarta(Carta carta) {
     // agrega inicio de carta y valor del palo
