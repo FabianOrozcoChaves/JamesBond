@@ -3,7 +3,7 @@ package marda;
 /**
  * Interface ConstructorSerializadorAbstracto
  * Esta interfaz permite implementar un patrón de diseño creacional: Patrón Constructor.
- * Permite serializar un estado del juego JamesBond para poder cargarlo en el futuro.
+ * Permite serializar un estado de un JuegoMarda para poder cargarlo en el futuro.
  */
 public interface ConstructorSerializadorAbstracto {
   
@@ -15,7 +15,7 @@ public interface ConstructorSerializadorAbstracto {
 
   /**
    * @brief Método que indica la forma en que se finaliza el objeto completo (ya sea en formato json, xml u otro).
-   * @param nombreObjeto Nombre del Objeto que al que se quiere guardar/serializar el estado.
+   * @param nombreObjeto Nombre del Objeto al que se quiere guardar/serializar el estado.
    */
   public void finObjeto();
 
@@ -34,7 +34,7 @@ public interface ConstructorSerializadorAbstracto {
   
   /**
    * @brief Método serializador. Se encarga de extraer los atributos del objeto JuegoMarda y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
-   * @param Tablero Objeto JuegoMarda del que se extraerán sus atributos para guardarlos en el objeto compuesto.
+   * @param juego Objeto JuegoMarda del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
   public void serializarJuego(JuegoMarda juego);
 
@@ -46,12 +46,12 @@ public interface ConstructorSerializadorAbstracto {
   
   /**
    * @brief Método serializador. Se encarga de extraer las pilas y nombre de un jugador para representarlas debidamente en el objeto complejo, ya sea en formato json, xml u otro.
-   * @param jugador Objeto Jugador del que se extraerán sus atributos para guardarlos en el objeto compuesto.
+   * @param jugador Objeto JugadorMarda del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
   public void serializarJugador(JugadorMarda jugador);
 
   /**
-   * @brief Método serializador. Se encarga de extraer los atributos del objeto Pila y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
+   * @brief Método serializador. Se encarga de extraer los atributos del objeto GrupoDeCartasMarda y representarlos debidamente en el objeto complejo, ya sea en formato json, xml u otro.
    * @param grupoDeCartas Objeto GrupoDeCartasMarda del que se extraerán sus atributos para guardarlos en el objeto compuesto.
    */
   public void serializarGrupoDeCartas(GrupoDeCartasMarda grupoDeCartas);
